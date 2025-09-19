@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{ 
+  --ids-primary:#2f6bff; 
+  --ids-secondary:#00d1ff; 
+  --ids-gold:#d4af37; 
+  --ids-ink:#0b0f17; 
+  --ids-border:#e6eaf2; 
+  --ids-cream:#f5efe6; 
+}
+
+html{ 
+  font-family: 'Heebo', 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+  scroll-behavior: smooth;
+}
+
+html,body{ 
+  background:#ffffff; 
+  color:var(--ids-ink); 
+  overflow-x: hidden;
+}
+
+.container-xl{ 
+  max-width:80rem; 
+  margin-inline:auto; 
+  padding-inline:1rem; 
+}
+
+@media (min-width:640px){ 
+  .container-xl{ padding-inline:1.5rem; } 
+}
+
+@media (min-width:1024px){ 
+  .container-xl{ padding-inline:2rem; } 
+}
+
+/* Hebrew RTL Support */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #fbbf24, #f59e0b);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #f59e0b, #d97706);
+}
+
+/* Hexagon clip path */
+.clip-path-hexagon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.hero{ position:relative; overflow:clip; }
+.hero-media{ position:absolute; inset:0; z-index:-2; }
+.hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(1.05) contrast(1.05) brightness(1.02); }
+.hero-media video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; opacity:.55; }
+.hero-overlay{ position:absolute; inset:0; z-index:-1; background:linear-gradient(to bottom, rgba(255,255,255,.92), rgba(255,255,255,.96)); }
+.hero-gold{ width:72px; height:3px; background:var(--ids-gold); border-radius:9999px; margin-inline:auto; box-shadow:0 0 0 1px rgba(212,175,55,.25), 0 6px 18px rgba(212,175,55,.35); }
+.headline{ line-height:1.08; letter-spacing:-.02em; }
+.kicker{ color:#4b5563; }
+
+.btn-primary{ border-radius:14px; padding:12px 20px; background:var(--ids-primary); color:#fff; box-shadow:0 10px 24px rgba(47,107,255,.25); }
+.btn-primary:hover{ background:#2a60e6; }
+.btn-ghost{ border-radius:14px; padding:12px 20px; border:1px solid var(--ids-border); }
+.force-ltr{ direction:ltr; unicode-bidi:plaintext; }
+
+.circle-card{ width:11rem; height:11rem; background:var(--ids-cream); border-radius:9999px;
+  border:1px solid color-mix(in oklab, var(--ids-gold) 65%, transparent);
+  box-shadow:0 14px 28px rgba(17,24,39,.08), inset 0 1px 0 rgba(255,255,255,.75);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.35rem; text-align:center; transition: transform .2s; }
+.circle-card:hover{ transform: translateY(-4px); }
+.circle-icon{ width:30px; height:30px; stroke:var(--ids-gold); opacity:.95; }
+.circle-title{ font-size:13px; color:#1f2937; }
+
+.section{ padding-block:4rem; }
+.card{ background:#fff; border:1px solid var(--ids-border); border-radius:18px; padding:1.5rem; box-shadow:0 10px 22px rgba(17,24,39,.06); }
+.card:hover{ box-shadow:0 12px 30px rgba(17,24,39,.09); }
+
+.banner-grid{ display:grid; gap:1rem; grid-template-columns:repeat(12,1fr); }
+.banner{ grid-column: span 12; position:relative; border-radius:18px; overflow:hidden; }
+@media (min-width:1024px){ .banner:first-child{ grid-column: span 7; } .banner:nth-child(2){ grid-column: span 5; } .banner:nth-child(3){ grid-column: span 12; } }
+.banner img{ width:100%; height:360px; object-fit:cover; object-position:center; display:block; transform:scale(1); transition: transform .5s ease; }
+.banner:hover img{ transform:scale(1.06); }
+.banner-overlay{ position:absolute; inset:0; background:linear-gradient( to bottom, rgba(0,0,0,.05), rgba(0,0,0,.35) ); }
+.banner-title{ position:absolute; inset-inline:0; bottom:18px; color:white; text-align:center; font-weight:600; text-shadow:0 4px 30px rgba(0,0,0,.45); }
+
+.reveal{ opacity:0; transform: translateY(16px); transition: all .7s ease; }
+.reveal.is-visible{ opacity:1; transform: translateY(0); }
