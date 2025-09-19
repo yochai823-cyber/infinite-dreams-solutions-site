@@ -9,6 +9,8 @@ export default function AdminPage() {
   const [requests, setRequests] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [editingNotes, setEditingNotes] = useState({})
+  const [notes, setNotes] = useState({})
   const router = useRouter()
 
   // סיסמה להגנה על העמוד (תוכל לשנות אותה)
@@ -91,6 +93,45 @@ export default function AdminPage() {
     return timelines[timeline] || timeline || 'לא צוין'
   }
 
+  const deleteRequest = async (requestId) => {
+    if (!confirm('האם אתה בטוח שברצונך למחוק בקשה זו?')) {
+      return
+    }
+    
+    try {
+      const response = await fetch(`/api/admin/requests/${requestId}`, {
+        method: 'DELETE'
+      })
+      
+      if (response.ok) {
+        setRequests(requests.filter(req => req.id !== requestId))
+        setError('')
+      } else {
+        setError('שגיאה במחיקת הבקשה')
+      }
+    } catch (error) {
+      setError('שגיאה במחיקת הבקשה')
+    }
+  }
+
+  const saveNotes = (requestId, newNotes) => {
+    setNotes(prev => ({
+      ...prev,
+      [requestId]: newNotes
+    }))
+    setEditingNotes(prev => ({
+      ...prev,
+      [requestId]: false
+    }))
+  }
+
+  const startEditingNotes = (requestId) => {
+    setEditingNotes(prev => ({
+      ...prev,
+      [requestId]: true
+    }))
+  }
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex items-center justify-center p-4">
@@ -134,7 +175,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50" dir="rtl">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-6 py-4">
@@ -198,9 +239,20 @@ export default function AdminPage() {
                       <h3 className="text-xl font-bold">{request.name}</h3>
                       <p className="text-blue-100">{getProjectTypeLabel(request.projectType)}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm text-blue-100">מזהה: #{request.id}</p>
-                      <p className="text-sm text-blue-100">{request.timestamp}</p>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-sm text-blue-100">מזהה: #{request.id}</p>
+                        <p className="text-sm text-blue-100">{request.timestamp}</p>
+                      </div>
+                      <button
+                        onClick={() => deleteRequest(request.id)}
+                        className="text-white hover:text-red-200 transition-colors duration-200 p-2 hover:bg-white/10 rounded-full"
+                        title="מחק בקשה"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -264,6 +316,59 @@ export default function AdminPage() {
                       </div>
                     </div>
                   )}
+
+                  {/* Internal Notes */}
+                  <div className="mt-6">
+                    <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                      <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
+                      הערות פנימיות
+                    </h4>
+                    {editingNotes[request.id] ? (
+                      <div className="space-y-3">
+                        <textarea
+                          defaultValue={notes[request.id] || ''}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 resize-none"
+                          rows={3}
+                          placeholder="הוסף הערות פנימיות (טופל, דיברתי עם הלקוח, וכו')"
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && e.ctrlKey) {
+                              saveNotes(request.id, e.target.value)
+                            }
+                          }}
+                        />
+                        <div className="flex gap-2">
+                          <button
+                            onClick={(e) => saveNotes(request.id, e.target.previousElementSibling.value)}
+                            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
+                          >
+                            שמור
+                          </button>
+                          <button
+                            onClick={() => setEditingNotes(prev => ({ ...prev, [request.id]: false }))}
+                            className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
+                          >
+                            ביטול
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="bg-orange-50 rounded-xl p-4 border border-orange-200 min-h-[60px]">
+                        {notes[request.id] ? (
+                          <p className="text-gray-700 whitespace-pre-wrap">{notes[request.id]}</p>
+                        ) : (
+                          <p className="text-gray-500 italic">אין הערות פנימיות</p>
+                        )}
+                        <button
+                          onClick={() => startEditingNotes(request.id)}
+                          className="mt-2 text-orange-600 hover:text-orange-700 text-sm font-medium"
+                        >
+                          {notes[request.id] ? 'ערוך הערות' : 'הוסף הערות'}
+                        </button>
+                      </div>
+                    )}
+                  </div>
 
                   {/* Action Buttons */}
                   <div className="mt-6 flex gap-4">
