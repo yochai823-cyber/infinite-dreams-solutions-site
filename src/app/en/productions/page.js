@@ -342,7 +342,23 @@ export default function ProductionsPage() {
                   {/* First ad - Lectures & Content */}
                   <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col sm:p-8 p-4">
                   <div className="flex justify-center flex-grow">
-                    <div className="relative cursor-pointer" onClick={() => window.open('/mc.png', '_blank')}>
+                    <div className="relative cursor-pointer" onClick={() => {
+                      const img = new Image();
+                      img.src = '/mc.png';
+                      img.style.maxWidth = '100vw';
+                      img.style.maxHeight = '100vh';
+                      img.style.objectFit = 'contain';
+                      img.style.position = 'fixed';
+                      img.style.top = '50%';
+                      img.style.left = '50%';
+                      img.style.transform = 'translate(-50%, -50%)';
+                      img.style.zIndex = '9999';
+                      img.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                      img.style.padding = '20px';
+                      img.style.borderRadius = '10px';
+                      img.onclick = () => document.body.removeChild(img);
+                      document.body.appendChild(img);
+                    }}>
                       <img 
                         src="/mc.png" 
                         alt="Music & Community - Yochai Aflalo"
@@ -350,11 +366,11 @@ export default function ProductionsPage() {
                         style={{height: 'auto', maxHeight: '300px'}}
                       />
                       {/* Logo in corner of image */}
-                      <div className="absolute -top-12 -left-4">
+                      <div className="absolute -top-6 -left-2">
                         <img 
                           src="/logo.png" 
                           alt="Logo"
-                          className="w-48 h-48 object-contain"
+                          className="w-24 h-24 object-contain"
                         />
                       </div>
                       
@@ -421,7 +437,23 @@ export default function ProductionsPage() {
                 {/* Second ad - Workshops */}
                 <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col">
                   <div className="flex justify-center flex-grow">
-                    <div className="relative cursor-pointer" onClick={() => window.open('/sadnat bina.png', '_blank')}>
+                    <div className="relative cursor-pointer" onClick={() => {
+                      const img = new Image();
+                      img.src = '/sadnat bina.png';
+                      img.style.maxWidth = '100vw';
+                      img.style.maxHeight = '100vh';
+                      img.style.objectFit = 'contain';
+                      img.style.position = 'fixed';
+                      img.style.top = '50%';
+                      img.style.left = '50%';
+                      img.style.transform = 'translate(-50%, -50%)';
+                      img.style.zIndex = '9999';
+                      img.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                      img.style.padding = '20px';
+                      img.style.borderRadius = '10px';
+                      img.onclick = () => document.body.removeChild(img);
+                      document.body.appendChild(img);
+                    }}>
                       <img 
                         src="/sadnat bina.png" 
                         alt="Sadnat Bina Workshops"

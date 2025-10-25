@@ -42,7 +42,23 @@ export default function TechPage() {
             <div className="w-full max-w-lg mx-auto">
               <div className="bg-white rounded-2xl p-8 shadow-lg">
                 <div className="flex justify-center">
-                  <div className="relative cursor-pointer" onClick={() => window.open('/sadnat bina.png', '_blank')}>
+                  <div className="relative cursor-pointer" onClick={() => {
+                    const img = new Image();
+                    img.src = '/sadnat bina.png';
+                    img.style.maxWidth = '100vw';
+                    img.style.maxHeight = '100vh';
+                    img.style.objectFit = 'contain';
+                    img.style.position = 'fixed';
+                    img.style.top = '50%';
+                    img.style.left = '50%';
+                    img.style.transform = 'translate(-50%, -50%)';
+                    img.style.zIndex = '9999';
+                    img.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                    img.style.padding = '20px';
+                    img.style.borderRadius = '10px';
+                    img.onclick = () => document.body.removeChild(img);
+                    document.body.appendChild(img);
+                  }}>
                     <img 
                       src="/sadnat bina.png" 
                       alt="סדנת בינה מלאכותית - סדנת בינה"
