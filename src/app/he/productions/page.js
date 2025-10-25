@@ -255,6 +255,7 @@ export default function ProductionsPage() {
                       src="/mc.png" 
                       alt="מוזיקה וקהילה - יוחאי אפללו"
                       className="w-full max-w-sm rounded-lg shadow-md"
+                      style={{height: 'auto', maxHeight: '300px'}}
                     />
                     {/* לוגו בפינה של התמונה */}
                     <div className="absolute -top-12 -left-4">
@@ -332,6 +333,7 @@ export default function ProductionsPage() {
                         src="/sadnat bina.png" 
                         alt="סדנאות בינה"
                         className="w-full max-w-sm rounded-lg shadow-md"
+                      style={{height: 'auto', maxHeight: '300px'}}
                       />
                       
                       {/* כפתור הורדה - במרכז המודעה */}

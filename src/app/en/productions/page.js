@@ -347,6 +347,7 @@ export default function ProductionsPage() {
                         src="/mc.png" 
                         alt="Music & Community - Yochai Aflalo"
                         className="w-full max-w-sm rounded-lg shadow-md"
+                        style={{height: 'auto', maxHeight: '300px'}}
                       />
                       {/* Logo in corner of image */}
                       <div className="absolute -top-12 -left-4">
@@ -425,6 +426,7 @@ export default function ProductionsPage() {
                         src="/sadnat bina.png" 
                         alt="Sadnat Bina Workshops"
                         className="w-full max-w-sm rounded-lg shadow-md"
+                        style={{height: 'auto', maxHeight: '300px'}}
                       />
                       
                       {/* Download button - center of ad */}
