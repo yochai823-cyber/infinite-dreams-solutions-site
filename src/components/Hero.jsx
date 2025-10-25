@@ -21,7 +21,7 @@ export default function Hero({ d, locale = 'he', pageType = 'home' }){
   
   const text = t[locale] || t.he
   return (
-    <section className="relative h-[60vh] flex items-start justify-center overflow-hidden">
+    <section className="relative h-[60vh] sm:h-[60vh] h-[39vh] flex items-start justify-center overflow-hidden">
       {/* Beautiful Background Image */}
       <div className="absolute inset-0 z-0">
         {/* Beautiful Background Image */}

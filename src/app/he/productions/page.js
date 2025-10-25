@@ -246,15 +246,15 @@ export default function ProductionsPage() {
             
             {/* שתי מודעות אחת ליד השנייה */}
             <div className="w-full max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-8 gap-4 mb-8">
                 {/* מודעה ראשונה - הרצאות ותוכן */}
-                <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col">
+                <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col sm:p-8 p-4">
                   <div className="flex justify-center flex-grow">
                     <div className="relative">
                       <img 
                       src="/mc.png" 
                       alt="מוזיקה וקהילה - יוחאי אפללו"
-                      className="w-full max-w-sm h-[506px] sm:h-[506px] h-[396px] object-cover rounded-lg shadow-md"
+                      className="w-full max-w-sm h-[506px] sm:h-[506px] h-[300px] object-cover rounded-lg shadow-md"
                     />
                     {/* לוגו בפינה של התמונה */}
                     <div className="absolute -top-12 -left-4">
@@ -325,13 +325,13 @@ export default function ProductionsPage() {
                 </div>
 
                 {/* מודעה שנייה - סדנאות */}
-                <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col">
+                <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col sm:p-8 p-4">
                   <div className="flex justify-center flex-grow">
                     <div className="relative">
                       <img 
                         src="/sadnat bina.png" 
                         alt="סדנאות בינה"
-                        className="w-full max-w-sm h-[506px] sm:h-[506px] h-[396px] object-cover rounded-lg shadow-md"
+                        className="w-full max-w-sm h-[506px] sm:h-[506px] h-[300px] object-cover rounded-lg shadow-md"
                       />
                       
                       {/* כפתור הורדה - במרכז המודעה */}

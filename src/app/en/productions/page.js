@@ -338,15 +338,15 @@ export default function ProductionsPage() {
               
               {/* Two ads side by side */}
               <div className="w-full max-w-4xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-8 gap-4 mb-8">
                   {/* First ad - Lectures & Content */}
-                  <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col">
+                  <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col sm:p-8 p-4">
                   <div className="flex justify-center flex-grow">
                     <div className="relative">
                       <img 
                         src="/mc.png" 
                         alt="Music & Community - Yochai Aflalo"
-                        className="w-full max-w-sm h-[506px] sm:h-[506px] h-[396px] object-cover rounded-lg shadow-md"
+                        className="w-full max-w-sm h-[506px] sm:h-[506px] h-[300px] object-cover rounded-lg shadow-md"
                       />
                       {/* Logo in corner of image */}
                       <div className="absolute -top-12 -left-4">
@@ -424,7 +424,7 @@ export default function ProductionsPage() {
                       <img 
                         src="/sadnat bina.png" 
                         alt="Sadnat Bina Workshops"
-                        className="w-full max-w-sm h-[506px] sm:h-[506px] h-[396px] object-cover rounded-lg shadow-md"
+                        className="w-full max-w-sm h-[506px] sm:h-[506px] h-[300px] object-cover rounded-lg shadow-md"
                       />
                       
                       {/* Download button - center of ad */}
