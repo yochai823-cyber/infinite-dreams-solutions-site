@@ -74,12 +74,12 @@ export default function Hero({ d, locale = 'he', pageType = 'home' }){
             <img 
               src="/logo.png" 
               alt="Infinite Dreams Solutions Logo" 
-              className="w-[300px] h-32 sm:w-[350px] sm:h-36 md:w-[500px] md:h-48 lg:w-[600px] lg:h-56 transition-all duration-500 hover:scale-105 object-contain"
+              className="w-[350px] h-36 sm:w-[350px] sm:h-36 md:w-[500px] md:h-48 lg:w-[600px] lg:h-56 transition-all duration-500 hover:scale-105 object-contain"
             />
           </div>
           
                   {/* Main heading */}
-                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-800 mb-12 leading-tight drop-shadow-lg -mt-12">
+                  <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-800 mb-12 leading-tight drop-shadow-lg -mt-12">
                     {pageType === 'tech' ? text.techTitle : 
                      pageType === 'productions' ? text.productionsTitle : 
                      pageType === 'about' ? (locale === 'he' ? 'אודותינו' : 'About Us') :
@@ -105,39 +105,39 @@ export default function Hero({ d, locale = 'he', pageType = 'home' }){
               {/* Technology Button */}
               <a 
                 href={`/${locale}/tech`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full text-sm sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
+                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
               >
                 <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span className="text-xs sm:text-base">{text.techButton}</span>
+                <span className="text-base sm:text-base">{text.techButton}</span>
               </a>
               
               {/* Productions Button */}
               <a 
                 href={`/${locale}/productions`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full text-sm sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
+                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
               >
                 <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
-                <span className="text-xs sm:text-base">{text.productionsButton}</span>
+                <span className="text-base sm:text-base">{text.productionsButton}</span>
               </a>
             </div>
           ) : pageType === 'productions' ? (
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center mb-8 sm:mb-16 px-4">
               <a 
                 href={`/${locale}/tech`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full text-sm sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
+                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
               >
                 <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span className="text-xs sm:text-base">{text.techButton}</span>
+                <span className="text-base sm:text-base">{text.techButton}</span>
               </a>
               <a 
                 href={`/${locale}`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full text-sm sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
+                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
               >
                 <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -149,16 +149,16 @@ export default function Hero({ d, locale = 'he', pageType = 'home' }){
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center mb-8 sm:mb-16 px-4">
               <a 
                 href={`/${locale}/productions`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full text-sm sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
+                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
               >
                 <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                 </svg>
-                <span className="text-xs sm:text-base">{text.productionsButton}</span>
+                <span className="text-base sm:text-base">{text.productionsButton}</span>
               </a>
               <a 
                 href={`/${locale}`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full text-sm sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
+                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
               >
                 <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -170,7 +170,7 @@ export default function Hero({ d, locale = 'he', pageType = 'home' }){
             <div className="flex justify-center items-center mb-8 sm:mb-16 px-4">
               <a 
                 href={`/${locale}`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full text-sm sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
+                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
               >
                 <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
