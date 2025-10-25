@@ -346,7 +346,7 @@ export default function ProductionsPage() {
                       <img 
                         src="/mc.png" 
                         alt="Music & Community - Yochai Aflalo"
-                        className="w-full max-w-sm h-[506px] sm:h-[506px] h-[200px] object-cover rounded-lg shadow-md"
+                        className="w-full max-w-sm rounded-lg shadow-md"
                       />
                       {/* Logo in corner of image */}
                       <div className="absolute -top-12 -left-4">
@@ -424,7 +424,7 @@ export default function ProductionsPage() {
                       <img 
                         src="/sadnat bina.png" 
                         alt="Sadnat Bina Workshops"
-                        className="w-full max-w-sm h-[506px] sm:h-[506px] h-[200px] object-cover rounded-lg shadow-md"
+                        className="w-full max-w-sm rounded-lg shadow-md"
                       />
                       
                       {/* Download button - center of ad */}
