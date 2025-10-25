@@ -265,7 +265,29 @@ export default function ProductionsPage() {
                       img.style.padding = '20px';
                       img.style.borderRadius = '10px';
                       img.onclick = () => document.body.removeChild(img);
+                      
+                      // Add close button
+                      const closeBtn = document.createElement('button');
+                      closeBtn.innerHTML = '✕';
+                      closeBtn.style.position = 'fixed';
+                      closeBtn.style.top = '20px';
+                      closeBtn.style.right = '20px';
+                      closeBtn.style.zIndex = '10000';
+                      closeBtn.style.background = 'white';
+                      closeBtn.style.border = 'none';
+                      closeBtn.style.borderRadius = '50%';
+                      closeBtn.style.width = '40px';
+                      closeBtn.style.height = '40px';
+                      closeBtn.style.fontSize = '20px';
+                      closeBtn.style.cursor = 'pointer';
+                      closeBtn.style.color = 'black';
+                      closeBtn.onclick = () => {
+                        document.body.removeChild(img);
+                        document.body.removeChild(closeBtn);
+                      };
+                      
                       document.body.appendChild(img);
+                      document.body.appendChild(closeBtn);
                     }}>
                       <img 
                       src="/mc.png" 
@@ -351,7 +373,29 @@ export default function ProductionsPage() {
                       img.style.padding = '20px';
                       img.style.borderRadius = '10px';
                       img.onclick = () => document.body.removeChild(img);
+                      
+                      // Add close button
+                      const closeBtn = document.createElement('button');
+                      closeBtn.innerHTML = '✕';
+                      closeBtn.style.position = 'fixed';
+                      closeBtn.style.top = '20px';
+                      closeBtn.style.right = '20px';
+                      closeBtn.style.zIndex = '10000';
+                      closeBtn.style.background = 'white';
+                      closeBtn.style.border = 'none';
+                      closeBtn.style.borderRadius = '50%';
+                      closeBtn.style.width = '40px';
+                      closeBtn.style.height = '40px';
+                      closeBtn.style.fontSize = '20px';
+                      closeBtn.style.cursor = 'pointer';
+                      closeBtn.style.color = 'black';
+                      closeBtn.onclick = () => {
+                        document.body.removeChild(img);
+                        document.body.removeChild(closeBtn);
+                      };
+                      
                       document.body.appendChild(img);
+                      document.body.appendChild(closeBtn);
                     }}>
                       <img 
                         src="/sadnat bina.png" 
