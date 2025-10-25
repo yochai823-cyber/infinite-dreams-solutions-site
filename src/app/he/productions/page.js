@@ -250,11 +250,11 @@ export default function ProductionsPage() {
                 {/* מודעה ראשונה - הרצאות ותוכן */}
                 <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col sm:p-8 p-4">
                   <div className="flex justify-center flex-grow">
-                    <div className="relative">
+                    <div className="relative cursor-pointer" onClick={() => window.open('/mc.png', '_blank')}>
                       <img 
                       src="/mc.png" 
                       alt="מוזיקה וקהילה - יוחאי אפללו"
-                      className="w-full max-w-sm rounded-lg shadow-md"
+                      className="w-full max-w-sm rounded-lg shadow-md hover:opacity-90 transition-opacity"
                       style={{height: 'auto', maxHeight: '300px'}}
                     />
                     {/* לוגו בפינה של התמונה */}
@@ -328,12 +328,12 @@ export default function ProductionsPage() {
                 {/* מודעה שנייה - סדנאות */}
                 <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col sm:p-8 p-4">
                   <div className="flex justify-center flex-grow">
-                    <div className="relative">
+                    <div className="relative cursor-pointer" onClick={() => window.open('/sadnat bina.png', '_blank')}>
                       <img 
                         src="/sadnat bina.png" 
                         alt="סדנאות בינה"
-                        className="w-full max-w-sm rounded-lg shadow-md"
-                      style={{height: 'auto', maxHeight: '300px'}}
+                        className="w-full max-w-sm rounded-lg shadow-md hover:opacity-90 transition-opacity"
+                        style={{height: 'auto', maxHeight: '300px'}}
                       />
                       
                       {/* כפתור הורדה - במרכז המודעה */}

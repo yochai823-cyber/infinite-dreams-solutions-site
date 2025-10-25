@@ -342,11 +342,11 @@ export default function ProductionsPage() {
                   {/* First ad - Lectures & Content */}
                   <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col sm:p-8 p-4">
                   <div className="flex justify-center flex-grow">
-                    <div className="relative">
+                    <div className="relative cursor-pointer" onClick={() => window.open('/mc.png', '_blank')}>
                       <img 
                         src="/mc.png" 
                         alt="Music & Community - Yochai Aflalo"
-                        className="w-full max-w-sm rounded-lg shadow-md"
+                        className="w-full max-w-sm rounded-lg shadow-md hover:opacity-90 transition-opacity"
                         style={{height: 'auto', maxHeight: '300px'}}
                       />
                       {/* Logo in corner of image */}
@@ -421,11 +421,11 @@ export default function ProductionsPage() {
                 {/* Second ad - Workshops */}
                 <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col">
                   <div className="flex justify-center flex-grow">
-                    <div className="relative">
+                    <div className="relative cursor-pointer" onClick={() => window.open('/sadnat bina.png', '_blank')}>
                       <img 
                         src="/sadnat bina.png" 
                         alt="Sadnat Bina Workshops"
-                        className="w-full max-w-sm rounded-lg shadow-md"
+                        className="w-full max-w-sm rounded-lg shadow-md hover:opacity-90 transition-opacity"
                         style={{height: 'auto', maxHeight: '300px'}}
                       />
                       

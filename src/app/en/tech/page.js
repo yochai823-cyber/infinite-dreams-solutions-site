@@ -42,11 +42,11 @@ export default function TechPage() {
             <div className="w-full max-w-lg mx-auto">
               <div className="bg-white rounded-2xl p-8 shadow-lg">
                 <div className="flex justify-center">
-                  <div className="relative">
+                  <div className="relative cursor-pointer" onClick={() => window.open('/sadnat bina.png', '_blank')}>
                     <img 
                       src="/sadnat bina.png" 
                       alt="AI Workshop - Sadnat Bina"
-                      className="w-full max-w-sm rounded-lg shadow-md"
+                      className="w-full max-w-sm rounded-lg shadow-md hover:opacity-90 transition-opacity"
                     />
                     
                     {/* Download button - center of ad */}
