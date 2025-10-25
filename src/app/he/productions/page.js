@@ -273,14 +273,6 @@ export default function ProductionsPage() {
                       className="w-full max-w-sm rounded-lg shadow-md hover:opacity-90 transition-opacity"
                       style={{height: 'auto', maxHeight: '300px'}}
                     />
-                    {/* לוגו בפינה של התמונה */}
-                    <div className="absolute -top-6 -left-2">
-                      <img 
-                        src="/logo.png" 
-                        alt="לוגו"
-                        className="w-24 h-24 object-contain"
-                      />
-                    </div>
                     
                     {/* כפתור הורדה - במרכז המודעה */}
                     <div className="flex justify-center mt-6">

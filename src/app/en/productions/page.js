@@ -365,14 +365,6 @@ export default function ProductionsPage() {
                         className="w-full max-w-sm rounded-lg shadow-md hover:opacity-90 transition-opacity"
                         style={{height: 'auto', maxHeight: '300px'}}
                       />
-                      {/* Logo in corner of image */}
-                      <div className="absolute -top-6 -left-2">
-                        <img 
-                          src="/logo.png" 
-                          alt="Logo"
-                          className="w-24 h-24 object-contain"
-                        />
-                      </div>
                       
                       {/* Download button - center of ad */}
                       <div className="flex justify-center mt-6">
