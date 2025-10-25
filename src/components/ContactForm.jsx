@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import TermsCheckbox from './TermsCheckbox'
 
 export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null) // 'success' | 'error' | null
+  const [termsAccepted, setTermsAccepted] = useState(false)
 
   // תרגום דינמי לפי שפה
   const t = {
@@ -39,6 +41,7 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
       sent: 'נשלח בהצלחה!',
               orContact: 'או צרו קשר ישירות:',
               emailLabel: 'אימייל',
+      termsError: 'יש לאשר את תנאי השימוש',
       projectTypes: {
         '': 'בחרו סוג פרויקט',
         'app': 'אפליקציה',
@@ -96,6 +99,7 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
       sent: 'Sent successfully!',
               orContact: 'Or contact us directly:',
               emailLabel: 'Email',
+      termsError: 'You must agree to the terms of service',
       projectTypes: {
         '': 'Select project type',
         'app': 'Application',
@@ -139,6 +143,12 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    if (!termsAccepted) {
+      alert(text.termsError)
+      return
+    }
+    
     setIsSubmitting(true)
     setSubmitStatus(null)
     
@@ -378,12 +388,26 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
             </div>
           )}
 
+          {/* Terms Checkbox */}
+          <div className="pt-2">
+            <TermsCheckbox
+              onTermsChange={setTermsAccepted}
+              required={true}
+              language={locale}
+              className="mb-4"
+            />
+          </div>
+
           {/* Submit Button */}
           <div className="pt-4">
             <button
               type="submit"
-              disabled={isSubmitting || submitStatus === 'success'}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3"
+              disabled={isSubmitting || submitStatus === 'success' || !termsAccepted}
+              className={`w-full font-bold py-4 px-6 rounded-xl transition-all duration-300 transform flex items-center justify-center gap-3 ${
+                termsAccepted && !isSubmitting && submitStatus !== 'success'
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white hover:scale-105'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
             >
               {isSubmitting ? (
                 <>

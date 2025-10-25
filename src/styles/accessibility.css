@@ -1,0 +1,291 @@
+/* סרגל נגישות - סגנונות מותאמים אישית */
+
+:root {
+  --font-size: 16px;
+  --letter-spacing: 0px;
+  --line-height: 1.5;
+  --contrast: 100%;
+  --font-family: system-ui;
+  --text-direction: ltr;
+  --line-spacing: 1.5;
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+/* תמיכה ב-RTL */
+[dir="rtl"] {
+  direction: rtl;
+}
+
+[dir="rtl"] .accessibility-bar {
+  right: 1.5rem;
+  left: auto;
+}
+
+[dir="rtl"] .accessibility-button {
+  right: 1.5rem;
+  left: auto;
+}
+
+/* יישום הגדרות על הגוף */
+body {
+  font-size: var(--font-size);
+  letter-spacing: var(--letter-spacing);
+  line-height: var(--line-height);
+  font-family: var(--font-family);
+  direction: var(--text-direction);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* תמיכה ב-RTL - רק לסרגל נגישות */
+.accessibility-bar [dir="rtl"] {
+  text-align: right;
+}
+
+.accessibility-bar [dir="rtl"] .flex {
+  flex-direction: row-reverse;
+}
+
+.accessibility-bar [dir="rtl"] .space-x-3 > * + * {
+  margin-left: 0;
+  margin-right: 0.75rem;
+}
+
+.accessibility-bar [dir="rtl"] .text-left {
+  text-align: right;
+}
+
+.accessibility-bar [dir="rtl"] .justify-start {
+  justify-content: flex-end;
+}
+
+.accessibility-bar [dir="rtl"] .justify-end {
+  justify-content: flex-start;
+}
+
+/* מצב כהה */
+.dark-mode {
+  background-color: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
+.dark-mode * {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .bg-white {
+  background-color: #2d2d2d !important;
+}
+
+.dark-mode .text-gray-900 {
+  color: #ffffff !important;
+}
+
+.dark-mode .text-gray-700 {
+  color: #e5e5e5 !important;
+}
+
+.dark-mode .text-gray-500 {
+  color: #a0a0a0 !important;
+}
+
+.dark-mode .border-gray-200 {
+  border-color: #4a4a4a !important;
+}
+
+.dark-mode .border-gray-300 {
+  border-color: #5a5a5a !important;
+}
+
+/* הדגשת קישורים */
+.highlight-links a {
+  background-color: yellow !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+/* הדגשת כותרות */
+.highlight-headings h1,
+.highlight-headings h2,
+.highlight-headings h3,
+.highlight-headings h4,
+.highlight-headings h5,
+.highlight-headings h6 {
+  background-color: lightblue !important;
+  padding: 4px 8px !important;
+  border-radius: 5px !important;
+  color: #000000 !important;
+}
+
+/* הדגשת טפסים */
+.highlight-forms input,
+.highlight-forms textarea,
+.highlight-forms select {
+  border: 3px solid orange !important;
+  background-color: lightyellow !important;
+  color: #000000 !important;
+}
+
+/* ניווט מקלדת */
+.keyboard-navigation *:focus {
+  outline: 3px solid blue !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* האטת אנימציות */
+.slow-animations * {
+  animation-duration: 3s !important;
+  transition-duration: 3s !important;
+}
+
+.slow-animations .motion-reduce {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* הסתרת תמונות */
+.hide-images img {
+  display: none !important;
+}
+
+.hide-images picture {
+  display: none !important;
+}
+
+.hide-images .bg-cover {
+  background-image: none !important;
+}
+
+/* מצב קריאה */
+.reading-mode {
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+  background-color: #f9f9f9 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.reading-mode * {
+  max-width: 100% !important;
+}
+
+/* הדגשת שורות */
+.highlight-lines p,
+.highlight-lines li {
+  border-bottom: 1px solid #ddd !important;
+  padding-bottom: 2px !important;
+}
+
+.highlight-lines h1,
+.highlight-lines h2,
+.highlight-lines h3,
+.highlight-lines h4,
+.highlight-lines h5,
+.highlight-lines h6 {
+  border-bottom: 2px solid #333 !important;
+  padding-bottom: 4px !important;
+}
+
+/* מצב מונוכרום */
+.monochrome {
+  filter: grayscale(100%) !important;
+}
+
+.monochrome img,
+.monochrome picture,
+.monochrome video {
+  filter: grayscale(100%) !important;
+}
+
+/* מצב דלטוניזם */
+.colorblind-mode {
+  filter: contrast(150%) saturate(200%) !important;
+}
+
+.colorblind-mode img,
+.colorblind-mode picture,
+.colorblind-mode video {
+  filter: contrast(150%) saturate(200%) !important;
+}
+
+/* הדגשת פוקוס */
+.focus-highlight *:focus {
+  box-shadow: 0 0 0 3px #ff6b6b !important;
+  outline: 3px solid #ff6b6b !important;
+  outline-offset: 2px !important;
+}
+
+/* התאמות נוספות לנגישות */
+.accessibility-enhanced {
+  scroll-behavior: smooth;
+}
+
+.accessibility-enhanced * {
+  transition: all 0.3s ease;
+}
+
+/* התאמות לניווט מקלדת */
+.keyboard-navigation .skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.keyboard-navigation .skip-link:focus {
+  top: 6px;
+}
+
+/* התאמות לטקסט */
+.text-enhanced {
+  word-spacing: var(--letter-spacing);
+  line-height: var(--line-spacing);
+}
+
+/* התאמות לצבעים */
+.contrast-enhanced {
+  filter: contrast(var(--contrast));
+}
+
+/* התאמות למובייל */
+@media (max-width: 768px) {
+  .accessibility-bar-mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+}
+
+/* התאמות לדפדפנים ישנים */
+@supports not (backdrop-filter: blur(10px)) {
+  .accessibility-bar {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* התאמות למוד הדפסה */
+@media print {
+  .accessibility-bar,
+  .accessibility-button {
+    display: none !important;
+  }
+  
+  .reading-mode {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+}

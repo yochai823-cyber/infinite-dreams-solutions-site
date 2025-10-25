@@ -10,7 +10,7 @@ export const he = {
     ['הרצאות ותוכן','הרצאות מעוררות השראה בעולמות תוכן שונים והפקת תוכן איכותי — מניסיון עשיר ומעשי.'],
   ],
   featured:'עבודות נבחרות', workCta:'בואו נעבוד יחד →',
-  contactTitle:'יש לכם חזון? בואו נבנה אותו.', contactSub:'תכנית פעולה קצרה וברורה — עם לו״ז ועלויות שקופות.',
+  contactTitle:'יש לכם חזון?\nבואו נבנה אותו.', contactSub:'תכנית פעולה קצרה וברורה\nעם לו״ז ועלויות שקופות.',
   email:'infinite.dreams.solutions@gmail.com', phone:'055‑330‑2046', phoneE164:'972553302046',
   privacy:'פרטיות', terms:'תנאים'
 }
@@ -26,7 +26,7 @@ export const en = {
     ['Lectures & Content','Inspiring lectures in various content areas and quality content production — from rich and practical experience.'],
   ],
   featured:'Featured work', workCta:'Work with us →',
-  contactTitle:'Got a vision? Let\'s build it.', contactSub:'A short, clear plan with timeline and pricing.',
+  contactTitle:'Got a vision?\nLet\'s build it.', contactSub:'A short, clear plan\nwith timeline and pricing.',
   email:'infinite.dreams.solutions@gmail.com', phone:'+972‑55‑330‑2046', phoneE164:'972553302046',
   privacy:'Privacy', terms:'Terms'
 }

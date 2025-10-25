@@ -3,49 +3,69 @@
 import { useState } from 'react'
 import ContactForm from './ContactForm'
 
-const ServiceIcon = ({ index }) => {
+const ServiceIcon = ({ index, pageType = 'home' }) => {
   const icons = [
-    // Apps, Automation & Websites
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-      <line x1="8" y1="21" x2="16" y2="21"/>
-      <line x1="12" y1="17" x2="12" y2="21"/>
-      <path d="M7 7h10M7 11h10M7 15h6"/>
-    </svg>,
-    // Music & Show Productions
+    // Apps, Automation & Websites - תו מוזיקלי
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M9 18V5l12-2v13"/>
       <circle cx="6" cy="18" r="3"/>
       <circle cx="18" cy="16" r="3"/>
-      <path d="M12 8v8"/>
-      <path d="M8 12h8"/>
+    </svg>,
+    // Music & Show Productions - מיקרופון
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+      <line x1="12" y1="19" x2="12" y2="23"/>
+      <line x1="8" y1="23" x2="16" y2="23"/>
     </svg>,
     // Community Training & Consulting
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
       <circle cx="9" cy="7" r="4"/>
       <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-      <path d="M12 12h4"/>
-      <path d="M12 16h4"/>
     </svg>,
     // Lectures & Content
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <polygon points="23 7 16 12 23 17 23 7"/>
       <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-      <path d="M6 9h4"/>
-      <path d="M6 13h4"/>
+    </svg>
+  ]
+
+  // אייקונים מיוחדים לדף טכנולוגיה
+  const techIcons = [
+    // אפליקציות ווב ואתרים
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+      <line x1="8" y1="21" x2="16" y2="21"/>
+      <line x1="12" y1="17" x2="12" y2="21"/>
+      <path d="M7 7h10M7 11h10M7 15h6"/>
+    </svg>,
+    // אוטומציה - גלגל שיניים
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+    </svg>,
+    // הדרכות ויעוץ
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
     </svg>
   ]
   
+  const iconSet = pageType === 'tech' ? techIcons : icons
+  const iconColor = pageType === 'tech' ? 'text-blue-500' : 'text-amber-500'
+  
   return (
-    <div className="w-16 h-16 mx-auto mb-6 text-amber-500">
-      {icons[index] || icons[0]}
+    <div className={`w-16 h-16 mx-auto mb-6 ${iconColor}`}>
+      {iconSet[index] || iconSet[0]}
     </div>
   )
 }
 
 export default function Services({ d, pageType = 'home', locale = 'he' }){
   const [isContactFormOpen, setIsContactFormOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState(null)
 
   // תרגום דינמי לפי שפה
   const t = {
@@ -116,16 +136,54 @@ export default function Services({ d, pageType = 'home', locale = 'he' }){
             d.services).map(([title, description], index) => (
             <div 
               key={title} 
-              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100"
+              onClick={() => {
+                if (pageType === 'productions') {
+                  if (index === 0) {
+                    // הפקות מוזיקה ומופעים - גלילה לכותרת
+                    document.getElementById('productions-content')?.scrollIntoView({ behavior: 'smooth' })
+                  } else if (index === 1) {
+                    // הרצאות ותוכן - גלילה לכותרת הרצאות
+                    document.getElementById('lectures-content')?.scrollIntoView({ behavior: 'smooth' })
+                  } else if (index === 2) {
+                    // הדרכות קהילתיות - גלילה לכותרת הדרכות
+                    document.getElementById('community-content')?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                } else if (pageType === 'tech') {
+                  if (index === 2) {
+                    // הדרכות ויעוץ - גלילה לכותרת הדרכות
+                    const element = document.getElementById('community-content')
+                    if (element) {
+                      const elementPosition = element.offsetTop - 100 // 100px מעל הכותרת
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      })
+                    }
+                  }
+                }
+              }}
+              className={`group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 ${
+                (pageType === 'productions' || pageType === 'tech') ? 'cursor-pointer' : 'cursor-default'
+              }`}
             >
               {/* Background Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-yellow-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className={`absolute inset-0 rounded-2xl transition-opacity duration-500 ${
+                activeSection === index 
+                  ? 'opacity-100' 
+                  : 'opacity-0 group-hover:opacity-100'
+              } ${
+                pageType === 'tech' 
+                  ? 'bg-gradient-to-br from-blue-500/5 to-blue-600/5' 
+                  : 'bg-gradient-to-br from-amber-500/5 to-yellow-600/5'
+              }`}></div>
               
               {/* Content */}
               <div className="relative z-10">
-                <ServiceIcon index={index} />
+                <ServiceIcon index={index} pageType={pageType} />
                 
-                <h3 className="text-xl font-bold text-gray-800 mb-4 text-center group-hover:text-amber-600 transition-colors duration-300">
+                <h3 className={`text-xl font-bold text-gray-800 mb-4 text-center transition-colors duration-300 ${
+                  pageType === 'tech' ? 'group-hover:text-blue-600' : 'group-hover:text-amber-600'
+                }`}>
                   {title}
                 </h3>
                 
@@ -135,7 +193,11 @@ export default function Services({ d, pageType = 'home', locale = 'he' }){
               </div>
 
               {/* Hover Effect */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-amber-400/30 transition-all duration-500"></div>
+              <div className={`absolute inset-0 rounded-2xl border-2 transition-all duration-500 ${
+                activeSection === index
+                  ? (pageType === 'tech' ? 'border-blue-400/50' : 'border-amber-400/50')
+                  : 'border-transparent group-hover:border-amber-400/30'
+              }`}></div>
             </div>
           ))}
         </div>

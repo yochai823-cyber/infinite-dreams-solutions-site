@@ -1,4 +1,7 @@
 import './globals.css'
+import AccessibilityBar from '../components/AccessibilityBar'
+import CookieConsent from '../components/CookieConsent'
+import '../styles/accessibility.css'
 
 export const metadata = {
   title: 'Infinite Dreams Solutions',
@@ -10,6 +13,8 @@ export default function RootLayout({ children }) {
     <html>
       <body>
         {children}
+        <AccessibilityBar />
+        <CookieConsent />
       </body>
     </html>
   )

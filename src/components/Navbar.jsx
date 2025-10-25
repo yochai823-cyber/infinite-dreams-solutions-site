@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
@@ -14,6 +13,8 @@ export default function Navbar({ d, locale, pageType = 'home' }){
       return `/${other}/tech`
     } else if (pageType === 'productions') {
       return `/${other}/productions`
+    } else if (pageType === 'about') {
+      return `/${other}/about`
     } else if (pageType === 'terms') {
       return `/${other}/terms`
     } else if (pageType === 'privacy') {
@@ -39,21 +40,10 @@ export default function Navbar({ d, locale, pageType = 'home' }){
     }`}>
       <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center gap-2 md:gap-6 group">
-            <div className="relative">
-              <Image 
-                src="/logo.png" 
-                alt="logo" 
-                width={60} 
-                height={60} 
-                className="md:w-20 md:h-20 rounded-2xl shadow-2xl group-hover:shadow-glow transition-all duration-500 group-hover:scale-110 border-2 border-white/20" 
-              />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-400/30 to-yellow-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute -inset-2 rounded-2xl bg-gradient-to-br from-amber-300/20 to-yellow-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
-            </div>
-            <div className="flex flex-col">
-            <span className="font-black text-lg md:text-2xl tracking-wide transition-colors duration-300" style={{
+          {/* Brand Text Only */}
+          <Link href={`/${locale}`} className="flex items-center gap-2 md:gap-6 group absolute left-1/2 transform -translate-x-1/2 lg:static lg:transform-none">
+            <div className="flex flex-col items-center text-center">
+            <span className="font-black text-sm sm:text-base md:text-2xl tracking-wide transition-colors duration-300" style={{
               background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4, #10b981)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
@@ -62,7 +52,7 @@ export default function Navbar({ d, locale, pageType = 'home' }){
             }}>
               {d.brand}
             </span>
-            <span className="text-xs md:text-sm font-medium text-gray-700 transition-colors duration-300" style={{
+            <span className="text-xs md:text-sm font-medium text-gray-700 transition-colors duration-300 text-center" style={{
               textShadow: '1px 1px 2px rgba(255,255,255,0.8), 0 0 0 1px #3b82f6'
             }}>
               {locale === 'he' ? 'הופכים חלומות למציאות' : 'Turning Dreams into Reality'}
@@ -75,26 +65,22 @@ export default function Navbar({ d, locale, pageType = 'home' }){
                     <li>
                       <a 
                         className="nav-link transition-colors duration-300 hover:text-amber-600 text-gray-700" 
-                        href="#services"
-                      >
-                        {d.nav.services}
-                      </a>
-                    </li>
-                    <li>
-                      <a 
-                        className="nav-link transition-colors duration-300 hover:text-amber-600 text-gray-700" 
-                        href="#projects"
-                      >
-                        {d.nav.projects}
-                      </a>
-                    </li>
-                    <li>
-                      <a 
-                        className="nav-link transition-colors duration-300 hover:text-amber-600 text-gray-700" 
-                        href="#contact"
+                        href={pageType === 'about' ? '#contact' : '#contact'}
+                        onClick={pageType === 'about' ? (e) => {
+                          e.preventDefault();
+                          document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
+                        } : undefined}
                       >
                         {d.nav.contact}
                       </a>
+                    </li>
+                    <li>
+                      <Link 
+                        href={`/${locale}/about`}
+                        className="nav-link transition-colors duration-300 hover:text-amber-600 text-gray-700"
+                      >
+                        {locale === 'he' ? 'אודותינו' : 'About Us'}
+                      </Link>
                     </li>
                     <li>
                       <Link 
@@ -104,14 +90,6 @@ export default function Navbar({ d, locale, pageType = 'home' }){
                         {d.nav.lang}
                       </Link>
                     </li>
-            <li>
-              <a 
-                href="#contact" 
-                className={`bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl`}
-              >
-                {d.nav.quote}
-              </a>
-            </li>
           </ul>
 
           {/* Mobile Menu Button */}
@@ -135,44 +113,37 @@ export default function Navbar({ d, locale, pageType = 'home' }){
 
         {/* Mobile Menu */}
         <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100 bg-amber-50 shadow-lg' : 'max-h-0 opacity-0'
+          isMobileMenuOpen ? 'max-h-96 opacity-100 bg-amber-50 shadow-lg border-t border-amber-200' : 'max-h-0 opacity-0'
         }`}>
-          <div className="py-4 space-y-4">
-            <a 
-              className="block py-2 transition-colors duration-300 text-gray-700 hover:text-amber-600" 
-              href="#services"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {d.nav.services}
-            </a>
-            <a 
-              className="block py-2 transition-colors duration-300 text-gray-700 hover:text-amber-600" 
-              href="#projects"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {d.nav.projects}
-            </a>
-            <a 
-              className="block py-2 transition-colors duration-300 text-gray-700 hover:text-amber-600" 
-              href="#contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {d.nav.contact}
-            </a>
-            <Link 
-              className="block py-2 transition-colors duration-300 text-gray-700 hover:text-amber-600" 
-              href={getLanguageSwitchPath()}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {d.nav.lang}
-            </Link>
-            <a 
-              href="#contact" 
-              className="block bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold py-3 px-6 rounded-full text-center transition-all duration-300 transform hover:scale-105"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {d.nav.quote}
-            </a>
+          <div className="py-6 px-6">
+            {/* Individual buttons with pill-shaped design */}
+            <div className="space-y-3">
+              <a 
+                className="block w-full bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-800 font-medium py-3 px-6 rounded-full text-center transition-all duration-300 transform hover:scale-105 shadow-sm hover:shadow-md" 
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMobileMenuOpen(false);
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                {d.nav.contact}
+              </a>
+              <Link 
+                className="block w-full bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-800 font-medium py-3 px-6 rounded-full text-center transition-all duration-300 transform hover:scale-105 shadow-sm hover:shadow-md" 
+                href={`/${locale}/about`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {locale === 'he' ? 'אודותינו' : 'About Us'}
+              </Link>
+              <Link 
+                className="block w-full bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-800 font-medium py-3 px-6 rounded-full text-center transition-all duration-300 transform hover:scale-105 shadow-sm hover:shadow-md" 
+                href={getLanguageSwitchPath()}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {d.nav.lang}
+              </Link>
+            </div>
           </div>
         </div>
       </nav>

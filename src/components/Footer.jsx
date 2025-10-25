@@ -1,3 +1,5 @@
+'use client'
+
 export default function Footer({ d, locale = 'he' }){
   const slogan = locale === 'he' ? 'הופכים חלומות למציאות' : 'Turning Dreams into Reality'
   

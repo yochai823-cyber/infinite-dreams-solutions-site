@@ -9,13 +9,13 @@ export default function HomeCTA({ d, locale = 'he' }){
   // תרגום דינמי לפי שפה
   const t = {
     he: {
-      title: 'יש לכם רעיון? בואו נבנה אותו יחד',
-      subtitle: 'נחזור אליכם תוך 24 שעות עם תכנית פעולה מפורטת',
+      title: 'יש לכם רעיון?\nבואו נבנה אותו יחד',
+      subtitle: 'נחזור אליכם תוך 24 שעות\nעם תכנית פעולה מפורטת',
       button: 'בואו נדבר על הפרויקט שלכם'
     },
     en: {
-      title: 'Got an idea? Let\'s build it together',
-      subtitle: 'We\'ll get back to you within 24 hours with a detailed action plan',
+      title: 'Got an idea?\nLet\'s build it together',
+      subtitle: 'We\'ll get back to you within 24 hours\nwith a detailed action plan',
       button: 'Let\'s talk about your project'
     }
   }
@@ -33,12 +33,12 @@ export default function HomeCTA({ d, locale = 'he' }){
             </div>
             
             {/* Main heading */}
-            <h2 className="text-4xl md:text-5xl font-black text-gray-800 mb-6 leading-tight">
+            <h2 className={`text-4xl md:text-5xl font-black text-gray-800 mb-6 leading-tight ${locale === 'he' ? 'whitespace-pre-line' : ''}`}>
               {text.title}
             </h2>
             
             {/* Subtitle */}
-            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p className={`text-xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed ${locale === 'he' ? 'whitespace-pre-line md:whitespace-normal' : ''}`}>
               {text.subtitle}
             </p>
             

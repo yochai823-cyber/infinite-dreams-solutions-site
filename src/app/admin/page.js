@@ -11,6 +11,7 @@ export default function AdminPage() {
   const [error, setError] = useState('')
   const [editingNotes, setEditingNotes] = useState({})
   const [notes, setNotes] = useState({})
+  const [newNoteText, setNewNoteText] = useState({})
   const router = useRouter()
 
   // סיסמה להגנה על העמוד (תוכל לשנות אותה)
@@ -22,6 +23,7 @@ export default function AdminPage() {
       setIsAuthenticated(true)
       setError('')
       loadRequests()
+      loadNotes()
     } else {
       setError('סיסמה שגויה')
     }
@@ -41,6 +43,44 @@ export default function AdminPage() {
       setError('שגיאה בטעינת הבקשות')
     } finally {
       setLoading(false)
+    }
+  }
+
+  const loadNotes = async () => {
+    try {
+      const response = await fetch('/api/admin/requests/notes')
+      if (response.ok) {
+        const data = await response.json()
+        const notesData = data.notes || {}
+        
+        // המר נתונים ישנים לפורמט החדש
+        const convertedNotes = {}
+        Object.keys(notesData).forEach(requestId => {
+          if (Array.isArray(notesData[requestId])) {
+            convertedNotes[requestId] = notesData[requestId]
+          } else if (typeof notesData[requestId] === 'string') {
+            // נתונים ישנים - המר למערך
+            // נשתמש ב-ID של הבקשה כבסיס לזמן (אם זה timestamp)
+            const baseTime = parseInt(requestId) || Date.now()
+            convertedNotes[requestId] = [{
+              id: baseTime + Math.random(),
+              text: notesData[requestId],
+              timestamp: new Date(baseTime).toLocaleString('he-IL', {
+                timeZone: 'Asia/Jerusalem',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+              })
+            }]
+          }
+        })
+        
+        setNotes(convertedNotes)
+      }
+    } catch (error) {
+      console.error('Error loading notes:', error)
     }
   }
 
@@ -99,30 +139,88 @@ export default function AdminPage() {
     }
     
     try {
+      console.log('Deleting request:', requestId)
       const response = await fetch(`/api/admin/requests/${requestId}`, {
         method: 'DELETE'
       })
       
+      console.log('Delete response status:', response.status)
+      const responseData = await response.json()
+      console.log('Delete response data:', responseData)
+      
       if (response.ok) {
         setRequests(requests.filter(req => req.id !== requestId))
         setError('')
+        console.log('Request deleted successfully')
       } else {
-        setError('שגיאה במחיקת הבקשה')
+        setError(`שגיאה במחיקת הבקשה: ${responseData.error || 'שגיאה לא ידועה'}`)
       }
     } catch (error) {
-      setError('שגיאה במחיקת הבקשה')
+      console.error('Error deleting request:', error)
+      setError(`שגיאה במחיקת הבקשה: ${error.message}`)
     }
   }
 
-  const saveNotes = (requestId, newNotes) => {
-    setNotes(prev => ({
-      ...prev,
-      [requestId]: newNotes
-    }))
-    setEditingNotes(prev => ({
-      ...prev,
-      [requestId]: false
-    }))
+  const saveNotes = async (requestId, newNotes) => {
+    if (!newNotes.trim()) {
+      setError('הערה לא יכולה להיות ריקה')
+      return
+    }
+
+    try {
+      const now = new Date().toLocaleString('he-IL', {
+        timeZone: 'Asia/Jerusalem',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+
+      const noteEntry = {
+        text: newNotes.trim(),
+        timestamp: now,
+        id: Date.now() // מזהה ייחודי להערה
+      }
+
+      console.log('Saving note:', { requestId, note: noteEntry })
+
+      const response = await fetch('/api/admin/requests/notes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          requestId,
+          note: noteEntry
+        })
+      })
+
+      console.log('Response status:', response.status)
+      const responseData = await response.json()
+      console.log('Response data:', responseData)
+
+      if (response.ok) {
+        setNotes(prev => ({
+          ...prev,
+          [requestId]: [...(prev[requestId] || []), noteEntry]
+        }))
+        setEditingNotes(prev => ({
+          ...prev,
+          [requestId]: false
+        }))
+        setNewNoteText(prev => ({
+          ...prev,
+          [requestId]: ''
+        }))
+        setError('')
+      } else {
+        setError(`שגיאה בשמירת ההערות: ${responseData.error || 'שגיאה לא ידועה'}`)
+      }
+    } catch (error) {
+      console.error('Error in saveNotes:', error)
+      setError(`שגיאה בשמירת ההערות: ${error.message}`)
+    }
   }
 
   const startEditingNotes = (requestId) => {
@@ -132,9 +230,33 @@ export default function AdminPage() {
     }))
   }
 
+  const deleteNote = async (requestId, noteId) => {
+    if (!confirm('האם אתה בטוח שברצונך למחוק הערה זו?')) {
+      return
+    }
+    
+    try {
+      const response = await fetch(`/api/admin/requests/notes/${requestId}/${noteId}`, {
+        method: 'DELETE'
+      })
+      
+      if (response.ok) {
+        setNotes(prev => ({
+          ...prev,
+          [requestId]: Array.isArray(prev[requestId]) ? prev[requestId].filter(note => note.id !== noteId) : []
+        }))
+        setError('')
+      } else {
+        setError('שגיאה במחיקת ההערה')
+      }
+    } catch (error) {
+      setError('שגיאה במחיקת ההערה')
+    }
+  }
+
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex items-center justify-center p-4" dir="rtl">
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-800 mb-2">🔐 פאנל ניהול</h1>
@@ -186,7 +308,10 @@ export default function AdminPage() {
             </div>
             <div className="flex items-center gap-4">
               <button
-                onClick={loadRequests}
+                onClick={() => {
+                  loadRequests()
+                  loadNotes()
+                }}
                 disabled={loading}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center gap-2"
               >
@@ -328,10 +453,14 @@ export default function AdminPage() {
                     {editingNotes[request.id] ? (
                       <div className="space-y-3">
                         <textarea
-                          defaultValue={notes[request.id] || ''}
+                          value={newNoteText[request.id] || ''}
+                          onChange={(e) => setNewNoteText(prev => ({
+                            ...prev,
+                            [request.id]: e.target.value
+                          }))}
                           className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 resize-none"
                           rows={3}
-                          placeholder="הוסף הערות פנימיות (טופל, דיברתי עם הלקוח, וכו')"
+                          placeholder="הוסף הערה פנימית (טופל, דיברתי עם הלקוח, וכו')"
                           onKeyDown={(e) => {
                             if (e.key === 'Enter' && e.ctrlKey) {
                               saveNotes(request.id, e.target.value)
@@ -340,13 +469,16 @@ export default function AdminPage() {
                         />
                         <div className="flex gap-2">
                           <button
-                            onClick={(e) => saveNotes(request.id, e.target.previousElementSibling.value)}
+                            onClick={() => saveNotes(request.id, newNoteText[request.id] || '')}
                             className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
                           >
                             שמור
                           </button>
                           <button
-                            onClick={() => setEditingNotes(prev => ({ ...prev, [request.id]: false }))}
+                            onClick={() => {
+                              setEditingNotes(prev => ({ ...prev, [request.id]: false }))
+                              setNewNoteText(prev => ({ ...prev, [request.id]: '' }))
+                            }}
                             className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm"
                           >
                             ביטול
@@ -354,17 +486,38 @@ export default function AdminPage() {
                         </div>
                       </div>
                     ) : (
-                      <div className="bg-orange-50 rounded-xl p-4 border border-orange-200 min-h-[60px]">
-                        {notes[request.id] ? (
-                          <p className="text-gray-700 whitespace-pre-wrap">{notes[request.id]}</p>
+                      <div className="bg-orange-50 rounded-xl p-4 border border-orange-200">
+                        {notes[request.id] && Array.isArray(notes[request.id]) && notes[request.id].length > 0 ? (
+                          <div className="space-y-3">
+                            {notes[request.id].map((note, index) => (
+                              <div key={note.id || index} className="bg-white rounded-lg p-3 border border-orange-200">
+                                <div className="flex justify-between items-start mb-2">
+                                  <span className="text-xs text-gray-500 font-medium">{note.timestamp}</span>
+                                  <button
+                                    onClick={() => deleteNote(request.id, note.id)}
+                                    className="text-gray-400 hover:text-red-500 transition-colors duration-200 p-1"
+                                    title="מחק הערה"
+                                  >
+                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                  </button>
+                                </div>
+                                <p className="text-gray-700 whitespace-pre-wrap text-sm">{note.text}</p>
+                              </div>
+                            ))}
+                          </div>
                         ) : (
-                          <p className="text-gray-500 italic">אין הערות פנימיות</p>
+                          <p className="text-gray-500 italic text-sm">אין הערות פנימיות</p>
                         )}
                         <button
                           onClick={() => startEditingNotes(request.id)}
-                          className="mt-2 text-orange-600 hover:text-orange-700 text-sm font-medium"
+                          className="mt-3 text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-1"
                         >
-                          {notes[request.id] ? 'ערוך הערות' : 'הוסף הערות'}
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                          </svg>
+                          הוסף הערה חדשה
                         </button>
                       </div>
                     )}
