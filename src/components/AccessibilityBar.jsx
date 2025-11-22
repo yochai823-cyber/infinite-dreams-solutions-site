@@ -621,7 +621,9 @@ const AccessibilityBar = () => {
       
       {/* כפתור צף - מיקום RTL */}
       <button
-        className={`fixed bottom-6 z-50 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 hover:scale-110 ${language === 'he' ? 'left-6' : 'right-6'}`}
+        className={`fixed z-50 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 hover:scale-110
+          bottom-4 p-3 ${language === 'he' ? 'left-4' : 'right-4'}
+          md:bottom-6 md:p-4 ${language === 'he' ? 'md:left-6' : 'md:right-6'}`}
         onClick={() => {
           if (!hasConsent) {
             alert(language === 'he' ? 'אנא קבל את תנאי השימוש בקוקיז כדי להשתמש בסרגל נגישות' : 'Please accept cookie terms to use accessibility bar');
@@ -632,27 +634,43 @@ const AccessibilityBar = () => {
         aria-label={isOpen ? t.closeAccessibility : t.openAccessibility}
         style={{ 
           transform: isOpen ? 'scale(1.1)' : 'scale(1)',
-          transition: 'all 0.3s ease'
+          transition: 'all 0.3s ease',
+          zIndex: isOpen ? 45 : 50
         }}
       >
-        <span className="text-2xl">
+        <span className="text-xl md:text-2xl">
           {isOpen ? icons.close : icons.wheelchair}
         </span>
       </button>
 
+      {/* Backdrop במובייל */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30 md:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
       {/* סרגל נגישות - מיקום RTL */}
       {isOpen && (
         <div
-          className={`accessibility-bar fixed bottom-6 z-40 bg-white dark:bg-gray-800 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 max-w-md w-full max-h-96 overflow-y-auto transition-all duration-300 ${language === 'he' ? 'left-6' : 'right-6'}`}
+          className={`accessibility-bar fixed z-40 bg-white dark:bg-gray-800 shadow-2xl border-t border-gray-200 dark:border-gray-700 overflow-y-auto transition-all duration-300
+            bottom-0 left-0 right-0 max-h-[85vh] rounded-t-3xl border-x-0 border-b-0
+            md:border md:bottom-6 md:max-w-md md:max-h-96 md:rounded-lg ${language === 'he' ? 'md:left-6' : 'md:right-6'}`}
           dir={language === 'he' ? 'rtl' : 'ltr'}
           style={{
             opacity: isOpen ? 1 : 0,
-            transform: isOpen ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(20px)',
+            transform: isOpen ? 'translateY(0)' : 'translateY(100%)',
             transition: 'all 0.3s ease'
           }}
         >
-            <div className="p-4">
-              <div className="flex items-center justify-between mb-4">
+            <div className="p-5 md:p-4 pb-6 md:pb-4">
+              {/* Mobile drag handle */}
+              <div className="md:hidden flex justify-center mb-5">
+                <div className="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+              </div>
+              
+              <div className="flex items-center justify-between mb-5 md:mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t.title}
                 </h3>
@@ -660,15 +678,15 @@ const AccessibilityBar = () => {
                   {/* כפתור החלפת שפה */}
                   <button
                     onClick={() => setLanguage(language === 'he' ? 'en' : 'he')}
-                    className="text-sm px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded text-gray-700"
+                    className="text-sm px-3 py-1.5 md:px-2 md:py-1 bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-lg text-gray-700 touch-manipulation"
                   >
                     {language === 'he' ? 'EN' : 'עב'}
                   </button>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 active:opacity-70 p-1 touch-manipulation"
                   >
-                    <span className="text-xl">{icons.close}</span>
+                    <span className="text-xl md:text-xl">{icons.close}</span>
                   </button>
                 </div>
               </div>
@@ -684,16 +702,16 @@ const AccessibilityBar = () => {
                 </div>
               )}
 
-              <div className="space-y-3">
+              <div className="space-y-4 md:space-y-3">
                 {accessibilityActions.map((action) => (
-                  <div key={action.id} className="flex items-center space-x-3">
-                    <div className="flex-shrink-0">
+                  <div key={action.id} className={`flex items-start gap-3 ${language === 'he' ? 'flex-row-reverse' : ''}`}>
+                    <div className="flex-shrink-0 pt-1">
                       <span className="text-xl text-gray-600 dark:text-gray-400">
                         {action.icon}
                       </span>
                     </div>
                     
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <label className="text-sm font-medium text-gray-700 dark:text-gray-300 block mb-2">
                         {action.label}
                       </label>
@@ -706,17 +724,17 @@ const AccessibilityBar = () => {
                           step={action.step || 1}
                           value={action.value}
                           onChange={(e) => action.onChange(e.target.value)}
-                          className="w-full mt-1"
+                          className="w-full mt-1 h-2 md:h-1.5 touch-manipulation"
                         />
                       )}
                       
                       {action.type === 'toggle' && (
                         <button
                           onClick={() => action.onChange(!action.value)}
-                          className={`mt-2 px-4 py-2 rounded text-sm font-medium ${
+                          className={`mt-2 px-4 py-2.5 md:py-2 rounded-lg text-sm font-medium touch-manipulation ${
                             action.value 
-                              ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                              : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                              ? 'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800' 
+                              : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 active:bg-gray-400 dark:active:bg-gray-500'
                           }`}
                         >
                           {action.value ? t.active : t.inactive}
@@ -727,7 +745,7 @@ const AccessibilityBar = () => {
                         <select
                           value={action.value}
                           onChange={(e) => action.onChange(e.target.value)}
-                          className="w-full mt-2 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded text-sm"
+                          className="w-full mt-2 px-3 py-2.5 md:py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm touch-manipulation"
                         >
                           {action.options.map((option) => (
                             <option key={option.value} value={option.value}>
@@ -742,14 +760,14 @@ const AccessibilityBar = () => {
                           type="color"
                           value={action.value}
                           onChange={(e) => action.onChange(e.target.value)}
-                          className="w-full mt-2 h-10 border border-gray-300 dark:border-gray-600 rounded cursor-pointer"
+                          className="w-full mt-2 h-12 md:h-10 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer touch-manipulation"
                         />
                       )}
                       
                       {action.type === 'action' && (
                         <button
                           onClick={action.onClick}
-                          className="mt-2 px-4 py-2 bg-green-600 text-white rounded text-sm font-medium hover:bg-green-700"
+                          className="mt-2 px-4 py-2.5 md:py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 active:bg-green-800 touch-manipulation"
                         >
                           {t.activate}
                         </button>

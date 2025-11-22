@@ -1,10 +1,32 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ContactForm from './ContactForm'
 
 export default function HomeCTA({ d, locale = 'he' }){
   const [isContactFormOpen, setIsContactFormOpen] = useState(false)
+
+  // Check URL for deep link to open project form
+  useEffect(() => {
+    try {
+      const url = new URL(window.location.href)
+      const shouldOpenProjectForm =
+        url.searchParams.get('open') === 'project-form' ||
+        window.location.hash === '#project-form'
+
+      if (shouldOpenProjectForm) {
+        // Small delay to ensure button is rendered
+        setTimeout(() => {
+          const btn = document.querySelector('#open-project-form-button')
+          if (btn) {
+            btn.click()
+          }
+        }, 100)
+      }
+    } catch (e) {
+      console.error('Error handling project-form deep link', e)
+    }
+  }, [])
 
   // תרגום דינמי לפי שפה
   const t = {
@@ -45,6 +67,7 @@ export default function HomeCTA({ d, locale = 'he' }){
             {/* CTA Button */}
             <div className="flex justify-center">
               <button 
+                id="open-project-form-button"
                 onClick={() => setIsContactFormOpen(true)}
                 className="inline-flex items-center gap-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >

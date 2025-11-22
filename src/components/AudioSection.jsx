@@ -12,14 +12,20 @@ const AudioSection = ({ audioFiles, locale = 'he' }) => {
       subtitle: 'האזינו לקטעי מוזיקה מההפקות שלנו',
       playButton: 'הפעל',
       pauseButton: 'השתק',
-      downloadButton: 'הורד'
+      downloadButton: 'הורד',
+      soundcloudTitle: 'עוד מוזיקה ב-SoundCloud',
+      soundcloudButton: 'האזינו ב-SoundCloud',
+      soundcloudDescription: 'גלו עוד יצירות מוזיקליות ופרויקטים מיוחדים'
     },
     en: {
       title: 'Audio Files',
       subtitle: 'Listen to music clips from our productions',
       playButton: 'Play',
       pauseButton: 'Pause',
-      downloadButton: 'Download'
+      downloadButton: 'Download',
+      soundcloudTitle: 'More Music on SoundCloud',
+      soundcloudButton: 'Listen on SoundCloud',
+      soundcloudDescription: 'Discover more musical works and special projects'
     }
   }
 
@@ -209,6 +215,37 @@ const AudioSection = ({ audioFiles, locale = 'he' }) => {
               <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-green-400/30 transition-all duration-500"></div>
             </div>
           ))}
+        </div>
+
+        {/* SoundCloud Link */}
+        <div className="mt-16 text-center">
+          <div className="max-w-2xl mx-auto bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 shadow-lg border border-orange-200">
+            <div className="mb-6">
+              <svg className="w-16 h-16 mx-auto text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 17.732c-.26 0-.484-.096-.66-.29-.176-.194-.264-.45-.264-.77v-8.54c0-.32.088-.576.264-.77.176-.194.4-.29.66-.29.26 0 .484.096.66.29.176.194.264.45.264.77v8.54c0 .32-.088.576-.264.77-.176.194-.4.29-.66.29zm-2.88-3.12c-.26 0-.484-.096-.66-.29-.176-.194-.264-.45-.264-.77V5.29c0-.32.088-.576.264-.77.176-.194.4-.29.66-.29.26 0 .484.096.66.29.176.194.264.45.264.77v8.262c0 .32-.088.576-.264.77-.176.194-.4.29-.66.29zm-2.88-1.62c-.26 0-.484-.096-.66-.29-.176-.194-.264-.45-.264-.77V5.29c0-.32.088-.576.264-.77.176-.194.4-.29.66-.29.26 0 .484.096.66.29.176.194.264.45.264.77v6.642c0 .32-.088.576-.264.77-.176.194-.4.29-.66.29zm-2.88-1.62c-.26 0-.484-.096-.66-.29-.176-.194-.264-.45-.264-.77V5.29c0-.32.088-.576.264-.77.176-.194.4-.29.66-.29.26 0 .484.096.66.29.176.194.264.45.264.77v5.022c0 .32-.088.576-.264.77-.176.194-.4.29-.66.29z"/>
+              </svg>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-800 mb-3">
+              {text.soundcloudTitle}
+            </h3>
+            <p className="text-gray-600 mb-6">
+              {text.soundcloudDescription}
+            </p>
+            <a
+              href="https://soundcloud.com/yochai-aflalo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 17.732c-.26 0-.484-.096-.66-.29-.176-.194-.264-.45-.264-.77v-8.54c0-.32.088-.576.264-.77.176-.194.4-.29.66-.29.26 0 .484.096.66.29.176.194.264.45.264.77v8.54c0 .32-.088.576-.264.77-.176.194-.4.29-.66.29zm-2.88-3.12c-.26 0-.484-.096-.66-.29-.176-.194-.264-.45-.264-.77V5.29c0-.32.088-.576.264-.77.176-.194.4-.29.66-.29.26 0 .484.096.66.29.176.194.264.45.264.77v8.262c0 .32-.088.576-.264.77-.176.194-.4.29-.66.29zm-2.88-1.62c-.26 0-.484-.096-.66-.29-.176-.194-.264-.45-.264-.77V5.29c0-.32.088-.576.264-.77.176-.194.4-.29.66-.29.26 0 .484.096.66.29.176.194.264.45.264.77v6.642c0 .32-.088.576-.264.77-.176.194-.4.29-.66.29zm-2.88-1.62c-.26 0-.484-.096-.66-.29-.176-.194-.264-.45-.264-.77V5.29c0-.32.088-.576.264-.77.176-.194.4-.29.66-.29.26 0 .484.096.66.29.176.194.264.45.264.77v5.022c0 .32-.088.576-.264.77-.176.194-.4.29-.66.29z"/>
+              </svg>
+              <span>{text.soundcloudButton}</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
         </div>
 
       </div>

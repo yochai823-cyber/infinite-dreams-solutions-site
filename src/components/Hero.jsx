@@ -63,6 +63,17 @@ export default function Hero({ d, locale = 'he', pageType = 'home' }){
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </a>
+          <a 
+            href="https://calendar.app.google/dZRmgiLWFz9zmktSA"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group bg-white/95 backdrop-blur-sm hover:bg-white rounded-full p-3 transition-all duration-300 transform hover:scale-110 shadow-xl hover:shadow-2xl border border-gray-200"
+            title={locale === 'he' ? 'קביעת פגישה' : 'Schedule a Meeting'}
+          >
+            <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </a>
         </div>
       </div>
 

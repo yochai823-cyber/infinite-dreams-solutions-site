@@ -1,4 +1,11 @@
+'use client'
+
+import { useState } from 'react'
+import ContactForm from './ContactForm'
+
 export default function CTA({ d, locale = 'he' }){
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false)
+
   // תרגום דינמי לפי שפה
   const t = {
     he: {
@@ -7,7 +14,8 @@ export default function CTA({ d, locale = 'he' }){
       guaranteedQuality: 'איכות מובטחת',
       guaranteedQualityDesc: 'תוצאות מקצועיות ברמה הגבוהה ביותר',
       executionSpeed: 'מהירות ביצוע',
-      executionSpeedDesc: 'פרויקטים מושלמים בזמן הקצר ביותר'
+      executionSpeedDesc: 'פרויקטים מושלמים בזמן הקצר ביותר',
+      serviceFormButton: 'טופס הזמנת שירותים'
     },
     en: {
       fastResponse: 'Fast Response',
@@ -15,7 +23,8 @@ export default function CTA({ d, locale = 'he' }){
       guaranteedQuality: 'Guaranteed Quality',
       guaranteedQualityDesc: 'Professional results of the highest level',
       executionSpeed: 'Execution Speed',
-      executionSpeedDesc: 'Projects completed in the shortest possible time'
+      executionSpeedDesc: 'Projects completed in the shortest possible time',
+      serviceFormButton: 'Service Order Form'
     }
   }
 
@@ -70,6 +79,29 @@ export default function CTA({ d, locale = 'he' }){
               </svg>
               <span className="text-sm">{d.email}</span>
             </a>
+
+            <a 
+              href="https://calendar.app.google/dZRmgiLWFz9zmktSA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full text-base transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span>{locale === 'he' ? 'קביעת פגישה' : 'Schedule a Meeting'}</span>
+            </a>
+
+            {/* טופס הזמנת שירותים */}
+            <button
+              onClick={() => setIsContactFormOpen(true)}
+              className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full text-base transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>{text.serviceFormButton}</span>
+            </button>
           </div>
           
           {/* Additional info */}
@@ -106,6 +138,14 @@ export default function CTA({ d, locale = 'he' }){
           </div>
         </div>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactForm 
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
+        d={d}
+        locale={locale}
+      />
     </section>
   )
 }

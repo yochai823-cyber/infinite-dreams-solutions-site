@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import ContactForm from './ContactForm'
+import ProjectsGallery from './ProjectsGallery'
 
 const ServiceIcon = ({ index, pageType = 'home' }) => {
   const icons = [
@@ -66,6 +67,8 @@ const ServiceIcon = ({ index, pageType = 'home' }) => {
 export default function Services({ d, pageType = 'home', locale = 'he' }){
   const [isContactFormOpen, setIsContactFormOpen] = useState(false)
   const [activeSection, setActiveSection] = useState(null)
+  const [isProjectsGalleryOpen, setIsProjectsGalleryOpen] = useState(false)
+  const [projectsGalleryType, setProjectsGalleryType] = useState(null) // 'apps' or 'automation'
 
   // תרגום דינמי לפי שפה
   const t = {
@@ -149,7 +152,15 @@ export default function Services({ d, pageType = 'home', locale = 'he' }){
                     document.getElementById('community-content')?.scrollIntoView({ behavior: 'smooth' })
                   }
                 } else if (pageType === 'tech') {
-                  if (index === 2) {
+                  if (index === 0) {
+                    // אפליקציות ווב ואתרים - פתיחת גלריית פרויקטים
+                    setProjectsGalleryType('apps')
+                    setIsProjectsGalleryOpen(true)
+                  } else if (index === 1) {
+                    // אוטומציה - פתיחת גלריית פרויקטים
+                    setProjectsGalleryType('automation')
+                    setIsProjectsGalleryOpen(true)
+                  } else if (index === 2) {
                     // הדרכות ויעוץ - גלילה לכותרת הדרכות
                     const element = document.getElementById('community-content')
                     if (element) {
@@ -227,6 +238,16 @@ export default function Services({ d, pageType = 'home', locale = 'he' }){
         d={d}
         locale={locale}
       />
+
+      {/* Projects Gallery Modal */}
+      {pageType === 'tech' && (
+        <ProjectsGallery
+          isOpen={isProjectsGalleryOpen}
+          onClose={() => setIsProjectsGalleryOpen(false)}
+          projectType={projectsGalleryType}
+          locale={locale}
+        />
+      )}
     </section>
   )
 }

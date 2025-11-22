@@ -65,11 +65,14 @@ export default function Navbar({ d, locale, pageType = 'home' }){
                     <li>
                       <a 
                         className="nav-link transition-colors duration-300 hover:text-amber-600 text-gray-700" 
-                        href={pageType === 'about' ? '#contact' : '#contact'}
-                        onClick={pageType === 'about' ? (e) => {
+                        href="#contact"
+                        onClick={(e) => {
                           e.preventDefault();
-                          document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
-                        } : undefined}
+                          const contactElement = document.getElementById('contact');
+                          if (contactElement) {
+                            contactElement.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
                       >
                         {d.nav.contact}
                       </a>
