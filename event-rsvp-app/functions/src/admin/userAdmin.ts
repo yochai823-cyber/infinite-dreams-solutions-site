@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import { onCall, HttpsError, CallableRequest } from 'firebase-functions/v2/https';
 import * as admin from 'firebase-admin';
 
 if (!admin.apps.length) {
@@ -7,21 +7,26 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
+interface SetRoleData {
+  userId: string;
+  role: string;
+}
+
 // Set user role (admin only)
-export const setUserRole = functions.https.onCall(async (data, context) => {
-  if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated', 'Authentication required');
+export const setUserRole = onCall(async (request: CallableRequest<SetRoleData>) => {
+  if (!request.auth) {
+    throw new HttpsError('unauthenticated', 'Authentication required');
   }
 
   // Check if caller is admin
-  const callerDoc = await db.collection('users').doc(context.auth.uid).get();
+  const callerDoc = await db.collection('users').doc(request.auth.uid).get();
   if (!callerDoc.exists || callerDoc.data()?.role !== 'admin') {
-    throw new functions.https.HttpsError('permission-denied', 'Admin access required');
+    throw new HttpsError('permission-denied', 'Admin access required');
   }
 
-  const { userId, role } = data;
+  const { userId, role } = request.data;
   if (!userId || !['client', 'admin'].includes(role)) {
-    throw new functions.https.HttpsError('invalid-argument', 'Invalid parameters');
+    throw new HttpsError('invalid-argument', 'Invalid parameters');
   }
 
   await db.collection('users').doc(userId).update({ role });
@@ -29,19 +34,23 @@ export const setUserRole = functions.https.onCall(async (data, context) => {
   return { success: true };
 });
 
+interface DeleteUserData {
+  userId?: string;
+}
+
 // Delete user data (for privacy compliance)
-export const deleteUserData = functions.https.onCall(async (data, context) => {
-  if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated', 'Authentication required');
+export const deleteUserData = onCall(async (request: CallableRequest<DeleteUserData>) => {
+  if (!request.auth) {
+    throw new HttpsError('unauthenticated', 'Authentication required');
   }
 
-  const userId = data.userId || context.auth.uid;
+  const userId = request.data.userId || request.auth.uid;
 
   // Only allow self-deletion or admin
-  if (userId !== context.auth.uid) {
-    const callerDoc = await db.collection('users').doc(context.auth.uid).get();
+  if (userId !== request.auth.uid) {
+    const callerDoc = await db.collection('users').doc(request.auth.uid).get();
     if (!callerDoc.exists || callerDoc.data()?.role !== 'admin') {
-      throw new functions.https.HttpsError('permission-denied', 'Unauthorized');
+      throw new HttpsError('permission-denied', 'Unauthorized');
     }
   }
 
@@ -78,7 +87,7 @@ export const deleteUserData = functions.https.onCall(async (data, context) => {
   await db.collection('consents').add({
     type: 'account_deletion',
     userId,
-    deletedBy: context.auth.uid,
+    deletedBy: request.auth.uid,
     timestamp: admin.firestore.FieldValue.serverTimestamp(),
   });
 

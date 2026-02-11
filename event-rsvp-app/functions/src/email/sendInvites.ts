@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import { onCall, HttpsError, CallableRequest } from 'firebase-functions/v2/https';
 import * as admin from 'firebase-admin';
 
 if (!admin.apps.length) {
@@ -13,27 +13,27 @@ interface SendRequest {
   template: string;
 }
 
-export const sendInviteEmails = functions.https.onCall(async (data: SendRequest, context) => {
+export const sendInviteEmails = onCall(async (request: CallableRequest<SendRequest>) => {
   // Auth check
-  if (!context.auth) {
-    throw new functions.https.HttpsError('unauthenticated', 'Authentication required');
+  if (!request.auth) {
+    throw new HttpsError('unauthenticated', 'Authentication required');
   }
 
-  const { eventId, guestIds, template } = data;
+  const { eventId, guestIds, template } = request.data;
 
   // Get event
   const eventDoc = await db.collection('events').doc(eventId).get();
   if (!eventDoc.exists) {
-    throw new functions.https.HttpsError('not-found', 'Event not found');
+    throw new HttpsError('not-found', 'Event not found');
   }
 
   const eventData = eventDoc.data()!;
-  if (eventData.ownerId !== context.auth.uid) {
-    throw new functions.https.HttpsError('permission-denied', 'Not event owner');
+  if (eventData.ownerId !== request.auth.uid) {
+    throw new HttpsError('permission-denied', 'Not event owner');
   }
 
   // Get guests
-  let guestsQuery: FirebaseFirestore.Query;
+  let guestsQuery: admin.firestore.Query;
   if (guestIds && guestIds.length > 0) {
     // Firestore 'in' operator limited to 30 items
     guestsQuery = eventDoc.ref.collection('guests');
@@ -72,7 +72,7 @@ export const sendInviteEmails = functions.https.onCall(async (data: SendRequest,
   // Log activity
   await eventDoc.ref.collection('activity').add({
     type: 'email_sent',
-    actorUserId: context.auth.uid,
+    actorUserId: request.auth.uid,
     payload: { sentCount, errorCount: errors.length },
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
   });

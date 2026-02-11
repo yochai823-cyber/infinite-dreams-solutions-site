@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import { onCall, CallableRequest } from 'firebase-functions/v2/https';
 import * as admin from 'firebase-admin';
 import { createHash } from 'crypto';
 
@@ -52,15 +52,19 @@ async function findGuestByToken(tokenHash: string) {
   return null;
 }
 
+interface GetRsvpData {
+  token: string;
+}
+
 // Get RSVP data (public, no auth required)
-export const getRsvpData = functions.https.onCall(async (data, context) => {
-  const { token } = data;
+export const getRsvpData = onCall(async (request: CallableRequest<GetRsvpData>) => {
+  const { token } = request.data;
   if (!token || typeof token !== 'string' || token.length < 16) {
     return { success: false, message: 'קישור לא תקין' };
   }
 
   // Rate limit by IP
-  const ip = context.rawRequest?.ip || 'unknown';
+  const ip = request.rawRequest?.ip || 'unknown';
   if (!checkRateLimit(`getRsvp:${ip}`)) {
     return { success: false, message: 'יותר מדי בקשות, נסה שוב בעוד דקה' };
   }
@@ -96,9 +100,17 @@ export const getRsvpData = functions.https.onCall(async (data, context) => {
   };
 });
 
+interface SubmitRsvpData {
+  token: string;
+  status: string;
+  partySize: number;
+  note: string;
+  consent: boolean;
+}
+
 // Submit RSVP (public, no auth required)
-export const submitRsvp = functions.https.onCall(async (data, context) => {
-  const { token, status, partySize, note, consent } = data;
+export const submitRsvp = onCall(async (request: CallableRequest<SubmitRsvpData>) => {
+  const { token, status, partySize, note, consent } = request.data;
 
   // Input validation
   if (!token || typeof token !== 'string') {
@@ -118,7 +130,7 @@ export const submitRsvp = functions.https.onCall(async (data, context) => {
   }
 
   // Rate limit by IP + token
-  const ip = context.rawRequest?.ip || 'unknown';
+  const ip = request.rawRequest?.ip || 'unknown';
   if (!checkRateLimit(`submitRsvp:${ip}:${token.slice(0, 8)}`)) {
     return { success: false, message: 'יותר מדי בקשות, נסה שוב בעוד דקה' };
   }
