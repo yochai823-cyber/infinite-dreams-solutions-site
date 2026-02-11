@@ -19,8 +19,13 @@ export function LoginPage() {
       .then((user) => {
         if (user) navigate('/dashboard');
       })
-      .catch(() => {
-        toast('error', t.errors.generic);
+      .catch((err: any) => {
+        const code = err?.code;
+        if (code === 'auth/unauthorized-domain') {
+          toast('error', 'הדומיין לא מורשה בהגדרות Firebase Authentication');
+        } else if (code) {
+          toast('error', `שגיאת Google: ${code}`);
+        }
       });
   }, []);
 
@@ -32,10 +37,16 @@ export function LoginPage() {
       navigate('/dashboard');
     } catch (err: any) {
       const code = err?.code;
-      if (code === 'auth/wrong-password' || code === 'auth/user-not-found') {
+      if (code === 'auth/wrong-password' || code === 'auth/user-not-found' || code === 'auth/invalid-credential') {
         toast('error', t.auth.wrongCredentials);
+      } else if (code === 'auth/too-many-requests') {
+        toast('error', 'יותר מדי ניסיונות. נסה שוב מאוחר יותר');
+      } else if (code === 'auth/network-request-failed') {
+        toast('error', 'שגיאת רשת. בדוק את החיבור לאינטרנט');
+      } else if (code === 'auth/configuration-not-found') {
+        toast('error', 'שירות ההתחברות לא מופעל בפרויקט Firebase');
       } else {
-        toast('error', t.errors.generic);
+        toast('error', `${t.errors.generic} (${code || err?.message || 'unknown'})`);
       }
     } finally {
       setLoading(false);
@@ -45,8 +56,17 @@ export function LoginPage() {
   const handleGoogle = async () => {
     try {
       await signInWithGoogle();
-    } catch {
-      toast('error', t.errors.generic);
+    } catch (err: any) {
+      const code = err?.code;
+      if (code === 'auth/popup-blocked' || code === 'auth/popup-closed-by-user') {
+        toast('error', 'החלון נחסם. נסה שוב');
+      } else if (code === 'auth/unauthorized-domain') {
+        toast('error', 'הדומיין לא מורשה. יש להוסיף אותו בהגדרות Firebase');
+      } else if (code === 'auth/configuration-not-found') {
+        toast('error', 'שירות Google לא מופעל בפרויקט Firebase');
+      } else {
+        toast('error', `${t.errors.generic} (${code || err?.message || 'unknown'})`);
+      }
     }
   };
 

@@ -42,8 +42,14 @@ export function SignupPage() {
         toast('error', t.auth.emailInUse);
       } else if (code === 'auth/invalid-email') {
         toast('error', t.auth.invalidEmail);
+      } else if (code === 'auth/weak-password') {
+        toast('error', 'הסיסמה חלשה מדי. נדרשים לפחות 6 תווים');
+      } else if (code === 'auth/network-request-failed') {
+        toast('error', 'שגיאת רשת. בדוק את החיבור לאינטרנט');
+      } else if (code === 'auth/configuration-not-found') {
+        toast('error', 'שירות ההתחברות לא מופעל בפרויקט Firebase');
       } else {
-        toast('error', t.errors.generic);
+        toast('error', `${t.errors.generic} (${code || err?.message || 'unknown'})`);
       }
     } finally {
       setLoading(false);
