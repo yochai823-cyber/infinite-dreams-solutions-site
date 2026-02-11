@@ -2,6 +2,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   GoogleAuthProvider,
   signOut,
   sendPasswordResetEmail,
@@ -46,21 +48,42 @@ export async function signIn(email: string, password: string): Promise<User> {
   return cred.user;
 }
 
-export async function signInWithGoogle(): Promise<User> {
-  const cred = await signInWithPopup(auth, googleProvider);
-  const userDoc = await getDoc(doc(db, 'users', cred.user.uid));
+async function ensureGoogleUserDoc(user: User): Promise<void> {
+  const userDoc = await getDoc(doc(db, 'users', user.uid));
   if (!userDoc.exists()) {
-    await setDoc(doc(db, 'users', cred.user.uid), {
-      email: cred.user.email,
-      name: cred.user.displayName || '',
+    await setDoc(doc(db, 'users', user.uid), {
+      email: user.email,
+      name: user.displayName || '',
       role: 'client' as UserRole,
       createdAt: serverTimestamp(),
       lastLoginAt: serverTimestamp(),
     });
   } else {
-    await setDoc(doc(db, 'users', cred.user.uid), { lastLoginAt: serverTimestamp() }, { merge: true });
+    await setDoc(doc(db, 'users', user.uid), { lastLoginAt: serverTimestamp() }, { merge: true });
   }
-  return cred.user;
+}
+
+export async function signInWithGoogle(): Promise<User> {
+  try {
+    const cred = await signInWithPopup(auth, googleProvider);
+    await ensureGoogleUserDoc(cred.user);
+    return cred.user;
+  } catch (err: any) {
+    if (err?.code === 'auth/popup-blocked' || err?.code === 'auth/popup-closed-by-browser') {
+      await signInWithRedirect(auth, googleProvider);
+      throw new Error('redirect');
+    }
+    throw err;
+  }
+}
+
+export async function handleGoogleRedirectResult(): Promise<User | null> {
+  const cred = await getRedirectResult(auth);
+  if (cred?.user) {
+    await ensureGoogleUserDoc(cred.user);
+    return cred.user;
+  }
+  return null;
 }
 
 export async function logOut(): Promise<void> {

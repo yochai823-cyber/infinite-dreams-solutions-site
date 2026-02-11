@@ -1,6 +1,6 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { signIn, signInWithGoogle } from '@/shared/firebase/auth';
+import { signIn, signInWithGoogle, handleGoogleRedirectResult } from '@/shared/firebase/auth';
 import { useI18n } from '@/shared/i18n';
 import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
@@ -13,6 +13,16 @@ export function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    handleGoogleRedirectResult()
+      .then((user) => {
+        if (user) navigate('/dashboard');
+      })
+      .catch(() => {
+        toast('error', t.errors.generic);
+      });
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
