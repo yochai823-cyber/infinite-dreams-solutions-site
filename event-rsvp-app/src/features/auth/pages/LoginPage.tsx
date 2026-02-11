@@ -45,7 +45,6 @@ export function LoginPage() {
   const handleGoogle = async () => {
     try {
       await signInWithGoogle();
-      navigate('/dashboard');
     } catch {
       toast('error', t.errors.generic);
     }

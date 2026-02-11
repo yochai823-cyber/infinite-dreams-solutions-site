@@ -1,7 +1,6 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithPopup,
   signInWithRedirect,
   getRedirectResult,
   GoogleAuthProvider,
@@ -63,18 +62,8 @@ async function ensureGoogleUserDoc(user: User): Promise<void> {
   }
 }
 
-export async function signInWithGoogle(): Promise<User> {
-  try {
-    const cred = await signInWithPopup(auth, googleProvider);
-    await ensureGoogleUserDoc(cred.user);
-    return cred.user;
-  } catch (err: any) {
-    if (err?.code === 'auth/popup-blocked' || err?.code === 'auth/popup-closed-by-browser') {
-      await signInWithRedirect(auth, googleProvider);
-      throw new Error('redirect');
-    }
-    throw err;
-  }
+export async function signInWithGoogle(): Promise<void> {
+  await signInWithRedirect(auth, googleProvider);
 }
 
 export async function handleGoogleRedirectResult(): Promise<User | null> {
