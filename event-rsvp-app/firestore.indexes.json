@@ -19,13 +19,6 @@
     },
     {
       "collectionGroup": "guests",
-      "queryScope": "COLLECTION_GROUP",
-      "fields": [
-        { "fieldPath": "tokenHash", "order": "ASCENDING" }
-      ]
-    },
-    {
-      "collectionGroup": "guests",
       "queryScope": "COLLECTION",
       "fields": [
         { "fieldPath": "status", "order": "ASCENDING" },
