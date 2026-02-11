@@ -20,6 +20,7 @@ export interface AppUser {
   email: string;
   name: string;
   role: UserRole;
+  senderName?: string;
   createdAt: Date;
   lastLoginAt: Date;
   tosAcceptedAt?: Date;
@@ -92,6 +93,7 @@ export async function getUserProfile(uid: string): Promise<AppUser | null> {
     email: data.email,
     name: data.name,
     role: data.role,
+    senderName: data.senderName,
     createdAt: data.createdAt?.toDate(),
     lastLoginAt: data.lastLoginAt?.toDate(),
     tosAcceptedAt: data.tosAcceptedAt?.toDate(),

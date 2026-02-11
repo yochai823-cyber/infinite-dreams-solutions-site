@@ -3,7 +3,7 @@ import { he } from './he';
 import { en } from './en';
 
 export type Locale = 'he' | 'en';
-export type Dict = typeof he;
+export type Dict = Omit<typeof he, 'dir'> & { dir: 'rtl' | 'ltr' };
 
 const dictionaries: Record<Locale, Dict> = { he, en };
 
