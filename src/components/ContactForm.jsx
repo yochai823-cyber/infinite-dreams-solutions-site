@@ -23,7 +23,7 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
   const t = {
     he: {
       title: 'בואו נדבר על הפרויקט שלכם',
-      subtitle: 'נחזור אליכם תוך 24 שעות',
+      subtitle: 'נחזור אליכם תוך 48 שעות',
       name: 'שם מלא',
       email: 'אימייל',
       phone: 'טלפון',
@@ -35,7 +35,7 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
       submit: 'שלחו בקשה',
       sending: 'שולח...',
       success: 'הבקשה נשלחה בהצלחה!',
-      successSub: 'נחזור אליכם תוך 24 שעות',
+      successSub: 'נחזור אליכם תוך 48 שעות',
       error: 'שגיאה בשליחת הבקשה',
       errorSub: 'אנא נסו שוב או צרו קשר ישירות',
       sent: 'נשלח בהצלחה!',
@@ -74,14 +74,14 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
       placeholders: {
         name: 'השם שלכם',
         email: 'your@email.com',
-        phone: '050-123-4567',
+        phone: '054-524-7997',
         description: 'ספרו לנו על הפרויקט שלכם - מה אתם רוצים להשיג, איזה בעיות אתם רוצים לפתור, וכל פרט חשוב אחר...',
         additional: 'כל מידע נוסף שיכול לעזור לנו להבין טוב יותר את הצרכים שלכם...'
       }
     },
     en: {
       title: 'Let\'s talk about your project',
-      subtitle: 'We\'ll get back to you within 24 hours',
+      subtitle: 'We\'ll get back to you within 48 hours',
       name: 'Full Name',
       email: 'Email',
       phone: 'Phone',
@@ -93,7 +93,7 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
       submit: 'Send Request',
       sending: 'Sending...',
       success: 'Request sent successfully!',
-      successSub: 'We\'ll get back to you within 24 hours',
+      successSub: 'We\'ll get back to you within 48 hours',
       error: 'Error sending request',
       errorSub: 'Please try again or contact us directly',
       sent: 'Sent successfully!',
@@ -132,7 +132,7 @@ export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
       placeholders: {
         name: 'Your name',
         email: 'your@email.com',
-        phone: '+1-234-567-8900',
+        phone: '+972-54-524-7997',
         description: 'Tell us about your project - what you want to achieve, what problems you want to solve, and any other important details...',
         additional: 'Any additional information that can help us better understand your needs...'
       }

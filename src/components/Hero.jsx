@@ -1,202 +1,145 @@
 'use client'
 
-export default function Hero({ d, locale = 'he', pageType = 'home' }){
-  // תרגום דינמי לפי שפה
-  const t = {
-    he: {
-      techButton: 'פיתוח וכלי ניהול',
-      productionsButton: 'הפקות ותוכן',
-      backToHome: 'חזרה לדף הבית',
-      techTitle: 'פיתוח וכלי ניהול',
-      productionsTitle: 'הפקות ותוכן'
-    },
-    en: {
-      techButton: 'Development & Management Tools',
-      productionsButton: 'Productions & Content',
-      backToHome: 'Back to Home',
-      techTitle: 'Development & Management Tools',
-      productionsTitle: 'Productions & Content'
-    }
-  }
-  
-  const text = t[locale] || t.he
+import Link from 'next/link'
+import { openContact } from './contactBus'
+
+function HeroVisual({ locale }){
+  const he = locale === 'he'
   return (
-    <section className="relative h-[60vh] sm:h-[60vh] h-[39vh] flex items-start justify-center overflow-hidden">
-      {/* Beautiful Background Image */}
-      <div className="absolute inset-0 z-0">
-        {/* Beautiful Background Image */}
-        <div 
-          className="w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url("/hero-bg.jpg")`
-          }}
-        ></div>
-        
-        {/* Subtle overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10"></div>
-        
-        {/* Subtle animated elements */}
-        <div className="absolute top-20 left-20 w-2 h-2 bg-white/30 rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-32 w-1 h-1 bg-white/40 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-40 left-32 w-3 h-3 bg-white/20 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-20 right-20 w-1.5 h-1.5 bg-white/35 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-      </div>
-      
-      {/* Contact Icons - Bottom Left on Background */}
-      <div className="absolute bottom-4 left-4 z-50">
-        <div className="flex gap-2">
-          <a 
-            href={`https://wa.me/${d.phoneE164}`} 
-            className="group bg-white/95 backdrop-blur-sm hover:bg-white rounded-full p-3 transition-all duration-300 transform hover:scale-110 shadow-xl hover:shadow-2xl border border-gray-200"
-            title="WhatsApp"
-          >
-            <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-            </svg>
-          </a>
-          <a 
-            href={`mailto:${d.email}`} 
-            className="group bg-white/95 backdrop-blur-sm hover:bg-white rounded-full p-3 transition-all duration-300 transform hover:scale-110 shadow-xl hover:shadow-2xl border border-gray-200"
-            title="Email"
-          >
-            <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </a>
-          <a 
-            href="https://calendar.app.google/dZRmgiLWFz9zmktSA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group bg-white/95 backdrop-blur-sm hover:bg-white rounded-full p-3 transition-all duration-300 transform hover:scale-110 shadow-xl hover:shadow-2xl border border-gray-200"
-            title={locale === 'he' ? 'קביעת פגישה' : 'Schedule a Meeting'}
-          >
-            <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </a>
+    <div className="relative w-full max-w-xl mx-auto lg:mx-0">
+      {/* glow behind */}
+      <div className="glow-blob w-[380px] h-[380px] top-4 inset-inline-end-[-40px]" style={{ background:'rgba(79,70,229,.35)' }} />
+      <div className="glow-blob w-[320px] h-[320px] bottom-[-30px] inset-inline-start-[-30px]" style={{ background:'rgba(6,182,212,.35)' }} />
+
+      {/* colorful glow halo behind the window */}
+      <div className="absolute z-0 -inset-4 rounded-[2.2rem] opacity-60 blur-2xl animate-floaty" style={{ background:'var(--grad)', backgroundSize:'200% auto' }} />
+
+      {/* Browser window with real screenshot */}
+      <div className="relative z-10 card-surface overflow-hidden shadow-[var(--shadow-lg)] animate-floaty ring-1 ring-white/60">
+        <div className="flex items-center gap-1.5 px-4 h-10 border-b border-[var(--border)] bg-[var(--surface-2)]">
+          <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+          <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+          <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+          <span className="ms-3 text-xs text-[var(--faint)] force-ltr">app.infinite-dreams.io</span>
+        </div>
+        <div className="aspect-[16/10] w-full bg-[var(--surface-2)]">
+          <img src="/projects/room-management-2.png" alt={he ? 'מערכת ניהול שבנינו' : 'A management system we built'} className="w-full h-full object-cover object-top" />
         </div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-10 text-center pt-12 sm:pt-16 md:pt-4 lg:pt-6">
-        <div className="max-w-6xl mx-auto">
-          {/* HUGE LOGO - NO FRAME */}
-          <div className="mb-0 flex justify-center">
-            <img 
-              src="/logo.png" 
-              alt="Infinite Dreams Solutions Logo" 
-              className="w-[350px] h-36 sm:w-[350px] sm:h-36 md:w-[500px] md:h-48 lg:w-[600px] lg:h-56 transition-all duration-500 hover:scale-105 object-contain"
-            />
-          </div>
-          
-                  {/* Main heading */}
-                  <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-800 mb-12 leading-tight drop-shadow-lg -mt-12">
-                    {pageType === 'tech' ? text.techTitle : 
-                     pageType === 'productions' ? text.productionsTitle : 
-                     pageType === 'about' ? (locale === 'he' ? 'אודותינו' : 'About Us') :
-                     d.hero.title}
-                  </h1>
-                  
-                  {/* Vision text for about page */}
-                  {pageType === 'about' && (
-                    <div className="mb-4 -mt-8">
-                      <div className="w-32 h-1 bg-gray-800 mx-auto mb-3"></div>
-                      <p className="text-sm md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
-                        {locale === 'he' 
-                          ? 'אנו מאמינים בכוחה של היצירה לחבר בין אנשים, לבנות קהילות חזקות וליצור חוויות משמעותיות.'
-                          : 'We believe in the power of creation to connect people, build strong communities, and create meaningful experiences.'
-                        }
-                      </p>
-                    </div>
-                  )}
-          
-          {/* Two Main CTA Buttons */}
-          {pageType === 'home' ? (
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-8 justify-center items-center mb-12 sm:mb-16 px-4 -mt-4 sm:mt-0">
-              {/* Technology Button */}
-              <a 
-                href={`/${locale}/tech`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
-              >
-                <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span className="text-base sm:text-base">{text.techButton}</span>
-              </a>
-              
-              {/* Productions Button */}
-              <a 
-                href={`/${locale}/productions`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
-              >
-                <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                </svg>
-                <span className="text-base sm:text-base">{text.productionsButton}</span>
-              </a>
-            </div>
-          ) : pageType === 'productions' ? (
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center mb-8 sm:mb-16 px-4">
-              <a 
-                href={`/${locale}/tech`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
-              >
-                <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span className="text-base sm:text-base">{text.techButton}</span>
-              </a>
-              <a 
-                href={`/${locale}`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
-              >
-                <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span className="text-xs sm:text-base">{text.backToHome}</span>
-              </a>
-            </div>
-          ) : pageType === 'tech' ? (
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-center mb-8 sm:mb-16 px-4">
-              <a 
-                href={`/${locale}/productions`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
-              >
-                <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                </svg>
-                <span className="text-base sm:text-base">{text.productionsButton}</span>
-              </a>
-              <a 
-                href={`/${locale}`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
-              >
-                <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span className="text-xs sm:text-base">{text.backToHome}</span>
-              </a>
-            </div>
-          ) : (
-            <div className="flex justify-center items-center mb-8 sm:mb-16 px-4">
-              <a 
-                href={`/${locale}`} 
-                className="group bg-white border-2 border-gray-800 hover:bg-gray-50 text-gray-800 font-bold py-3 px-6 sm:py-3 sm:px-6 rounded-full text-lg sm:text-lg transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-glow-lg flex items-center gap-2 sm:gap-3 w-4/5 sm:w-auto justify-center"
-              >
-                <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span className="text-xs sm:text-base">{text.backToHome}</span>
-              </a>
-            </div>
-          )}
+      {/* Floating phone (real app) */}
+      <div className="absolute z-20 bottom-[-28px] inset-inline-start-[-18px] w-[116px] sm:w-[140px] rounded-[1.6rem] overflow-hidden border-4 border-white shadow-[var(--shadow-lg)] animate-floaty" style={{ animationDelay:'1s' }}>
+        <img src="/product/hugim-2.webp" alt={he ? 'אפליקציה שבנינו' : 'An app we built'} className="w-full h-auto block" />
+      </div>
+
+      {/* Floating chips */}
+      <div className="absolute z-30 top-[-18px] inset-inline-start-6 animate-floaty" style={{ animationDelay:'.4s' }}>
+        <div className="card-surface px-3 py-1.5 flex items-center gap-2 text-xs sm:text-sm font-semibold shadow-[var(--shadow-md)]">
+          <span className="w-5 h-5 grid place-items-center rounded-md text-white" style={{ background:'var(--grad)' }}>
+            <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.6"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>
+          </span>
+          {he ? 'אוטומציה' : 'Automation'}
         </div>
       </div>
-      
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 right-8 z-10">
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-bounce"></div>
+      <div className="absolute z-30 top-16 inset-inline-end-[-10px] animate-floaty" style={{ animationDelay:'1.4s' }}>
+        <div className="card-surface px-3 py-1.5 flex items-center gap-2 text-xs sm:text-sm font-semibold shadow-[var(--shadow-md)]">
+          <span className="w-5 h-5 grid place-items-center rounded-md text-white bg-[var(--accent-3)]">
+            <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5 10.1 10.9 5.5 9l4.6-1.4L12 3z"/></svg>
+          </span>
+          AI
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function Hero({ d, locale = 'he', pageType = 'home' }){
+  const he = locale === 'he'
+
+  if (pageType !== 'home'){
+    const titles = {
+      tech: he ? 'פיתוח וכלי ניהול' : 'Development & Management Tools',
+      productions: he ? 'הפקות, מוזיקה ותוכן' : 'Productions, Music & Content',
+      about: he ? 'אודות' : 'About',
+    }
+    return (
+      <section className="relative overflow-hidden pt-28 md:pt-36 pb-10 md:pb-14">
+        <div className="absolute inset-0 -z-10" style={{ background:'linear-gradient(160deg,#eef2ff 0%,#f5f3ff 40%,#ecfeff 100%)' }} />
+        <div className="glow-blob -z-10 w-[420px] h-[420px] -top-24 inset-inline-start-[-60px]" style={{ background:'rgba(79,70,229,.28)' }} />
+        <div className="container-page text-center">
+          <h1 className="display text-4xl md:text-6xl text-[var(--text)]">{titles[pageType] || d.brand}</h1>
+          <div className="mx-auto mt-5 h-1 w-20 rounded-full" style={{ background:'var(--grad)' }} />
+          <div className="mt-8">
+            <Link href={`/${locale}`} className="btn btn-ghost">
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d={he ? 'M13 5l7 7-7 7' : 'M11 5l-7 7 7 7'} /><path d={he ? 'M20 12H4' : 'M4 12h16'} />
+              </svg>
+              {he ? 'חזרה לדף הבית' : 'Back to home'}
+            </Link>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  const [line1, line2] = d.hero.title.split('\n')
+
+  return (
+    <section className="relative overflow-hidden pt-24 md:pt-28 pb-16 md:pb-24">
+      {/* rich colorful aurora background */}
+      <div className="absolute inset-0 -z-20 hero-aurora" />
+      <div className="absolute inset-0 -z-10 bg-grid opacity-40" />
+      <div className="glow-blob -z-10 w-[560px] h-[560px] -top-40 inset-inline-start-[-120px]" style={{ background:'rgba(236,72,153,.32)' }} />
+      <div className="glow-blob -z-10 w-[520px] h-[520px] top-10 inset-inline-end-[-120px]" style={{ background:'rgba(6,182,212,.30)' }} />
+
+      <div className="container-page">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          {/* Text */}
+          <div className="text-center lg:text-start">
+            <span className="eyebrow">
+              <span className="w-2 h-2 rounded-full" style={{ background:'var(--grad)' }} />
+              {d.hero.eyebrow}
+            </span>
+
+            <h1 className="display mt-5 text-[2.05rem] leading-[1.1] sm:text-5xl lg:text-[3.55rem] text-[var(--text)] balance">
+              {line1}
+              <br />
+              <span className="text-grad">{line2}</span>
+            </h1>
+
+            <p className="mx-auto lg:mx-0 mt-5 max-w-xl text-lg md:text-xl text-[var(--muted)] leading-relaxed">
+              {d.hero.subShort || d.hero.sub}
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3">
+              <button onClick={openContact} className="btn btn-primary w-full sm:w-auto text-[17px]">
+                {d.hero.ctaPrimary}
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d={he ? 'M11 5l-7 7 7 7' : 'M13 5l7 7-7 7'} /><path d={he ? 'M4 12h16' : 'M20 12H4'} />
+                </svg>
+              </button>
+              <Link href={`/${locale}#work`} className="btn btn-ghost w-full sm:w-auto text-[17px]">
+                {d.hero.ctaSecondary}
+              </Link>
+            </div>
+
+            {/* quick highlights */}
+            <div className="mt-9 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+              {(he ? ['+20 שנות ניסיון','ליווי מקצה לקצה','תגובה תוך 48ש׳'] : ['20+ years','End-to-end','48h response']).map((t) => (
+                <span key={t} className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--text)] bg-white/70 backdrop-blur border border-[var(--border)] rounded-full px-3.5 py-1.5 shadow-[var(--shadow-sm)]">
+                  <span className="w-4 h-4 rounded-full grid place-items-center text-white" style={{ background:'var(--grad)' }}>
+                    <svg viewBox="0 0 24 24" className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+                  </span>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Visual */}
+          <div className="order-first lg:order-last">
+            <HeroVisual locale={locale} />
+          </div>
         </div>
       </div>
     </section>

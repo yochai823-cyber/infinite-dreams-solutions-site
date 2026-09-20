@@ -32,12 +32,12 @@ export default function HomeCTA({ d, locale = 'he' }){
   const t = {
     he: {
       title: 'יש לכם רעיון?\nבואו נבנה אותו יחד',
-      subtitle: 'נחזור אליכם תוך 24 שעות\nעם תכנית פעולה מפורטת',
+      subtitle: 'נחזור אליכם תוך 48 שעות\nעם תכנית פעולה מפורטת',
       button: 'בואו נדבר על הפרויקט שלכם'
     },
     en: {
       title: 'Got an idea?\nLet\'s build it together',
-      subtitle: 'We\'ll get back to you within 24 hours\nwith a detailed action plan',
+      subtitle: 'We\'ll get back to you within 48 hours\nwith a detailed action plan',
       button: 'Let\'s talk about your project'
     }
   }

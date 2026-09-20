@@ -13,9 +13,9 @@ export default function ProjectsGallery({ isOpen, onClose, projectType, locale =
           description: 'מערכת מתקדמת לניהול הזמנות חדרים במתנ"ס - ניהול לוח זמנים, הזמנות, תשלומים ודוחות',
           technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
           images: [
-            '/projects/room-management-1.png',
             '/projects/room-management-2.png',
-            '/projects/room-management-3.png'
+            '/projects/room-management-3.png',
+            '/projects/room-management-1.png'
           ]
         },
         {
@@ -24,10 +24,10 @@ export default function ProjectsGallery({ isOpen, onClose, projectType, locale =
           description: 'מערכת מקיפה לניהול תלמידים, שיעורים ונוכחות בבית ספר למחול',
           technologies: ['React Native', 'Firebase', 'Node.js'],
           images: [
-            '/projects/dance-school-1.png',
             '/projects/dance-school-2.png',
             '/projects/dance-school-3.png',
-            '/projects/dance-school-4.png'
+            '/projects/dance-school-4.png',
+            '/projects/dance-school-1.png'
           ]
         },
         {
@@ -49,9 +49,9 @@ export default function ProjectsGallery({ isOpen, onClose, projectType, locale =
           description: 'Advanced system for managing room bookings in community centers - schedule management, bookings, payments and reports',
           technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
           images: [
-            '/projects/room-management-1.png',
             '/projects/room-management-2.png',
-            '/projects/room-management-3.png'
+            '/projects/room-management-3.png',
+            '/projects/room-management-1.png'
           ]
         },
         {
@@ -60,10 +60,10 @@ export default function ProjectsGallery({ isOpen, onClose, projectType, locale =
           description: 'Comprehensive system for managing students, classes and attendance at a dance school',
           technologies: ['React Native', 'Firebase', 'Node.js'],
           images: [
-            '/projects/dance-school-1.png',
             '/projects/dance-school-2.png',
             '/projects/dance-school-3.png',
-            '/projects/dance-school-4.png'
+            '/projects/dance-school-4.png',
+            '/projects/dance-school-1.png'
           ]
         },
         {

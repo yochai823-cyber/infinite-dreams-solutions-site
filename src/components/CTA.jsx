@@ -10,7 +10,7 @@ export default function CTA({ d, locale = 'he' }){
   const t = {
     he: {
       fastResponse: 'תגובה מהירה',
-      fastResponseDesc: 'נחזור אליכם תוך 24 שעות',
+      fastResponseDesc: 'נחזור אליכם תוך 48 שעות',
       guaranteedQuality: 'איכות מובטחת',
       guaranteedQualityDesc: 'תוצאות מקצועיות ברמה הגבוהה ביותר',
       executionSpeed: 'מהירות ביצוע',
@@ -19,7 +19,7 @@ export default function CTA({ d, locale = 'he' }){
     },
     en: {
       fastResponse: 'Fast Response',
-      fastResponseDesc: 'We\'ll get back to you within 24 hours',
+      fastResponseDesc: 'We\'ll get back to you within 48 hours',
       guaranteedQuality: 'Guaranteed Quality',
       guaranteedQualityDesc: 'Professional results of the highest level',
       executionSpeed: 'Execution Speed',

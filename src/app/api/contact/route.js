@@ -1,51 +1,7 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import { sql, ensureSchema } from '../../../lib/db'
 
-// יומן בקשות - נשמור בקובץ JSON
-const REQUESTS_LOG_PATH = path.join(process.cwd(), 'contact-requests.json')
-
-// פונקציה לשמירת בקשה ביומן
-function saveRequestToLog(formData) {
-  const timestamp = new Date().toLocaleString('he-IL', {
-    timeZone: 'Asia/Jerusalem',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-  })
-
-  const requestEntry = {
-    id: Date.now(),
-    timestamp,
-    date: new Date().toISOString(),
-    ...formData
-  }
-
-  try {
-    // קריאת הקובץ הקיים
-    let requests = []
-    if (fs.existsSync(REQUESTS_LOG_PATH)) {
-      const data = fs.readFileSync(REQUESTS_LOG_PATH, 'utf8')
-      requests = JSON.parse(data)
-    }
-
-    // הוספת הבקשה החדשה
-    requests.unshift(requestEntry) // הוספה בתחילת הרשימה
-
-    // שמירת הקובץ המעודכן
-    fs.writeFileSync(REQUESTS_LOG_PATH, JSON.stringify(requests, null, 2), 'utf8')
-    
-    return requestEntry
-  } catch (error) {
-    console.error('שגיאה בשמירת יומן:', error)
-    return null
-  }
-}
-
-// פונקציה לשליחת מייל (זמנית - רק שמירה ביומן)
+// פונקציה לשליחת מייל (זמנית - רק הדפסה לקונסול)
 async function sendEmail(formData, requestId) {
   try {
     // כרגע רק נשמור ביומן - תוכל להוסיף שליחת מייל מאוחר יותר
@@ -112,7 +68,7 @@ ${formData.additionalInfo || 'אין מידע נוסף'}
 📅 תאריך ושעה: ${new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' })}
 
 ---
-💡 זכור: התחייבת לחזור תוך 24 שעות!
+💡 זכור: התחייבת לחזור תוך 48 שעות!
     `)
     
     return true
@@ -126,25 +82,46 @@ export async function POST(request) {
   try {
     const formData = await request.json()
 
-    // שמירה ביומן
-    const requestEntry = saveRequestToLog(formData)
-    
-    if (!requestEntry) {
-      return NextResponse.json(
-        { success: false, message: 'שגיאה בשמירת הבקשה' },
-        { status: 500 }
-      )
-    }
+    // לוודא שהטבלאות קיימות
+    await ensureSchema()
+
+    // מזהה בקשה ייחודי (שומר על פורמט Date.now שהאדמין כבר מכיר)
+    const requestId = Date.now()
+
+    // שמירת הבקשה בבסיס הנתונים
+    await sql`
+      INSERT INTO contact_requests (
+        id,
+        name,
+        email,
+        phone,
+        project_type,
+        project_description,
+        budget,
+        timeline,
+        additional_info
+      ) VALUES (
+        ${requestId},
+        ${formData.name},
+        ${formData.email},
+        ${formData.phone},
+        ${formData.projectType},
+        ${formData.projectDescription},
+        ${formData.budget},
+        ${formData.timeline},
+        ${formData.additionalInfo}
+      );
+    `
 
     // שליחת מייל (כרגע רק הדפסה לקונסול)
-    const emailSent = await sendEmail(formData, requestEntry.id)
+    await sendEmail(formData, requestId)
 
+    // גם אם שמירת הלוג לקובץ נכשלה – לא נכשיל את הבקשה ללקוח
     return NextResponse.json({
       success: true,
-      message: 'הבקשה נשלחה בהצלחה! נחזור אליכם תוך 24 שעות.',
-      requestId: requestEntry.id
+      message: 'הבקשה נשלחה בהצלחה! נחזור אליכם תוך 48 שעות.',
+      requestId
     })
-
   } catch (error) {
     console.error('שגיאה בשרת:', error)
     return NextResponse.json(

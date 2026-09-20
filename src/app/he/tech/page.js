@@ -4,7 +4,7 @@ import { he } from '../../../dict'
 import Navbar from '../../../components/Navbar'
 import Hero from '../../../components/Hero'
 import Services from '../../../components/Services'
-import CTA from '../../../components/CTA'
+import FinalCTA from '../../../components/FinalCTA'
 import Footer from '../../../components/Footer'
 
 export default function TechPage() {
@@ -135,7 +135,7 @@ export default function TechPage() {
         </section>
       </div>
 
-      <CTA d={he} locale="he" />
+      <FinalCTA d={he} locale="he" />
       <Footer d={he} locale="he" />
     </main>
   )

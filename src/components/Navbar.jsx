@@ -1,149 +1,98 @@
 'use client'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { openContact } from './contactBus'
 
 export default function Navbar({ d, locale, pageType = 'home' }){
-  const other = locale==='he' ? 'en' : 'he'
+  const other = locale === 'he' ? 'en' : 'he'
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
-  // קביעת הנתיב הנכון לפי הדף הנוכחי
-  const getLanguageSwitchPath = () => {
-    if (pageType === 'tech') {
-      return `/${other}/tech`
-    } else if (pageType === 'productions') {
-      return `/${other}/productions`
-    } else if (pageType === 'about') {
-      return `/${other}/about`
-    } else if (pageType === 'terms') {
-      return `/${other}/terms`
-    } else if (pageType === 'privacy') {
-      return `/${other}/privacy`
-    } else {
-      return `/${other}`
-    }
+  const langPath = () => {
+    const map = { tech:'/tech', productions:'/productions', about:'/about', terms:'/terms', privacy:'/privacy' }
+    return `/${other}${map[pageType] || ''}`
   }
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setIsScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive:true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const home = `/${locale}`
+  const links = [
+    { label:d.nav.services, href:`${home}#services` },
+    { label:d.nav.process,  href:`${home}#process` },
+    { label:d.nav.work,     href:`${home}#work` },
+    { label:d.nav.about,    href:`${home}/about` },
+  ]
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-amber-50/90 backdrop-blur-md shadow-lg' 
-        : 'bg-transparent'
-    }`}>
-      <nav className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Brand Text Only */}
-          <Link href={`/${locale}`} className="flex items-center gap-2 md:gap-6 group absolute left-1/2 transform -translate-x-1/2 lg:static lg:transform-none">
-            <div className="flex flex-col items-center text-center">
-            <span className="font-black text-sm sm:text-base md:text-2xl tracking-wide transition-colors duration-300" style={{
-              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4, #10b981)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: '1px 1px 2px rgba(255,255,255,0.8), 0 0 0 1px #3b82f6'
-            }}>
-              {d.brand}
+    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? 'nav-glass' : 'bg-transparent'}`}>
+      <nav className="container-page">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Brand */}
+          <Link href={home} className="group flex items-center gap-2.5 shrink-0" onClick={() => setOpen(false)}>
+            <img src="/logo-mark.webp" alt={d.brand} className="h-9 md:h-11 w-auto transition-transform duration-300 group-hover:scale-105" />
+            <span className="hidden sm:block text-[11px] md:text-xs text-[var(--muted)] border-s border-[var(--border)] ps-2.5 leading-tight">
+              {locale === 'he' ? 'פיתוח · אוטומציה' : 'Development ·'}<br/>{locale === 'he' ? 'ובינה מלאכותית' : 'Automation · AI'}
             </span>
-            <span className="text-xs md:text-sm font-medium text-gray-700 transition-colors duration-300 text-center" style={{
-              textShadow: '1px 1px 2px rgba(255,255,255,0.8), 0 0 0 1px #3b82f6'
-            }}>
-              {locale === 'he' ? 'הופכים חלומות למציאות' : 'Turning Dreams into Reality'}
-            </span>
-            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center gap-8">
-                    <li>
-                      <a 
-                        className="nav-link transition-colors duration-300 hover:text-amber-600 text-gray-700" 
-                        href="#contact"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          const contactElement = document.getElementById('contact');
-                          if (contactElement) {
-                            contactElement.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        }}
-                      >
-                        {d.nav.contact}
-                      </a>
-                    </li>
-                    <li>
-                      <Link 
-                        href={`/${locale}/about`}
-                        className="nav-link transition-colors duration-300 hover:text-amber-600 text-gray-700"
-                      >
-                        {locale === 'he' ? 'אודותינו' : 'About Us'}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link 
-                        className="rounded-full px-4 py-2 border-2 border-gray-300 text-gray-700 hover:border-blue-500 hover:text-amber-600 transition-all duration-300 hover:scale-105" 
-                        href={getLanguageSwitchPath()}
-                      >
-                        {d.nav.lang}
-                      </Link>
-                    </li>
+          {/* Desktop links */}
+          <ul className="hidden lg:flex items-center gap-1">
+            {links.map(l => (
+              <li key={l.href}>
+                <Link href={l.href} className="px-4 py-2 rounded-full text-[15px] font-medium text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
           </ul>
 
-          {/* Mobile Menu Button */}
+          {/* Desktop actions */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Link href={langPath()} className="w-10 h-10 grid place-items-center rounded-full border border-[var(--border-strong)] text-sm font-semibold text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-colors">
+              {d.nav.lang}
+            </Link>
+            <button onClick={openContact} className="btn btn-primary !py-2.5 !px-5 text-[15px]">
+              {d.nav.quote}
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d={locale === 'he' ? 'M11 5l-7 7 7 7' : 'M13 5l7 7-7 7'} /><path d={locale === 'he' ? 'M4 12h16' : 'M20 12H4'} />
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile toggle */}
           <button
-            className="lg:hidden p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={locale === 'he' ? 'תפריט' : 'Menu'}
+            aria-expanded={open}
+            className="lg:hidden w-11 h-11 grid place-items-center rounded-xl border border-[var(--border)] bg-[var(--surface)]/70 backdrop-blur"
+            onClick={() => setOpen(v => !v)}
           >
-            <div className={`w-6 h-6 flex flex-col justify-center space-y-1 transition-all duration-300`}>
-              <span className={`block h-0.5 w-6 transition-all duration-300 ${
-                isScrolled ? 'bg-gray-800' : 'bg-white'
-              } ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-              <span className={`block h-0.5 w-6 transition-all duration-300 ${
-                isScrolled ? 'bg-gray-800' : 'bg-white'
-              } ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`block h-0.5 w-6 transition-all duration-300 ${
-                isScrolled ? 'bg-gray-800' : 'bg-white'
-              } ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+            <div className="w-5 flex flex-col gap-[5px]">
+              <span className={`h-0.5 w-full bg-[var(--text)] rounded-full transition-all duration-300 ${open ? 'rotate-45 translate-y-[7px]' : ''}`} />
+              <span className={`h-0.5 w-full bg-[var(--text)] rounded-full transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
+              <span className={`h-0.5 w-full bg-[var(--text)] rounded-full transition-all duration-300 ${open ? '-rotate-45 -translate-y-[7px]' : ''}`} />
             </div>
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100 bg-amber-50 shadow-lg border-t border-amber-200' : 'max-h-0 opacity-0'
-        }`}>
-          <div className="py-6 px-6">
-            {/* Individual buttons with pill-shaped design */}
-            <div className="space-y-3">
-              <a 
-                className="block w-full bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-800 font-medium py-3 px-6 rounded-full text-center transition-all duration-300 transform hover:scale-105 shadow-sm hover:shadow-md" 
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMobileMenuOpen(false);
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                {d.nav.contact}
-              </a>
-              <Link 
-                className="block w-full bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-800 font-medium py-3 px-6 rounded-full text-center transition-all duration-300 transform hover:scale-105 shadow-sm hover:shadow-md" 
-                href={`/${locale}/about`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {locale === 'he' ? 'אודותינו' : 'About Us'}
+        {/* Mobile panel */}
+        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${open ? 'max-h-[420px] opacity-100 pb-5' : 'max-h-0 opacity-0'}`}>
+          <div className="mt-2 rounded-2xl card-surface p-3 space-y-1">
+            {links.map(l => (
+              <Link key={l.href} href={l.href} onClick={() => setOpen(false)}
+                className="block px-4 py-3 rounded-xl text-[15px] font-medium text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors">
+                {l.label}
               </Link>
-              <Link 
-                className="block w-full bg-white border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-800 font-medium py-3 px-6 rounded-full text-center transition-all duration-300 transform hover:scale-105 shadow-sm hover:shadow-md" 
-                href={getLanguageSwitchPath()}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
+            ))}
+            <div className="flex items-center gap-2 pt-2">
+              <button onClick={() => { setOpen(false); openContact() }} className="btn btn-primary flex-1">
+                {d.nav.quote}
+              </button>
+              <Link href={langPath()} onClick={() => setOpen(false)} className="btn btn-ghost !px-5">
                 {d.nav.lang}
               </Link>
             </div>

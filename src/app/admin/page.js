@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import AnalyticsPanel from '../../components/AnalyticsPanel'
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -17,10 +18,21 @@ export default function AdminPage() {
   // סיסמה להגנה על העמוד (תוכל לשנות אותה)
   const ADMIN_PASSWORD = '23081982'
 
+  // בדיקה אם המשתמש כבר מחובר (בטעינת הדף)
+  useEffect(() => {
+    const savedAuth = sessionStorage.getItem('admin_authenticated')
+    if (savedAuth === 'true') {
+      setIsAuthenticated(true)
+      loadRequests()
+      loadNotes()
+    }
+  }, [])
+
   const handleLogin = (e) => {
     e.preventDefault()
     if (password === ADMIN_PASSWORD) {
       setIsAuthenticated(true)
+      sessionStorage.setItem('admin_authenticated', 'true')
       setError('')
       loadRequests()
       loadNotes()
@@ -325,7 +337,10 @@ export default function AdminPage() {
                 רענן
               </button>
               <button
-                onClick={() => setIsAuthenticated(false)}
+                onClick={() => {
+                  setIsAuthenticated(false)
+                  sessionStorage.removeItem('admin_authenticated')
+                }}
                 className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
               >
                 התנתק
@@ -342,6 +357,11 @@ export default function AdminPage() {
             <p className="text-red-700">{error}</p>
           </div>
         )}
+
+        {/* Analytics dashboard */}
+        <AnalyticsPanel />
+
+        <h2 className="text-xl font-bold text-gray-800 mb-4">📋 בקשות אחרונות</h2>
 
         {requests.length === 0 ? (
           <div className="text-center py-12">

@@ -1,71 +1,35 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
-
-const REQUESTS_FILE = path.join(process.cwd(), 'contact-requests.json')
-const NOTES_FILE = path.join(process.cwd(), 'admin-notes.json')
+import { sql, ensureSchema } from '../../../../../lib/db'
 
 export async function POST(request) {
   try {
     const body = await request.json()
-    console.log('Received request body:', body)
-    
     const { requestId, note } = body
 
-    if (!requestId || !note) {
-      console.error('Missing requestId or note:', { requestId, note })
+    if (!requestId || !note || !note.id || !note.text) {
       return NextResponse.json(
         { success: false, error: 'חסרים פרמטרים נדרשים' },
         { status: 400 }
       )
     }
 
-    // קרא את קובץ ההערות הנוכחי
-    let allNotes = {}
-    if (fs.existsSync(NOTES_FILE)) {
-      const fileContent = fs.readFileSync(NOTES_FILE, 'utf8')
-      allNotes = JSON.parse(fileContent)
-    }
+    await ensureSchema()
 
-    // המר נתונים ישנים לפורמט החדש
-    Object.keys(allNotes).forEach(id => {
-      if (typeof allNotes[id] === 'string') {
-        // נתונים ישנים - המר למערך
-        // נשתמש ב-ID של הבקשה כבסיס לזמן (אם זה timestamp)
-        const baseTime = parseInt(id) || Date.now()
-        allNotes[id] = [{
-          id: baseTime + Math.random(),
-          text: allNotes[id],
-          timestamp: new Date(baseTime).toLocaleString('he-IL', {
-            timeZone: 'Asia/Jerusalem',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-          })
-        }]
-      }
+    const reqId = BigInt(requestId)
+    const noteId = BigInt(note.id)
+
+    // נשמור את הטקסט בלבד, ה-timestamp ייווצר מה-DB
+    await sql`
+      INSERT INTO request_notes (id, request_id, text)
+      VALUES (${noteId}, ${reqId}, ${note.text});
+    `
+
+    return NextResponse.json({
+      success: true,
+      message: 'הערה נשמרה בהצלחה'
     })
-
-    // הוסף הערה חדשה למערך ההערות
-    if (!allNotes[requestId]) {
-      allNotes[requestId] = []
-    }
-    allNotes[requestId].push(note)
-
-    console.log('Saving notes to file:', allNotes)
-
-    // שמור את הקובץ המעודכן
-    fs.writeFileSync(NOTES_FILE, JSON.stringify(allNotes, null, 2))
-
-    return NextResponse.json({ 
-      success: true, 
-      message: 'הערה נשמרה בהצלחה' 
-    })
-
   } catch (error) {
-    console.error('Error saving note:', error)
+    console.error('Error saving note to DB:', error)
     return NextResponse.json(
       { success: false, error: `שגיאה בשמירת ההערה: ${error.message}` },
       { status: 500 }
@@ -75,41 +39,43 @@ export async function POST(request) {
 
 export async function GET() {
   try {
-    // קרא את קובץ ההערות
-    let allNotes = {}
-    if (fs.existsSync(NOTES_FILE)) {
-      const fileContent = fs.readFileSync(NOTES_FILE, 'utf8')
-      allNotes = JSON.parse(fileContent)
+    await ensureSchema()
+
+    const rows = await sql`
+      SELECT id, request_id, text, created_at
+      FROM request_notes
+      ORDER BY created_at ASC;
+    `
+
+    const formatter = new Intl.DateTimeFormat('he-IL', {
+      timeZone: 'Asia/Jerusalem',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+
+    const notesByRequest = {}
+
+    for (const row of rows) {
+      const reqId = String(row.request_id)
+      if (!notesByRequest[reqId]) {
+        notesByRequest[reqId] = []
+      }
+      notesByRequest[reqId].push({
+        id: Number(row.id),
+        text: row.text,
+        timestamp: formatter.format(row.created_at)
+      })
     }
 
-    // המר נתונים ישנים לפורמט החדש
-    Object.keys(allNotes).forEach(id => {
-      if (typeof allNotes[id] === 'string') {
-        // נתונים ישנים - המר למערך
-        // נשתמש ב-ID של הבקשה כבסיס לזמן (אם זה timestamp)
-        const baseTime = parseInt(id) || Date.now()
-        allNotes[id] = [{
-          id: baseTime + Math.random(),
-          text: allNotes[id],
-          timestamp: new Date(baseTime).toLocaleString('he-IL', {
-            timeZone: 'Asia/Jerusalem',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit'
-          })
-        }]
-      }
+    return NextResponse.json({
+      success: true,
+      notes: notesByRequest
     })
-
-    return NextResponse.json({ 
-      success: true, 
-      notes: allNotes 
-    })
-
   } catch (error) {
-    console.error('Error loading notes:', error)
+    console.error('Error loading notes from DB:', error)
     return NextResponse.json(
       { success: false, error: 'שגיאה בטעינת ההערות' },
       { status: 500 }

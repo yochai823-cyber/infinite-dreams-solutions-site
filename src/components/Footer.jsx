@@ -1,44 +1,59 @@
 'use client'
+import Link from 'next/link'
 
 export default function Footer({ d, locale = 'he' }){
-  const slogan = locale === 'he' ? 'הופכים חלומות למציאות' : 'Turning Dreams into Reality'
-  
+  const he = locale === 'he'
+  const home = `/${locale}`
+  const tagline = he ? 'פיתוח אפליקציות, אוטומציה ובינה מלאכותית לארגונים.' : 'App development, automation & AI for organizations.'
+
+  const nav = [
+    { label:d.nav.services, href:`${home}#services` },
+    { label:d.nav.process,  href:`${home}#process` },
+    { label:d.nav.work,     href:`${home}#work` },
+    { label:d.nav.about,    href:`${home}/about` },
+  ]
+
   return (
-    <footer className="py-12 bg-gradient-to-r from-gray-50 to-white border-t border-gray-200">
-      <div className="container mx-auto px-6">
-        <div className="text-center">
-          {/* Main Copyright */}
-          <div className="mb-6">
-            <p className="text-gray-600 text-lg font-medium">
-              © {new Date().getFullYear()} {d.brand}
-            </p>
-            <p className="text-gray-500 text-sm mt-2">
-              {slogan}
-            </p>
+    <footer className="bg-[var(--surface)] border-t border-[var(--border)]">
+      <div className="container-page py-14 md:py-16">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1.2fr]">
+          {/* Brand */}
+          <div>
+            <Link href={home} className="inline-flex items-center">
+              <img src="/logo-mark.webp" alt={d.brand} className="h-12 w-auto" />
+            </Link>
+            <p className="mt-4 text-[15px] text-[var(--muted)] leading-relaxed max-w-xs">{tagline}</p>
           </div>
-          
-          {/* Links */}
-          <div className="flex justify-center items-center gap-8 mb-6">
-            <a 
-              href={`/${locale}/privacy`} 
-              className="text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm font-medium"
-            >
-              {d.privacy}
-            </a>
-            <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
-            <a 
-              href={`/${locale}/terms`} 
-              className="text-gray-600 hover:text-gray-800 transition-colors duration-300 text-sm font-medium"
-            >
-              {d.terms}
-            </a>
+
+          {/* Nav */}
+          <div>
+            <h4 className="text-sm font-semibold text-[var(--text)] mb-4">{he ? 'ניווט' : 'Navigate'}</h4>
+            <ul className="space-y-2.5">
+              {nav.map(l => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-[15px] text-[var(--muted)] hover:text-[var(--accent)] transition-colors">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          
-          {/* Contact Info */}
-          <div className="text-center">
-            <p className="text-gray-500 text-xs md:text-sm break-words px-4">
-              {d.email} • {d.phone}
-            </p>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-sm font-semibold text-[var(--text)] mb-4">{he ? 'דברו איתנו' : 'Get in touch'}</h4>
+            <ul className="space-y-2.5 text-[15px]">
+              <li><a href={`mailto:${d.email}`} className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors force-ltr">{d.email}</a></li>
+              <li><a href={`tel:+${d.phoneE164}`} className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors force-ltr">{d.phone}</a></li>
+              <li><a href={`https://wa.me/${d.phoneE164}`} target="_blank" rel="noopener noreferrer" className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors">{he ? 'וואטסאפ' : 'WhatsApp'}</a></li>
+              <li><a href={d.calendar} target="_blank" rel="noopener noreferrer" className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors">{he ? 'קביעת פגישה' : 'Book a meeting'}</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-6 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[13px] text-[var(--faint)]">© {new Date().getFullYear()} {d.brand}</p>
+          <div className="flex items-center gap-5">
+            <Link href={`${home}/privacy`} className="text-[13px] text-[var(--faint)] hover:text-[var(--text)] transition-colors">{d.privacy}</Link>
+            <Link href={`${home}/terms`} className="text-[13px] text-[var(--faint)] hover:text-[var(--text)] transition-colors">{d.terms}</Link>
           </div>
         </div>
       </div>
