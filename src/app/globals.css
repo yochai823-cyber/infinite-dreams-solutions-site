@@ -150,10 +150,14 @@ body{ font-size:17px; line-height:1.65; }
 ::-webkit-scrollbar-thumb{ background:linear-gradient(to bottom,#6366f1,#2563eb); border-radius:9999px; border:2px solid var(--surface-2); }
 ::-webkit-scrollbar-thumb:hover{ background:linear-gradient(to bottom,#4f46e5,#1d4ed8); }
 
-/* ---- Motion preferences ---- */
+/* ---- Motion preferences ----
+   Under reduced-motion we still show content instantly and drop smooth
+   scroll, but the gentle ambient brand motion (logo marquee, float,
+   gradient) is intentionally kept so the site never looks "frozen"
+   (e.g. on phones in Low-Power Mode, which forces reduced-motion). */
 @media (prefers-reduced-motion:reduce){
-  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
-  .reveal{ opacity:1; transform:none; }
+  html{ scroll-behavior:auto; }
+  .reveal{ opacity:1 !important; transform:none !important; }
 }
 
 /* ---- Keyframes ---- */
@@ -166,7 +170,6 @@ body{ font-size:17px; line-height:1.65; }
 .marquee-wrap{ overflow:hidden; }
 .marquee-track{ display:flex; flex-wrap:nowrap; width:max-content; animation:marquee 45s linear infinite; }
 .marquee-wrap:hover .marquee-track{ animation-play-state:paused; }
-@media (prefers-reduced-motion:reduce){ .marquee-track{ animation:none; } }
 
 /* ============================================================
    Legacy helpers kept for /productions, /tech, /about internals
