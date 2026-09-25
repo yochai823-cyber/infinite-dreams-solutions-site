@@ -5,6 +5,7 @@ import useReveal from './useReveal'
 import Navbar from './Navbar'
 import FinalCTA from './FinalCTA'
 import Footer from './Footer'
+import SolutionDemo from './SolutionDemo'
 import { openContact } from './contactBus'
 
 export default function SolutionLanding({ d, locale = 'he', solution }){
@@ -79,6 +80,20 @@ export default function SolutionLanding({ d, locale = 'he', solution }){
               {solution.forWho}
             </p>
           )}
+        </div>
+      </section>
+
+      {/* Live demo screen */}
+      <section className="py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 -z-10" style={{ background:'var(--grad-soft)' }} />
+        <div className="container-page">
+          <div className="max-w-xl mx-auto text-center reveal mb-12">
+            <span className="eyebrow">{he ? 'הצצה למערכת' : 'A peek inside'}</span>
+            <h2 className="display mt-4 text-3xl md:text-4xl text-[var(--text)]">{he ? 'ככה זה נראה מבפנים' : 'This is how it looks'}</h2>
+          </div>
+          <div className="reveal">
+            <SolutionDemo slug={solution.slug} />
+          </div>
         </div>
       </section>
 
