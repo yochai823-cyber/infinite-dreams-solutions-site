@@ -1,464 +1,165 @@
 'use client'
 
-import { useState } from 'react'
-import TermsCheckbox from './TermsCheckbox'
+import { useState, useEffect } from 'react'
 
 export default function ContactForm({ isOpen, onClose, d, locale = 'he' }) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    projectType: '',
-    projectDescription: '',
-    budget: '',
-    timeline: '',
-    additionalInfo: ''
-  })
+  const he = locale === 'he'
+  const [step, setStep] = useState(1)
+  const [data, setData] = useState({ description: '', name: '', phone: '', email: '', updates: true })
+  const [submitting, setSubmitting] = useState(false)
+  const [status, setStatus] = useState(null) // 'success' | 'error' | null
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null) // 'success' | 'error' | null
-  const [termsAccepted, setTermsAccepted] = useState(false)
+  // reset when opened
+  useEffect(() => {
+    if (isOpen){ setStep(1); setStatus(null); setData({ description: '', name: '', phone: '', email: '', updates: true }) }
+  }, [isOpen])
 
-  // תרגום דינמי לפי שפה
-  const t = {
-    he: {
-      title: 'בואו נדבר על הפרויקט שלכם',
-      subtitle: 'נחזור אליכם תוך 48 שעות',
-      name: 'שם מלא',
-      email: 'אימייל',
-      phone: 'טלפון',
-      projectType: 'סוג הפרויקט',
-      projectDescription: 'תיאור הפרויקט',
-      budget: 'תקציב משוער',
-      timeline: 'לוח זמנים רצוי',
-      additionalInfo: 'מידע נוסף',
-      submit: 'שלחו בקשה',
-      sending: 'שולח...',
-      success: 'הבקשה נשלחה בהצלחה!',
-      successSub: 'נחזור אליכם תוך 48 שעות',
-      error: 'שגיאה בשליחת הבקשה',
-      errorSub: 'אנא נסו שוב או צרו קשר ישירות',
-      sent: 'נשלח בהצלחה!',
-              orContact: 'או צרו קשר ישירות:',
-              emailLabel: 'אימייל',
-      termsError: 'יש לאשר את תנאי השימוש',
-      projectTypes: {
-        '': 'בחרו סוג פרויקט',
-        'app': 'אפליקציה',
-        'website': 'אתר אינטרנט',
-        'automation': 'אוטומציה',
-        'consulting': 'יעוץ והדרכה',
-        'production': 'הפקה מוזיקלית',
-        'lecture': 'הרצאה',
-        'other': 'אחר'
-      },
-      budgets: {
-        '': 'בחרו טווח תקציב',
-        'under-5k': 'עד 5,000 ₪',
-        '5k-15k': '5,000 - 15,000 ₪',
-        '15k-30k': '15,000 - 30,000 ₪',
-        '30k-50k': '30,000 - 50,000 ₪',
-        '50k-100k': '50,000 - 100,000 ₪',
-        'over-100k': 'מעל 100,000 ₪',
-        'discuss': 'נדבר על זה'
-      },
-      timelines: {
-        '': 'בחרו לוח זמנים',
-        'asap': 'כמה שיותר מהר',
-        '1-month': 'תוך חודש',
-        '2-3-months': '2-3 חודשים',
-        '3-6-months': '3-6 חודשים',
-        '6-months-plus': 'מעל 6 חודשים',
-        'flexible': 'גמיש'
-      },
-      placeholders: {
-        name: 'השם שלכם',
-        email: 'your@email.com',
-        phone: '054-524-7997',
-        description: 'ספרו לנו על הפרויקט שלכם - מה אתם רוצים להשיג, איזה בעיות אתם רוצים לפתור, וכל פרט חשוב אחר...',
-        additional: 'כל מידע נוסף שיכול לעזור לנו להבין טוב יותר את הצרכים שלכם...'
-      }
-    },
-    en: {
-      title: 'Let\'s talk about your project',
-      subtitle: 'We\'ll get back to you within 48 hours',
-      name: 'Full Name',
-      email: 'Email',
-      phone: 'Phone',
-      projectType: 'Project Type',
-      projectDescription: 'Project Description',
-      budget: 'Estimated Budget',
-      timeline: 'Preferred Timeline',
-      additionalInfo: 'Additional Information',
-      submit: 'Send Request',
-      sending: 'Sending...',
-      success: 'Request sent successfully!',
-      successSub: 'We\'ll get back to you within 48 hours',
-      error: 'Error sending request',
-      errorSub: 'Please try again or contact us directly',
-      sent: 'Sent successfully!',
-              orContact: 'Or contact us directly:',
-              emailLabel: 'Email',
-      termsError: 'You must agree to the terms of service',
-      projectTypes: {
-        '': 'Select project type',
-        'app': 'Application',
-        'website': 'Website',
-        'automation': 'Automation',
-        'consulting': 'Consulting & Training',
-        'production': 'Music Production',
-        'lecture': 'Lecture',
-        'other': 'Other'
-      },
-      budgets: {
-        '': 'Select budget range',
-        'under-5k': 'Up to $1,500',
-        '5k-15k': '$1,500 - $4,500',
-        '15k-30k': '$4,500 - $9,000',
-        '30k-50k': '$9,000 - $15,000',
-        '50k-100k': '$15,000 - $30,000',
-        'over-100k': 'Over $30,000',
-        'discuss': 'Let\'s discuss'
-      },
-      timelines: {
-        '': 'Select timeline',
-        'asap': 'As soon as possible',
-        '1-month': 'Within a month',
-        '2-3-months': '2-3 months',
-        '3-6-months': '3-6 months',
-        '6-months-plus': 'Over 6 months',
-        'flexible': 'Flexible'
-      },
-      placeholders: {
-        name: 'Your name',
-        email: 'your@email.com',
-        phone: '+972-54-524-7997',
-        description: 'Tell us about your project - what you want to achieve, what problems you want to solve, and any other important details...',
-        additional: 'Any additional information that can help us better understand your needs...'
-      }
-    }
+  const t = he ? {
+    step1Title: 'ספרו לנו מה תרצו לפתור בעזרת AI בעסק שלכם',
+    step1Sub: 'משפט או שניים על העסק והאתגר — ונחזור אליכם עם רעיון.',
+    descPh: 'לדוגמה: אני מבזבז שעות על תיאום תורים ומענה ללקוחות בוואטסאפ…',
+    next: 'המשך',
+    step2Title: 'כמעט שם — איך נחזור אליכם?',
+    step2Sub: 'נחזור אליכם תוך 48 שעות.',
+    name: 'שם מלא', phone: 'טלפון', email: 'אימייל',
+    namePh: 'השם שלכם', phonePh: '054-000-0000', emailPh: 'your@email.com',
+    updates: 'אשמח לקבל עדכונים על מערכות חדשות שיעזרו לי בעסק',
+    terms: 'בשליחה אני מאשר/ת את תנאי השימוש ומדיניות הפרטיות',
+    send: 'שליחה', sending: 'שולח…', back: 'חזרה',
+    successTitle: 'הפנייה נשלחה! 🎉', successSub: 'נחזור אליכם תוך 48 שעות.',
+    waTitle: 'רוצים לדבר עכשיו?', waBtn: 'שיחת וואטסאפ מיידית',
+    waMsg: 'היי, ביקרתי אצלכם באתר, הייתי שמח לשוחח טלפונית',
+    errorMsg: 'שגיאה בשליחה. נסו שוב או דברו איתנו בוואטסאפ.',
+  } : {
+    step1Title: 'Tell us what you\'d like to solve with AI in your business',
+    step1Sub: 'A sentence or two about your business and the challenge — we\'ll come back with an idea.',
+    descPh: 'e.g. I waste hours coordinating appointments and answering customers on WhatsApp…',
+    next: 'Continue',
+    step2Title: 'Almost there — how should we reach you?',
+    step2Sub: 'We\'ll get back to you within 48 hours.',
+    name: 'Full name', phone: 'Phone', email: 'Email',
+    namePh: 'Your name', phonePh: '+972-54-000-0000', emailPh: 'your@email.com',
+    updates: 'I\'d like updates about new systems that could help my business',
+    terms: 'By submitting I agree to the Terms and Privacy Policy',
+    send: 'Send', sending: 'Sending…', back: 'Back',
+    successTitle: 'Sent! 🎉', successSub: 'We\'ll get back to you within 48 hours.',
+    waTitle: 'Want to talk now?', waBtn: 'Instant WhatsApp chat',
+    waMsg: 'Hi, I visited your website and would love to chat by phone',
+    errorMsg: 'Something went wrong. Try again or message us on WhatsApp.',
   }
 
-  const text = t[locale] || t.he
+  const waHref = `https://wa.me/${d.phoneE164}?text=${encodeURIComponent(t.waMsg)}`
+  const set = (k) => (e) => setData(p => ({ ...p, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }))
 
-  const handleSubmit = async (e) => {
+  const submit = async (e) => {
     e.preventDefault()
-    
-    if (!termsAccepted) {
-      alert(text.termsError)
-      return
-    }
-    
-    setIsSubmitting(true)
-    setSubmitStatus(null)
-    
+    setSubmitting(true); setStatus(null)
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      const res = await fetch('/api/contact', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.name, email: data.email, phone: data.phone,
+          projectType: 'ai', projectDescription: data.description,
+          budget: '', timeline: '',
+          additionalInfo: (he ? 'עדכונים שיווקיים: ' : 'Marketing updates: ') + (data.updates ? (he ? 'כן' : 'yes') : (he ? 'לא' : 'no')),
+        }),
       })
-
-      const result = await response.json()
-
-      if (result.success) {
-        setSubmitStatus('success')
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          projectType: '',
-          projectDescription: '',
-          budget: '',
-          timeline: '',
-          additionalInfo: ''
-        })
-        // Close form after 3 seconds
-        setTimeout(() => {
-          onClose()
-          setSubmitStatus(null)
-        }, 3000)
-      } else {
-        setSubmitStatus('error')
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+      const j = await res.json()
+      setStatus(j.success ? 'success' : 'error')
+    } catch { setStatus('error') }
+    finally { setSubmitting(false) }
   }
 
   if (!isOpen) return null
 
+  const inputCls = 'w-full px-4 py-3 rounded-xl border border-[var(--border-strong)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-transparent transition text-[var(--text)]'
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={onClose}
-      ></div>
-      
-      {/* Modal */}
-      <div className="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-t-3xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl font-bold mb-2">{text.title}</h2>
-              <p className="text-blue-100">{text.subtitle}</p>
-            </div>
-            <button
-              onClick={onClose}
-              className="text-white/80 hover:text-white transition-colors duration-200 p-2 hover:bg-white/10 rounded-full"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-[rgba(6,10,20,.6)] backdrop-blur-sm" onClick={onClose} />
+      <div className="relative bg-white rounded-3xl shadow-[var(--shadow-lg)] max-w-lg w-full max-h-[92vh] overflow-y-auto">
+        {/* header */}
+        <div className="sticky top-0 z-10 px-6 py-5 text-white rounded-t-3xl flex items-start justify-between" style={{ background: 'var(--grad)' }}>
+          <div className="pe-3">
+            {status === 'success' ? (
+              <><h2 className="text-xl font-bold">{t.successTitle}</h2><p className="text-white/85 text-sm mt-1">{t.successSub}</p></>
+            ) : step === 1 ? (
+              <><h2 className="text-lg font-bold leading-snug">{t.step1Title}</h2><p className="text-white/85 text-sm mt-1">{t.step1Sub}</p></>
+            ) : (
+              <><h2 className="text-xl font-bold">{t.step2Title}</h2><p className="text-white/85 text-sm mt-1">{t.step2Sub}</p></>
+            )}
           </div>
+          <button onClick={onClose} aria-label="close" className="shrink-0 w-9 h-9 grid place-items-center rounded-full hover:bg-white/15 transition">
+            <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          {/* Name and Email Row */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {text.name} *
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                placeholder={text.placeholders.name}
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {text.email} *
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                placeholder={text.placeholders.email}
-              />
-            </div>
+        {/* progress (steps) */}
+        {status !== 'success' && (
+          <div className="flex gap-1.5 px-6 pt-4">
+            <span className="h-1.5 flex-1 rounded-full" style={{ background: 'var(--grad)' }} />
+            <span className="h-1.5 flex-1 rounded-full" style={{ background: step === 2 ? 'var(--grad)' : 'var(--surface-3)' }} />
           </div>
+        )}
 
-          {/* Phone and Project Type Row */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {text.phone} *
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                placeholder={text.placeholders.phone}
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {text.projectType} *
-              </label>
-              <select
-                name="projectType"
-                value={formData.projectType}
-                onChange={handleInputChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-              >
-                {Object.entries(text.projectTypes).map(([value, label]) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Project Description */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              {text.projectDescription} *
-            </label>
-            <textarea
-              name="projectDescription"
-              value={formData.projectDescription}
-              onChange={handleInputChange}
-              required
-              rows={4}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
-              placeholder={text.placeholders.description}
-            />
-          </div>
-
-          {/* Budget and Timeline Row */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {text.budget}
-              </label>
-              <select
-                name="budget"
-                value={formData.budget}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-              >
-                {Object.entries(text.budgets).map(([value, label]) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {text.timeline}
-              </label>
-              <select
-                name="timeline"
-                value={formData.timeline}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-              >
-                {Object.entries(text.timelines).map(([value, label]) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Additional Info */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              {text.additionalInfo}
-            </label>
-            <textarea
-              name="additionalInfo"
-              value={formData.additionalInfo}
-              onChange={handleInputChange}
-              rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
-              placeholder={text.placeholders.additional}
-            />
-          </div>
-
-          {/* Status Messages */}
-          {submitStatus === 'success' && (
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
-              <div className="flex items-center justify-center gap-2 text-green-700">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span className="font-semibold">{text.success}</span>
+        <div className="p-6">
+          {status === 'success' ? (
+            <div className="text-center">
+              <div className="mx-auto w-16 h-16 rounded-full grid place-items-center text-white mb-4" style={{ background: 'var(--grad)' }}>
+                <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               </div>
-              <p className="text-green-600 text-sm mt-1">{text.successSub}</p>
-            </div>
-          )}
-
-          {submitStatus === 'error' && (
-            <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
-              <div className="flex items-center justify-center gap-2 text-red-700">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span className="font-semibold">{text.error}</span>
+              <div className="mt-6 rounded-2xl border border-[var(--border)] bg-[var(--surface-2)] p-5">
+                <p className="font-bold text-[var(--text)]">{t.waTitle}</p>
+                <a href={waHref} target="_blank" rel="noopener noreferrer" className="mt-3 btn w-full text-white" style={{ background: '#25D366' }}>
+                  <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885M20.463 3.488A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></svg>
+                  {t.waBtn}
+                </a>
               </div>
-              <p className="text-red-600 text-sm mt-1">{text.errorSub}</p>
+              <button onClick={onClose} className="mt-4 text-sm text-[var(--muted)] hover:text-[var(--text)]">{he ? 'סגירה' : 'Close'}</button>
             </div>
+          ) : step === 1 ? (
+            <form onSubmit={(e) => { e.preventDefault(); if (data.description.trim()) setStep(2) }}>
+              <textarea autoFocus value={data.description} onChange={set('description')} required rows={5}
+                className={inputCls + ' resize-none'} placeholder={t.descPh} />
+              <button type="submit" disabled={!data.description.trim()}
+                className={`btn btn-primary w-full mt-5 text-[17px] ${!data.description.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                {t.next}
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d={he ? 'M11 5l-7 7 7 7' : 'M13 5l7 7-7 7'}/><path d={he ? 'M4 12h16' : 'M20 12H4'}/></svg>
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={submit} className="space-y-4">
+              <button type="button" onClick={() => setStep(1)} className="inline-flex items-center gap-1.5 text-sm text-[var(--muted)] hover:text-[var(--text)]">
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d={he ? 'M13 5l7 7-7 7' : 'M11 5l-7 7 7 7'}/><path d={he ? 'M20 12H4' : 'M4 12h16'}/></svg>
+                {t.back}
+              </button>
+              <div>
+                <label className="block text-sm font-semibold text-[var(--text)] mb-1.5">{t.name}</label>
+                <input value={data.name} onChange={set('name')} required className={inputCls} placeholder={t.namePh} />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-[var(--text)] mb-1.5">{t.phone}</label>
+                  <input type="tel" value={data.phone} onChange={set('phone')} required className={inputCls + ' force-ltr text-start'} placeholder={t.phonePh} />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-[var(--text)] mb-1.5">{t.email}</label>
+                  <input type="email" value={data.email} onChange={set('email')} required className={inputCls + ' force-ltr text-start'} placeholder={t.emailPh} />
+                </div>
+              </div>
+              <label className="flex items-start gap-3 cursor-pointer select-none pt-1">
+                <input type="checkbox" checked={data.updates} onChange={set('updates')} className="mt-1 w-5 h-5 rounded accent-[var(--accent)]" />
+                <span className="text-[14px] text-[var(--muted)] leading-snug">{t.updates}</span>
+              </label>
+              {status === 'error' && <p className="text-sm text-red-600">{t.errorMsg}</p>}
+              <button type="submit" disabled={submitting} className={`btn btn-primary w-full text-[17px] ${submitting ? 'opacity-70' : ''}`}>
+                {submitting ? t.sending : t.send}
+                {!submitting && <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>}
+              </button>
+              <p className="text-[12px] text-[var(--faint)] text-center">{t.terms}</p>
+            </form>
           )}
-
-          {/* Terms Checkbox */}
-          <div className="pt-2">
-            <TermsCheckbox
-              onTermsChange={setTermsAccepted}
-              required={true}
-              language={locale}
-              className="mb-4"
-            />
-          </div>
-
-          {/* Submit Button */}
-          <div className="pt-4">
-            <button
-              type="submit"
-              disabled={isSubmitting || submitStatus === 'success' || !termsAccepted}
-              className={`w-full font-bold py-4 px-6 rounded-xl transition-all duration-300 transform flex items-center justify-center gap-3 ${
-                termsAccepted && !isSubmitting && submitStatus !== 'success'
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white hover:scale-105'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-            >
-              {isSubmitting ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  <span>{text.sending}</span>
-                </>
-              ) : submitStatus === 'success' ? (
-                <>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>{text.sent}</span>
-                </>
-              ) : (
-                <>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                  </svg>
-                  <span>{text.submit}</span>
-                </>
-              )}
-            </button>
-          </div>
-
-          {/* Contact Info */}
-          <div className="text-center pt-4 border-t border-gray-200">
-            <p className="text-sm text-gray-600 mb-2">
-              {text.orContact}
-            </p>
-            <div className="flex justify-center gap-4">
-              <a 
-                href={`https://wa.me/${d.phoneE164}`}
-                className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center gap-1"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                </svg>
-                WhatsApp
-              </a>
-              <a 
-                href={`mailto:${d.email}`}
-                className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center gap-1"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                {text.emailLabel}
-              </a>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   )

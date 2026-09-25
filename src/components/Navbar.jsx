@@ -22,10 +22,8 @@ export default function Navbar({ d, locale, pageType = 'home' }){
 
   const home = `/${locale}`
   const links = [
-    { label:d.nav.services, href:`${home}#services` },
-    { label:d.nav.process,  href:`${home}#process` },
-    { label:d.nav.work,     href:`${home}#work` },
-    { label:d.nav.about,    href:`${home}/about` },
+    { label:d.nav.solutions, href:`${home}#solutions` },
+    { label:d.nav.about,     href:`${home}/about` },
   ]
 
   return (

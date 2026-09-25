@@ -1,6 +1,7 @@
 export const he = {
   brand:'Infinite Dreams Solutions',
   nav:{
+    solutions:'פתרונות',
     services:'שירותים',
     process:'איך עובדים',
     work:'עבודות',
@@ -12,10 +13,10 @@ export const he = {
 
   hero:{
     eyebrow:'פיתוח · אוטומציה · בינה מלאכותית',
-    title:'אפליקציות, אוטומציה ו-AI\nשמזניקים ארגונים קדימה',
+    title:'פתרונות AI לעסקים ולארגונים\nאפליקציות, אוטומציות ומערכות חכמות',
     // legacy short title (used by some internal pages)
     sub:'הופכים תהליכים ידניים ומורכבים למערכות חכמות, אפליקציות מדויקות ופתרונות בינה מלאכותית — ומלמדים את הצוות שלכם איך לרתום את הטכנולוגיה לעבודה היומיומית.',
-    subShort:'אפליקציות, אוטומציות ומערכות AI שמפחיתות עבודה ידנית ומזניקות תוצאות.',
+    subShort:'היום כבר לא צריך תקציב של מיליונים או ארגון ענק — פתרונות טכנולוגיים חכמים ונגישים שיקדמו כל עסק, גם הקטן.',
     ctaPrimary:'בואו נדבר על הפרויקט',
     ctaSecondary:'לצפייה בעבודות',
     trust:'למעלה מ-20 שנות ניסיון בליווי רשויות, עמותות, חברות ועסקים'
@@ -23,10 +24,50 @@ export const he = {
 
   // Home stat / trust strip (grounded, no invented numbers)
   stats:[
-    ['+20', 'שנות ניסיון ניהולי וארגוני'],
-    ['מקצה לקצה', 'מאפיון ותכנון ועד השקה וליווי'],
-    ['רשויות ועסקים', 'עמותות, חברות ומוסדות ציבור'],
-    ['48 שעות', 'זמן חזרה ראשוני לפנייה']
+    ['20+', 'שנות ניסיון בליווי עסקים, רשויות וארגונים']
+  ],
+
+  solutionsEyebrow:'הפתרונות שלנו',
+  solutionsTitle:'פתרונות חכמים, מוכנים לעבוד — לכל עסק',
+  solutionsSub:'כל פתרון כבר בנוי, נבדק ועובד בשטח. מתאימים אותו לעסק שלכם — בלי לפתח מאפס ובלי מחירי ענק.',
+  solutionsCta:'עוד על הפתרון',
+  solutions:[
+    {
+      slug:'whatsapp-ai', image:'/solutions/whatsapp-ai.webp', badge:'AI',
+      title:'מזכירת AI בוואטסאפ',
+      tagline:'עונה ללקוחות, מתאמת וסוגרת לידים — 24/7',
+      pain:'לידים שנופלים כי לא הספקתם לענות בזמן?',
+      description:'בוט AI חכם שמחובר לוואטסאפ העסקי שלכם — עונה ללקוחות באופן מיידי, מסנן פניות, מתאם פגישות וסוגר לידים בשבילכם, גם כשאתם עסוקים או ישנים. הלקוחות מקבלים מענה תוך שניות, ואתם מקבלים רק את הפניות החמות.',
+      benefits:['מענה מיידי 24/7, גם אחרי שעות העבודה','סינון פניות והעברה חכמה לנציג אנושי','תיאום פגישות ותורים אוטומטי','בנק ידע שמכיר את העסק ועונה כמוכם'],
+      forWho:'מושלם לקוסמטיקאיות, קליניקות, נותני שירות ועסקים קטנים שמאבדים לקוחות בגלל מענה איטי.'
+    },
+    {
+      slug:'classes', image:'/solutions/classes.webp', badge:'מערכת',
+      title:'מערכת לניהול חוגים',
+      tagline:'נוכחות, הורים, תשלומים ומורים — במקום אחד',
+      pain:'מנהלים חוגים עם אקסלים, וואטסאפים ופתקים?',
+      description:'מערכת מלאה לניהול חוגים ופעילויות: נוכחות בקליק, אפליקציה להורים, ניהול מורים ותלמידים, תשלומים ודוחות — הכל מסונכרן ובמקום אחד. חוסכת שעות עבודה בשבוע ונותנת לכם שליטה מלאה על הפעילות.',
+      benefits:['נוכחות דיגיטלית בזמן אמת','אפליקציה להורים — עדכונים, לוז ותשלומים','ניהול מורים, תלמידים ולוח שעות','דוחות והכנסות בלחיצת כפתור'],
+      forWho:'מושלם לחוגים, בתי ספר לאמנויות, מתנ״סים, תנועות נוער וכל ארגון עם פעילויות.'
+    },
+    {
+      slug:'rooms', image:'/solutions/rooms.webp', badge:'מערכת',
+      title:'מערכת לניהול חדרים ואולמות',
+      tagline:'הזמנות, לוח שנה ותשלומים — בלי כפילויות',
+      pain:'חדרים שנתפסים פעמיים ולוח זמנים מבולגן?',
+      description:'מערכת חכמה לניהול הזמנות של חדרים, אולמות וחללים: לוח שנה ויזואלי, הזמנות אונליין, מניעת כפילויות, תשלומים ודוחות ניצול. הכל שקוף, מסודר וזמין מכל מכשיר.',
+      benefits:['לוח שנה ויזואלי לכל החללים','הזמנות אונליין ואישור אוטומטי','מניעת כפילויות והתנגשויות','דוחות ניצול והכנסות'],
+      forWho:'מושלם למתנ״סים, בתי ספר, עמותות, אולמות אירועים וחללי עבודה משותפים.'
+    },
+    {
+      slug:'open-houses', image:'/solutions/map.webp', badge:'מפה',
+      title:'מפה אינטראקטיבית לאירועים',
+      tagline:'בתים פתוחים, פסטיבלים וסיורים — על מפה חיה',
+      pain:'אירוע גדול ואנשים לא מוצאים לאן ללכת?',
+      description:'מפה אינטראקטיבית וממותגת לאירועים עירוניים — בתים פתוחים, פסטיבלים, סיורים ותערוכות. המבקרים רואים את כל התחנות על מפה חיה, מסננים לפי קטגוריה, מסמנים מועדפים ומנווטים בקלות. חוויית מבקר מושלמת, ולכם — נתונים על מה שעובד.',
+      benefits:['כל התחנות על מפה חיה ומעודכנת','סינון לפי קטגוריה וחיפוש חכם','ניווט וסימון מועדפים','נתוני ביקורים בזמן אמת'],
+      forWho:'מושלם לרשויות, מחלקות תרבות, פסטיבלים ואירועי בתים פתוחים.'
+    }
   ],
 
   clientsEyebrow:'לקוחות נבחרים',
@@ -93,6 +134,7 @@ export const he = {
 export const en = {
   brand:'Infinite Dreams Solutions',
   nav:{
+    solutions:'Solutions',
     services:'Services',
     process:'How it works',
     work:'Work',
@@ -104,19 +146,59 @@ export const en = {
 
   hero:{
     eyebrow:'Development · Automation · AI',
-    title:'Apps, automation & AI\nthat move organizations forward',
+    title:'AI solutions for businesses\n& organizations of every size',
     sub:'We turn manual, messy processes into smart systems, precise apps and AI-powered solutions — and teach your team how to put the technology to work every day.',
-    subShort:'Apps, automation and AI systems that cut manual work and drive real results.',
+    subShort:'You don\'t need a huge budget or a big organization anymore — accessible, smart technology that moves any business forward, even a small one.',
     ctaPrimary:'Let\'s talk about your project',
     ctaSecondary:'See our work',
     trust:'20+ years supporting municipalities, non-profits, companies and businesses'
   },
 
   stats:[
-    ['20+', 'Years of management & organizational experience'],
-    ['End to end', 'From discovery and planning to launch and support'],
-    ['Public · Business', 'Municipalities, non-profits & companies'],
-    ['24 hours', 'Initial response time to every inquiry']
+    ['20+', 'Years supporting businesses, municipalities & organizations']
+  ],
+
+  solutionsEyebrow:'Our solutions',
+  solutionsTitle:'Smart, ready-to-run solutions — for any business',
+  solutionsSub:'Each solution is already built, tested and proven in the field. We tailor it to your business — no building from scratch, no enterprise price tag.',
+  solutionsCta:'More about it',
+  solutions:[
+    {
+      slug:'whatsapp-ai', image:'/solutions/whatsapp-ai.webp', badge:'AI',
+      title:'AI WhatsApp Secretary',
+      tagline:'Answers customers, books & closes leads — 24/7',
+      pain:'Losing leads because you couldn\'t reply in time?',
+      description:'A smart AI bot connected to your business WhatsApp — it replies to customers instantly, filters inquiries, books appointments and closes leads for you, even when you\'re busy or asleep. Customers get answers in seconds, and you only get the hot leads.',
+      benefits:['Instant 24/7 replies, even after hours','Smart filtering and hand-off to a human','Automatic appointment & booking scheduling','A knowledge base that answers like you would'],
+      forWho:'Perfect for beauticians, clinics, service providers and small businesses losing customers to slow replies.'
+    },
+    {
+      slug:'classes', image:'/solutions/classes.webp', badge:'System',
+      title:'Classes Management System',
+      tagline:'Attendance, parents, payments & teachers — in one place',
+      pain:'Running classes on spreadsheets, WhatsApp and sticky notes?',
+      description:'A complete system for managing classes and activities: one-tap attendance, a parents app, teacher and student management, payments and reports — all synced in one place. Saves hours every week and gives you full control.',
+      benefits:['Real-time digital attendance','Parents app — updates, schedule & payments','Manage teachers, students & timetables','Reports and revenue at the tap of a button'],
+      forWho:'Perfect for activity programs, arts schools, community centers and youth organizations.'
+    },
+    {
+      slug:'rooms', image:'/solutions/rooms.webp', badge:'System',
+      title:'Rooms & Halls Management',
+      tagline:'Bookings, calendar & payments — no double-bookings',
+      pain:'Rooms booked twice and a messy schedule?',
+      description:'A smart system for managing bookings of rooms, halls and spaces: a visual calendar, online bookings, double-booking prevention, payments and utilization reports. Transparent, organized and available from any device.',
+      benefits:['Visual calendar for every space','Online bookings with automatic approval','Double-booking & conflict prevention','Utilization and revenue reports'],
+      forWho:'Perfect for community centers, schools, non-profits, event halls and coworking spaces.'
+    },
+    {
+      slug:'open-houses', image:'/solutions/map.webp', badge:'Map',
+      title:'Interactive Event Map',
+      tagline:'Open houses, festivals & tours — on a live map',
+      pain:'A big event and people can\'t find where to go?',
+      description:'An interactive, branded map for city events — open houses, festivals, tours and exhibitions. Visitors see every stop on a live map, filter by category, save favorites and navigate with ease. A perfect visitor experience — and real data for you.',
+      benefits:['Every stop on a live, updated map','Filter by category & smart search','Navigation and favorites','Real-time visit analytics'],
+      forWho:'Perfect for municipalities, culture departments, festivals and open-house events.'
+    }
   ],
 
   clientsEyebrow:'Selected clients',

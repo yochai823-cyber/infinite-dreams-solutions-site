@@ -1,15 +1,13 @@
 'use client'
 
 export default function Stats({ d }){
+  const [value, label] = d.stats[0] || ['20+', '']
   return (
-    <section className="container-page -mt-4 md:-mt-2 pb-6 md:pb-10">
-      <div className="reveal card-surface shadow-[var(--shadow-md)] grid grid-cols-2 lg:grid-cols-4 divide-y divide-x-0 lg:divide-y-0 lg:divide-x divide-[var(--border)] rtl:lg:divide-x-reverse overflow-hidden">
-        {d.stats.map(([value, label], i) => (
-          <div key={i} className="px-2 py-4 md:px-3 md:py-6 text-center min-w-0">
-            <div className="font-extrabold text-grad leading-tight whitespace-nowrap text-[clamp(1.1rem,2.1vw,1.9rem)]">{value}</div>
-            <div className="mt-2 text-[12px] md:text-sm text-[var(--muted)] leading-snug px-1">{label}</div>
-          </div>
-        ))}
+    <section className="container-page -mt-2 md:mt-0 pb-8 md:pb-12">
+      <div className="reveal mx-auto max-w-xl card-surface shadow-[var(--shadow-md)] px-6 py-5 flex items-center justify-center gap-4 text-center">
+        <span className="text-4xl md:text-5xl font-extrabold text-grad leading-none whitespace-nowrap">{value}</span>
+        <span className="w-px h-10 bg-[var(--border)]" />
+        <span className="text-[15px] md:text-base font-semibold text-[var(--muted)] text-start leading-snug">{label}</span>
       </div>
     </section>
   )
