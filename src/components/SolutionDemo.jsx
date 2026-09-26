@@ -86,49 +86,93 @@ function WhatsAppDemo(){
   )
 }
 
-/* ---------- Classes management — desktop dashboard ---------- */
+/* ---------- Classes management — mobile attendance screen with smiley picker ---------- */
 function ClassesDemo(){
-  const menu = ['מצב פיננסי','דוחות','חוגים','תלמידים','מורים','הורים','נוכחות','פעילויות','הודעות','הגדרות']
-  const bars = [60,72,55,80,66,90,74,88,62,95,70,84]
+  const students = [
+    ['אוראל לוי','present'],
+    ['מיכל רוזן','present'],
+    ['יובל כהן','present'],
+    ['נועה שקד','present'],
+    ['איתמר ב.','absent'],
+    ['שחר אלימלך','present'],
+  ]
   return (
-    <BrowserFrame url="app.dreams-solutions.io" label="לוח בקרה אחד לכל הפעילות — נוכחות, תלמידים, תשלומים ודוחות">
-      <div dir="rtl" className="flex bg-[var(--surface-2)]" style={{ minHeight:360 }}>
-        <aside className="w-[132px] shrink-0 bg-white border-s border-[var(--border)] p-2.5">
-          <div className="flex items-center gap-1.5 mb-3 px-1">
-            <span className="w-6 h-6 rounded-lg grid place-items-center text-white text-[10px] font-black" style={{ background:'var(--grad)' }}>∞</span>
-            <span className="text-[12px] font-extrabold text-grad">Dreams</span>
+    <PhoneFrame label="סימון נוכחות בשנייה — בוחרים סמיילי וזהו">
+      <div className="pt-7 bg-[var(--surface-2)]" style={{ minHeight:400 }}>
+        {/* header */}
+        <div className="flex items-center justify-between px-3 py-2.5 bg-white border-b border-[var(--border)]">
+          <span className="text-[var(--faint)]">
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </span>
+          <div className="text-center leading-tight">
+            <div className="text-[13px] font-bold text-[var(--text)]">נוכחות · כיתה ז׳1</div>
+            <div className="text-[10px] text-[var(--muted)]">יום ראשון · 26.5</div>
           </div>
-          <nav className="space-y-0.5">
-            {menu.map((m,i)=>(
-              <div key={m} className={`text-[11px] px-2 py-1.5 rounded-lg ${i===0?'text-white font-semibold':'text-[var(--muted)]'}`} style={i===0?{background:'var(--grad)'}:undefined}>{m}</div>
-            ))}
-          </nav>
-        </aside>
-        <main className="flex-1 p-3">
-          <div className="flex items-center justify-between mb-3">
-            <div className="font-bold text-[var(--text)] text-[13px]">מצב פיננסי · כל החוגים</div>
-            <div className="flex gap-1">
-              {['שנה','רבעון','חודש'].map((t,i)=>(<span key={t} className={`text-[10px] px-2 py-1 rounded-md ${i===2?'text-white':'bg-white border border-[var(--border)] text-[var(--muted)]'}`} style={i===2?{background:'var(--grad)'}:undefined}>{t}</span>))}
+          <span className="w-7 h-7 rounded-lg grid place-items-center text-[13px]" style={{ background:'var(--grad-soft)' }}>📅</span>
+        </div>
+
+        {/* KPI tiles */}
+        <div className="grid grid-cols-3 gap-1.5 px-3 pt-3">
+          {[['נוכחים','28','70%','#10b981'],['חסרים','10','25%','#ef4444'],['סה״כ','38','','']].map(([l,v,p,c])=>(
+            <div key={l} className="rounded-xl bg-white border border-[var(--border)] p-2 text-center">
+              <div className="text-[10px] text-[var(--muted)]">{l}</div>
+              <div className="text-[18px] font-extrabold text-[var(--text)] leading-none mt-0.5">{v}</div>
+              {p && <div className="text-[9px] font-bold" style={{ color:c }}>{p}</div>}
             </div>
+          ))}
+        </div>
+
+        {/* progress bar */}
+        <div className="px-3 pt-2.5">
+          <div className="h-2 rounded-full bg-[var(--border)] overflow-hidden">
+            <div className="h-full rounded-full" style={{ width:'70%', background:'#10b981' }} />
           </div>
-          <div className="grid grid-cols-4 gap-2 mb-3">
-            {[['₪1,677','רווחים','+131%'],['₪7,820','מחזור',''],['78%','ריטנשן',''],['₪10,070','הכנסות','']].map(([v,l,d])=>(
-              <div key={l} className="rounded-xl bg-white border border-[var(--border)] p-2">
-                <div className="text-[15px] font-extrabold text-grad force-ltr">{v}</div>
-                <div className="text-[10px] text-[var(--muted)]">{l}</div>
-                {d && <div className="text-[9px] font-bold text-emerald-600">{d}</div>}
+        </div>
+
+        {/* student list + the smiley picker that opens on tap */}
+        <div className="relative px-3 pt-2.5 pb-2 space-y-1">
+          {students.map(([name,st],i)=>(
+            <div key={i} className={`flex items-center justify-between rounded-lg px-2.5 py-1.5 border ${i===1?'border-[var(--grad-from,#8b5cf6)] ring-1 ring-violet-300 bg-violet-50/40':'border-[var(--border)] bg-white'}`}>
+              <span className="text-[12px] font-medium text-[var(--text)]">{name}</span>
+              {st==='present'
+                ? <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-600"><span>נוכח</span><span className="w-4 h-4 rounded-full grid place-items-center text-white bg-emerald-500"><svg viewBox="0 0 24 24" className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></span>
+                : <span className="flex items-center gap-1 text-[10px] font-bold text-red-500"><span>חסר</span><span className="w-4 h-4 rounded-full grid place-items-center text-white bg-red-500"><svg viewBox="0 0 24 24" className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></span>
+              }
+            </div>
+          ))}
+
+          {/* smiley status picker popover */}
+          <div className="absolute z-30 top-[52px] inset-inline-start-4 inset-inline-end-4">
+            <div className="rounded-2xl bg-white shadow-[var(--shadow-lg)] border border-[var(--border)] px-3 py-2.5">
+              <div className="text-[10px] font-semibold text-[var(--muted)] text-center mb-2">איך לסמן את מיכל?</div>
+              <div className="flex items-center justify-center gap-3">
+                <div className="flex flex-col items-center gap-0.5">
+                  <span className="w-10 h-10 rounded-full grid place-items-center text-[20px] ring-2 ring-emerald-400 bg-emerald-50 shadow-sm">😃</span>
+                  <span className="text-[8px] font-bold text-emerald-600">נוכח</span>
+                </div>
+                <div className="flex flex-col items-center gap-0.5">
+                  <span className="w-10 h-10 rounded-full grid place-items-center text-[20px] bg-amber-50">😐</span>
+                  <span className="text-[8px] text-[var(--muted)]">איחר</span>
+                </div>
+                <div className="flex flex-col items-center gap-0.5">
+                  <span className="w-10 h-10 rounded-full grid place-items-center text-[20px] bg-red-50">😞</span>
+                  <span className="text-[8px] text-[var(--muted)]">חסר</span>
+                </div>
               </div>
-            ))}
-          </div>
-          <div className="rounded-xl bg-white border border-[var(--border)] p-3">
-            <div className="text-[11px] font-semibold text-[var(--muted)] mb-2">הכנסות · 12 חודשים</div>
-            <div className="flex items-end gap-1.5 h-24">
-              {bars.map((h,i)=>(<div key={i} className="flex-1 rounded-t" style={{ height:`${h}%`, background:'var(--grad)', opacity:.35+ (i/bars.length)*0.65 }} />))}
             </div>
+            <div className="w-3 h-3 rotate-45 bg-white border-b border-e border-[var(--border)] mx-auto -mt-1.5" />
           </div>
-        </main>
+        </div>
+
+        {/* CTA */}
+        <div className="px-3 pb-3">
+          <div className="rounded-xl py-2.5 text-center text-white text-[12px] font-bold flex items-center justify-center gap-1.5" style={{ background:'var(--grad)' }}>
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            סיים ורשום נוכחות
+          </div>
+        </div>
       </div>
-    </BrowserFrame>
+    </PhoneFrame>
   )
 }
 
@@ -148,8 +192,8 @@ function RoomsDemo(){
         <aside className="w-[150px] shrink-0 bg-[var(--surface-2)] border-s border-[var(--border)] p-2.5">
           <div className="rounded-xl p-2.5 text-white mb-3" style={{ background:'var(--grad)' }}>
             <div className="text-[11px] font-bold leading-tight">מערכת לניהול חדרים</div>
-            <div className="text-[9px] text-white/80 mt-0.5">מתנ״ס קדימה־צורן</div>
-            <div className="mt-2 text-[9px] bg-white/20 rounded-md px-1.5 py-0.5 w-fit">יוחאי אפללו</div>
+            <div className="text-[9px] text-white/80 mt-0.5">ניהול חללים ואולמות</div>
+            <div className="mt-2 text-[9px] bg-white/20 rounded-md px-1.5 py-0.5 w-fit">מנהל/ת המערכת</div>
           </div>
           <nav className="space-y-0.5">
             {menu.map(([m,act])=>(
@@ -188,54 +232,16 @@ function RoomsDemo(){
   )
 }
 
-/* ---------- Interactive event map ---------- */
+/* ---------- Interactive event map (real Google-Maps-based screen) ---------- */
 function MapDemo(){
-  const cats = [['❤️','#ec4899'],['🏛️','#14b8a6'],['🎨','#f97316'],['🏃','#22c55e'],['🎭','#8b5cf6'],['🎵','#3b82f6']]
-  const pins = [
-    { x:30, y:38, n:75, c:'#f97316' }, { x:44, y:30, n:1, c:'#f97316' }, { x:52, y:44, n:130, c:'#14b8a6' },
-    { x:40, y:52, n:140, c:'#14b8a6' }, { x:58, y:36, n:9, c:'#f97316' }, { x:63, y:50, n:11, c:'#f97316' },
-    { x:48, y:60, n:150, c:'#14b8a6' }, { x:68, y:60, n:14, c:'#f97316' }, { x:36, y:44, n:71, c:'#f97316' },
-    { x:56, y:56, n:21, c:'#f97316' }, { x:72, y:42, n:2, c:'#f97316' }, { x:26, y:52, n:67, c:'#f97316' },
-  ]
   return (
-    <BrowserFrame url="map.kfar-saba.dreams-solutions.io" label="כל התחנות על מפה חיה · סינון, מועדפים וניווט">
-      <div dir="rtl" className="relative" style={{ height:380 }}>
-        {/* top controls */}
-        <div className="absolute top-2 inset-inline-start-2 z-20 flex gap-1.5">
-          <span className="text-[10px] font-semibold px-2 py-1 rounded-lg text-white shadow" style={{ background:'var(--grad)' }}>לרשימת הבתים הפתוחים</span>
-          <span className="text-[10px] font-semibold px-2 py-1 rounded-lg bg-white shadow text-[var(--text)] border border-[var(--border)]">📁 מקרא וסינון</span>
+    <BrowserFrame url="map.dreams-solutions.io" label="כל התחנות על מפת גוגל חיה · סינון, מועדפים וניווט בלחיצה">
+      <div dir="rtl" className="relative bg-white">
+        <img src="/projects/open-houses-map.webp" alt="מפה אינטראקטיבית של בתים פתוחים על גבי מפת גוגל" className="w-full block" />
+        {/* clean strip over the source municipal logos */}
+        <div className="absolute bottom-0 inset-x-0 h-9 bg-gradient-to-t from-white via-white/95 to-transparent flex items-end justify-center pb-1">
+          <span className="text-[9px] font-medium text-[var(--muted)]">מפה אינטראקטיבית · Infinite Dreams Solutions</span>
         </div>
-        <div className="absolute top-2 left-2 z-20 text-[10px] px-2 py-1 rounded-lg bg-white shadow text-[var(--muted)] border border-[var(--border)]">⛶ מסך מלא</div>
-        {/* search */}
-        <div className="absolute top-11 inset-inline-start-2 z-20 w-52 h-7 rounded-full bg-white shadow flex items-center px-3 text-[11px] text-[var(--faint)]">🔍 חיפוש לפי כתובת או שם אמן/ית…</div>
-        {/* banner */}
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 h-9 px-4 rounded-lg text-white text-[12px] font-black flex items-center gap-2 shadow" style={{ background:'linear-gradient(90deg,#e11d8f,#f59e0b)' }}>
-          🎨 בתים פתוחים · סופ״ש של אמנות
-        </div>
-        {/* category toolbar (physical left) */}
-        <div className="absolute top-24 left-2 z-20 flex flex-col gap-1.5">
-          {cats.map(([ic,c],i)=>(
-            <span key={i} className="w-8 h-8 rounded-full grid place-items-center text-[14px] shadow ring-2 ring-white" style={{ background:c }}>{ic}</span>
-          ))}
-        </div>
-        {/* map */}
-        <div className="absolute inset-0 -z-0" style={{ background:'linear-gradient(135deg,#eaf2ff,#f3f0ff 55%,#eafcf3)' }}>
-          <svg viewBox="0 0 100 76" preserveAspectRatio="none" className="w-full h-full">
-            <g stroke="#cdd6ea" strokeWidth="1.2" fill="none">
-              <path d="M0 18 H100 M0 40 H100 M0 60 H100 M20 0 V76 M45 0 V76 M70 0 V76 M88 0 V76"/>
-            </g>
-            <g stroke="#e6d9f5" strokeWidth="2.4" fill="none" opacity=".7"><path d="M0 30 H100 M55 0 V76"/></g>
-            <g fill="#dcecdc" opacity=".6"><rect x="4" y="44" width="12" height="12" rx="2"/><rect x="74" y="6" width="14" height="10" rx="2"/></g>
-          </svg>
-          {pins.map((p,i)=>(
-            <div key={i} className="absolute -translate-x-1/2 -translate-y-full" style={{ left:`${p.x}%`, top:`${p.y}%` }}>
-              <div className="min-w-[22px] h-[22px] px-1 rounded-full grid place-items-center text-white text-[10px] font-bold shadow-md ring-2 ring-white force-ltr" style={{ background:p.c }}>{p.n}</div>
-              <div className="w-2 h-2 rotate-45 mx-auto -mt-1" style={{ background:p.c }} />
-            </div>
-          ))}
-        </div>
-        {/* footer */}
-        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 z-20 text-[8px] text-[var(--faint)] bg-white/80 px-2 py-0.5 rounded">© 2026 Mapa GISrael · החברה לתרבות הפנאי כפר-סבא</div>
       </div>
     </BrowserFrame>
   )
