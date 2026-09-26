@@ -7,10 +7,8 @@ export default function Footer({ d, locale = 'he' }){
   const tagline = he ? 'פיתוח אפליקציות, אוטומציה ובינה מלאכותית לארגונים.' : 'App development, automation & AI for organizations.'
 
   const nav = [
-    { label:d.nav.services, href:`${home}#services` },
-    { label:d.nav.process,  href:`${home}#process` },
-    { label:d.nav.work,     href:`${home}#work` },
-    { label:d.nav.about,    href:`${home}/about` },
+    { label:d.nav.solutions, href:`${home}#solutions` },
+    { label:d.nav.about,     href:`${home}/about` },
   ]
 
   return (

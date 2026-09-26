@@ -118,7 +118,7 @@ export default function Hero({ d, locale = 'he', pageType = 'home' }){
                   <path d={he ? 'M11 5l-7 7 7 7' : 'M13 5l7 7-7 7'} /><path d={he ? 'M4 12h16' : 'M20 12H4'} />
                 </svg>
               </button>
-              <Link href={`/${locale}#work`} className="btn btn-ghost w-full sm:w-auto text-[17px]">
+              <Link href={`/${locale}#solutions`} className="btn btn-ghost w-full sm:w-auto text-[17px]">
                 {d.hero.ctaSecondary}
               </Link>
             </div>
