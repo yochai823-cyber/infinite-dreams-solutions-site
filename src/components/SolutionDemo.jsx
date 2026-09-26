@@ -1,14 +1,22 @@
 'use client'
-import { Fragment } from 'react'
 
-/* Hand-built, high-fidelity demo screens that mirror how each real app is
-   built — crisp HTML/CSS mockups inside device/browser frames. */
+/* Hand-built, high-fidelity demo screens modeled on the real apps
+   (based on the user's actual app screenshots). Each carries a "דמו" badge. */
+
+function DemoBadge(){
+  return (
+    <span className="absolute top-2 inset-inline-end-2 z-30 text-[10px] font-bold text-white px-2 py-0.5 rounded-full shadow" style={{ background:'rgba(13,18,32,.7)' }}>
+      דמו להמחשה
+    </span>
+  )
+}
 
 function PhoneFrame({ children, label }){
   return (
     <div className="relative mx-auto w-[300px] max-w-full">
       <div className="absolute -inset-5 rounded-[3rem] opacity-40 blur-2xl" style={{ background:'var(--grad)' }} />
       <div className="relative rounded-[2.6rem] bg-[#0d1220] p-2.5 shadow-[var(--shadow-lg)]" dir="rtl">
+        <DemoBadge />
         <div className="relative rounded-[2rem] overflow-hidden bg-white">
           <div className="absolute top-0 inset-x-0 h-6 flex justify-center z-20 pointer-events-none">
             <div className="mt-1.5 w-24 h-5 bg-[#0d1220] rounded-b-2xl" />
@@ -23,7 +31,7 @@ function PhoneFrame({ children, label }){
 
 function BrowserFrame({ children, url, label }){
   return (
-    <div className="relative mx-auto w-full max-w-2xl">
+    <div className="relative mx-auto w-full max-w-3xl">
       <div className="absolute -inset-5 rounded-[2.4rem] opacity-40 blur-2xl" style={{ background:'var(--grad)' }} />
       <div className="relative card-surface overflow-hidden shadow-[var(--shadow-lg)] ring-1 ring-white/60">
         <div className="flex items-center gap-1.5 px-4 h-10 border-b border-[var(--border)] bg-[var(--surface-2)]">
@@ -31,6 +39,7 @@ function BrowserFrame({ children, url, label }){
           <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
           <span className="w-3 h-3 rounded-full bg-[#28c840]" />
           <span className="ms-3 text-xs text-[var(--faint)] force-ltr">{url}</span>
+          <span className="ms-auto text-[10px] font-bold text-white px-2 py-0.5 rounded-full" style={{ background:'rgba(13,18,32,.7)' }}>דמו להמחשה</span>
         </div>
         {children}
       </div>
@@ -39,7 +48,7 @@ function BrowserFrame({ children, url, label }){
   )
 }
 
-/* ---------- WhatsApp AI ---------- */
+/* ---------- WhatsApp AI (kept — user liked it) ---------- */
 function WhatsAppDemo(){
   return (
     <PhoneFrame label="מזכירת ה-AI עונה, מתאמת וסוגרת — לבד">
@@ -77,95 +86,103 @@ function WhatsAppDemo(){
   )
 }
 
-/* ---------- Classes management ---------- */
+/* ---------- Classes management — desktop dashboard ---------- */
 function ClassesDemo(){
-  const rows = [['נועה לוי','בלט · כיתה ב',true],['איתי כהן','היפ-הופ · ד-ו',true],['שירה ברק','ג׳אז · ז-ח',false],['דניאל מזרחי','ברייקדאנס',true]]
+  const menu = ['מצב פיננסי','דוחות','חוגים','תלמידים','מורים','הורים','נוכחות','פעילויות','הודעות','הגדרות']
+  const bars = [60,72,55,80,66,90,74,88,62,95,70,84]
   return (
-    <PhoneFrame label="נוכחות, תלמידים ותשלומים — במקום אחד">
-      <div className="pt-7">
-        <div className="px-4 py-3 text-white" style={{ background:'var(--grad)' }}>
-          <div className="text-[11px] text-white/80">שלום, מיכל 👋</div>
-          <div className="font-bold text-[15px]">מערכת ניהול חוגים</div>
-        </div>
-        <div className="p-3 space-y-3" style={{ minHeight:370 }}>
-          <div className="grid grid-cols-2 gap-2">
-            {[['248','תלמידים'],['92%','נוכחות היום'],['14','חוגים'],['₪10,070','הכנסות החודש']].map(([v,l])=>(
-              <div key={l} className="rounded-xl border border-[var(--border)] p-2.5">
-                <div className="text-lg font-extrabold text-grad force-ltr">{v}</div>
-                <div className="text-[11px] text-[var(--muted)]">{l}</div>
+    <BrowserFrame url="app.dreams-solutions.io" label="לוח בקרה אחד לכל הפעילות — נוכחות, תלמידים, תשלומים ודוחות">
+      <div dir="rtl" className="flex bg-[var(--surface-2)]" style={{ minHeight:360 }}>
+        <aside className="w-[132px] shrink-0 bg-white border-s border-[var(--border)] p-2.5">
+          <div className="flex items-center gap-1.5 mb-3 px-1">
+            <span className="w-6 h-6 rounded-lg grid place-items-center text-white text-[10px] font-black" style={{ background:'var(--grad)' }}>∞</span>
+            <span className="text-[12px] font-extrabold text-grad">Dreams</span>
+          </div>
+          <nav className="space-y-0.5">
+            {menu.map((m,i)=>(
+              <div key={m} className={`text-[11px] px-2 py-1.5 rounded-lg ${i===0?'text-white font-semibold':'text-[var(--muted)]'}`} style={i===0?{background:'var(--grad)'}:undefined}>{m}</div>
+            ))}
+          </nav>
+        </aside>
+        <main className="flex-1 p-3">
+          <div className="flex items-center justify-between mb-3">
+            <div className="font-bold text-[var(--text)] text-[13px]">מצב פיננסי · כל החוגים</div>
+            <div className="flex gap-1">
+              {['שנה','רבעון','חודש'].map((t,i)=>(<span key={t} className={`text-[10px] px-2 py-1 rounded-md ${i===2?'text-white':'bg-white border border-[var(--border)] text-[var(--muted)]'}`} style={i===2?{background:'var(--grad)'}:undefined}>{t}</span>))}
+            </div>
+          </div>
+          <div className="grid grid-cols-4 gap-2 mb-3">
+            {[['₪1,677','רווחים','+131%'],['₪7,820','מחזור',''],['78%','ריטנשן',''],['₪10,070','הכנסות','']].map(([v,l,d])=>(
+              <div key={l} className="rounded-xl bg-white border border-[var(--border)] p-2">
+                <div className="text-[15px] font-extrabold text-grad force-ltr">{v}</div>
+                <div className="text-[10px] text-[var(--muted)]">{l}</div>
+                {d && <div className="text-[9px] font-bold text-emerald-600">{d}</div>}
               </div>
             ))}
           </div>
-          <div className="rounded-xl border border-[var(--border)] p-2.5">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[12px] font-bold text-[var(--text)]">נוכחות · היפ-הופ 17:00</span>
-              <span className="text-[10px] text-[var(--muted)]">היום</span>
-            </div>
-            <div className="space-y-1.5">
-              {rows.map(([n,c,present])=>(
-                <div key={n} className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-full grid place-items-center text-white text-[11px] font-bold shrink-0" style={{ background:'var(--grad)' }}>{n[0]}</span>
-                  <div className="flex-1 leading-tight">
-                    <div className="text-[12px] font-semibold text-[var(--text)]">{n}</div>
-                    <div className="text-[10px] text-[var(--muted)]">{c}</div>
-                  </div>
-                  <span className={`w-6 h-6 rounded-full grid place-items-center ${present?'text-white':'text-[var(--faint)] bg-[var(--surface-3)]'}`} style={present?{background:'#22c55e'}:undefined}>
-                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d={present?'M20 6 9 17l-5-5':'M18 6 6 18M6 6l12 12'}/></svg>
-                  </span>
-                </div>
-              ))}
+          <div className="rounded-xl bg-white border border-[var(--border)] p-3">
+            <div className="text-[11px] font-semibold text-[var(--muted)] mb-2">הכנסות · 12 חודשים</div>
+            <div className="flex items-end gap-1.5 h-24">
+              {bars.map((h,i)=>(<div key={i} className="flex-1 rounded-t" style={{ height:`${h}%`, background:'var(--grad)', opacity:.35+ (i/bars.length)*0.65 }} />))}
             </div>
           </div>
-        </div>
+        </main>
       </div>
-    </PhoneFrame>
+    </BrowserFrame>
   )
 }
 
-/* ---------- Rooms / halls calendar ---------- */
+/* ---------- Rooms / halls — desktop month calendar ---------- */
 function RoomsDemo(){
-  const days = ['א׳','ב׳','ג׳','ד׳','ה׳']
-  const events = [
-    { d:0, t:1, span:2, label:'חוג יצירה', c:'#4f46e5' },
-    { d:1, t:0, span:1, label:'ישיבת צוות', c:'#06b6d4' },
-    { d:1, t:2, span:2, label:'חוג ריקוד', c:'#e11d8f' },
-    { d:2, t:1, span:1, label:'אולם — הרצאה', c:'#8b5cf6' },
-    { d:3, t:0, span:2, label:'קרמיקה', c:'#f59e0b' },
-    { d:3, t:3, span:1, label:'BNI', c:'#10b981' },
-    { d:4, t:2, span:2, label:'שירה בציבור', c:'#4f46e5' },
-  ]
-  const times = ['09:00','11:00','13:00','15:00']
+  const menu = [['לוח שנה',true],['ההזמנות שלי בלוח',false],['פתיחת הזמנה',false],['אולמות וחדרים',false],['צרכים',false],['יומן הזמנות',false],['ניהול משתמשים',false]]
+  const dows = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ש׳']
+  const events = {
+    '3':[['חוג יצירה','#4f46e5']], '5':[['BNI · אולם','#10b981'],['ריקוד','#e11d8f']],
+    '8':[['התעמלות','#8b5cf6']], '12':[['הרצאה','#06b6d4']], '14':[['שירה בציבור','#f59e0b'],['+2','#94a3b8']],
+    '17':[['קרמיקה','#4f46e5']], '20':[['מחול','#e11d8f']], '22':[['סדנה','#06b6d4']], '26':[['חוג תופים','#8b5cf6']],
+  }
+  const cells = Array.from({length:35}, (_,i)=> i-2) // start offset
   return (
-    <BrowserFrame url="rooms.infinite-dreams.io" label="לוח שנה ויזואלי · בלי כפילויות והתנגשויות">
-      <div className="p-4" dir="rtl">
-        <div className="flex items-center justify-between mb-3">
-          <div className="font-bold text-[var(--text)]">יומן הזמנות · נובמבר</div>
-          <div className="flex gap-1">
-            <span className="text-xs px-2.5 py-1 rounded-lg bg-[var(--surface-2)] text-[var(--muted)]">שבוע</span>
-            <span className="text-xs px-2.5 py-1 rounded-lg text-white" style={{ background:'var(--grad)' }}>חודש</span>
+    <BrowserFrame url="rooms.dreams-solutions.io" label="לוח שנה ויזואלי לכל החללים — בלי כפילויות והתנגשויות">
+      <div dir="rtl" className="flex" style={{ minHeight:360 }}>
+        <aside className="w-[150px] shrink-0 bg-[var(--surface-2)] border-s border-[var(--border)] p-2.5">
+          <div className="rounded-xl p-2.5 text-white mb-3" style={{ background:'var(--grad)' }}>
+            <div className="text-[11px] font-bold leading-tight">מערכת לניהול חדרים</div>
+            <div className="text-[9px] text-white/80 mt-0.5">מתנ״ס קדימה־צורן</div>
+            <div className="mt-2 text-[9px] bg-white/20 rounded-md px-1.5 py-0.5 w-fit">יוחאי אפללו</div>
           </div>
-        </div>
-        <div className="grid" style={{ gridTemplateColumns:`48px repeat(5,1fr)` }}>
-          <div />
-          {days.map(d=>(<div key={d} className="text-center text-[12px] font-semibold text-[var(--muted)] pb-2">{d}</div>))}
-          {times.map((tm,ti)=>(
-            <Fragment key={tm}>
-              <div className="text-[10px] text-[var(--faint)] text-start pt-1 force-ltr">{tm}</div>
-              {days.map((_,di)=>{
-                const ev = events.find(e=>e.d===di && e.t===ti)
-                return (
-                  <div key={di+'-'+ti} className="border-t border-s border-[var(--border)] h-10 p-0.5">
-                    {ev && (
-                      <div className="h-full rounded-md px-1.5 flex items-center text-[9px] font-bold text-white leading-none" style={{ background:ev.c }}>
-                        <span className="truncate">{ev.label}</span>
-                      </div>
-                    )}
+          <nav className="space-y-0.5">
+            {menu.map(([m,act])=>(
+              <div key={m} className={`text-[11px] px-2 py-1.5 rounded-lg flex items-center justify-between ${act?'text-white font-semibold':'text-[var(--muted)]'}`} style={act?{background:'var(--grad)'}:undefined}>
+                <span>{m}</span>{m==='אולמות וחדרים' && <span className="text-[8px] bg-emerald-500 text-white rounded-full px-1">19</span>}
+              </div>
+            ))}
+          </nav>
+          <div className="mt-3 text-[10px] text-white text-center rounded-lg py-1.5 font-semibold" style={{ background:'#f97316' }}>יציאה מהמערכת</div>
+        </aside>
+        <main className="flex-1 p-3 bg-white">
+          <div className="flex items-center justify-between mb-2">
+            <div className="font-bold text-grad text-[13px]">יומן הזמנות · נובמבר 2025</div>
+            <div className="flex gap-1">
+              {['יומי','שבועי','חודשי'].map((t,i)=>(<span key={t} className={`text-[10px] px-2 py-1 rounded-md ${i===2?'text-white':'bg-[var(--surface-2)] text-[var(--muted)]'}`} style={i===2?{background:'var(--grad)'}:undefined}>{t}</span>))}
+            </div>
+          </div>
+          <div className="grid grid-cols-7 gap-px bg-[var(--border)] rounded-lg overflow-hidden">
+            {dows.map(d=>(<div key={d} className="bg-[var(--surface-2)] text-center text-[10px] font-semibold text-[var(--muted)] py-1">{d}</div>))}
+            {cells.map((day,idx)=>{
+              const valid = day>=1 && day<=30
+              const evs = events[String(day)] || []
+              return (
+                <div key={idx} className="bg-white h-[52px] p-0.5">
+                  {valid && <div className="text-[9px] text-[var(--faint)] text-start px-1">{day}</div>}
+                  <div className="space-y-0.5 mt-0.5">
+                    {evs.map(([label,c],i)=>(<div key={i} className="rounded px-1 text-[7px] font-bold text-white truncate leading-tight" style={{ background:c }}>{label}</div>))}
                   </div>
-                )
-              })}
-            </Fragment>
-          ))}
-        </div>
+                </div>
+              )
+            })}
+          </div>
+        </main>
       </div>
     </BrowserFrame>
   )
@@ -173,39 +190,52 @@ function RoomsDemo(){
 
 /* ---------- Interactive event map ---------- */
 function MapDemo(){
+  const cats = [['❤️','#ec4899'],['🏛️','#14b8a6'],['🎨','#f97316'],['🏃','#22c55e'],['🎭','#8b5cf6'],['🎵','#3b82f6']]
   const pins = [
-    { x:22, y:34, n:1, c:'#e11d8f' }, { x:48, y:24, n:2, c:'#4f46e5' },
-    { x:70, y:40, n:3, c:'#06b6d4' }, { x:35, y:58, n:4, c:'#f59e0b' },
-    { x:60, y:66, n:5, c:'#8b5cf6' }, { x:82, y:60, n:6, c:'#10b981' },
+    { x:30, y:38, n:75, c:'#f97316' }, { x:44, y:30, n:1, c:'#f97316' }, { x:52, y:44, n:130, c:'#14b8a6' },
+    { x:40, y:52, n:140, c:'#14b8a6' }, { x:58, y:36, n:9, c:'#f97316' }, { x:63, y:50, n:11, c:'#f97316' },
+    { x:48, y:60, n:150, c:'#14b8a6' }, { x:68, y:60, n:14, c:'#f97316' }, { x:36, y:44, n:71, c:'#f97316' },
+    { x:56, y:56, n:21, c:'#f97316' }, { x:72, y:42, n:2, c:'#f97316' }, { x:26, y:52, n:67, c:'#f97316' },
   ]
   return (
-    <BrowserFrame url="map.infinite-dreams.io" label="כל התחנות על מפה חיה · סינון וניווט">
-      <div dir="rtl">
-        <div className="flex items-center gap-2 p-3 border-b border-[var(--border)]">
-          <div className="flex-1 h-8 rounded-full bg-[var(--surface-2)] flex items-center px-3 text-[12px] text-[var(--faint)]">חיפוש כתובת או שם אמן…</div>
-          {['אמנות','מוזיקה','אוכל'].map((c,i)=>(
-            <span key={c} className={`text-[11px] px-2.5 py-1 rounded-full ${i===0?'text-white':'bg-[var(--surface-2)] text-[var(--muted)]'}`} style={i===0?{background:'var(--grad)'}:undefined}>{c}</span>
+    <BrowserFrame url="map.kfar-saba.dreams-solutions.io" label="כל התחנות על מפה חיה · סינון, מועדפים וניווט">
+      <div dir="rtl" className="relative" style={{ height:380 }}>
+        {/* top controls */}
+        <div className="absolute top-2 inset-inline-start-2 z-20 flex gap-1.5">
+          <span className="text-[10px] font-semibold px-2 py-1 rounded-lg text-white shadow" style={{ background:'var(--grad)' }}>לרשימת הבתים הפתוחים</span>
+          <span className="text-[10px] font-semibold px-2 py-1 rounded-lg bg-white shadow text-[var(--text)] border border-[var(--border)]">📁 מקרא וסינון</span>
+        </div>
+        <div className="absolute top-2 left-2 z-20 text-[10px] px-2 py-1 rounded-lg bg-white shadow text-[var(--muted)] border border-[var(--border)]">⛶ מסך מלא</div>
+        {/* search */}
+        <div className="absolute top-11 inset-inline-start-2 z-20 w-52 h-7 rounded-full bg-white shadow flex items-center px-3 text-[11px] text-[var(--faint)]">🔍 חיפוש לפי כתובת או שם אמן/ית…</div>
+        {/* banner */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 h-9 px-4 rounded-lg text-white text-[12px] font-black flex items-center gap-2 shadow" style={{ background:'linear-gradient(90deg,#e11d8f,#f59e0b)' }}>
+          🎨 בתים פתוחים · סופ״ש של אמנות
+        </div>
+        {/* category toolbar (physical left) */}
+        <div className="absolute top-24 left-2 z-20 flex flex-col gap-1.5">
+          {cats.map(([ic,c],i)=>(
+            <span key={i} className="w-8 h-8 rounded-full grid place-items-center text-[14px] shadow ring-2 ring-white" style={{ background:c }}>{ic}</span>
           ))}
         </div>
-        <div className="relative h-64" style={{ background:'linear-gradient(135deg,#eef4ff,#f7f0ff 60%,#eafcff)' }}>
-          {/* stylized streets */}
-          <svg viewBox="0 0 100 70" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
-            <g stroke="#cdd6ea" strokeWidth="1.4" fill="none">
-              <path d="M0 20 H100 M0 45 H100 M25 0 V70 M55 0 V70 M80 0 V70"/>
+        {/* map */}
+        <div className="absolute inset-0 -z-0" style={{ background:'linear-gradient(135deg,#eaf2ff,#f3f0ff 55%,#eafcf3)' }}>
+          <svg viewBox="0 0 100 76" preserveAspectRatio="none" className="w-full h-full">
+            <g stroke="#cdd6ea" strokeWidth="1.2" fill="none">
+              <path d="M0 18 H100 M0 40 H100 M0 60 H100 M20 0 V76 M45 0 V76 M70 0 V76 M88 0 V76"/>
             </g>
-            <g stroke="#e6d9f5" strokeWidth="2.5" fill="none" opacity=".7"><path d="M0 33 H100 M42 0 V70"/></g>
+            <g stroke="#e6d9f5" strokeWidth="2.4" fill="none" opacity=".7"><path d="M0 30 H100 M55 0 V76"/></g>
+            <g fill="#dcecdc" opacity=".6"><rect x="4" y="44" width="12" height="12" rx="2"/><rect x="74" y="6" width="14" height="10" rx="2"/></g>
           </svg>
-          {pins.map(p=>(
-            <div key={p.n} className="absolute -translate-x-1/2 -translate-y-full" style={{ left:`${p.x}%`, top:`${p.y}%` }}>
-              <div className="w-7 h-7 rounded-full grid place-items-center text-white text-[12px] font-bold shadow-lg ring-2 ring-white force-ltr" style={{ background:p.c }}>{p.n}</div>
+          {pins.map((p,i)=>(
+            <div key={i} className="absolute -translate-x-1/2 -translate-y-full" style={{ left:`${p.x}%`, top:`${p.y}%` }}>
+              <div className="min-w-[22px] h-[22px] px-1 rounded-full grid place-items-center text-white text-[10px] font-bold shadow-md ring-2 ring-white force-ltr" style={{ background:p.c }}>{p.n}</div>
               <div className="w-2 h-2 rotate-45 mx-auto -mt-1" style={{ background:p.c }} />
             </div>
           ))}
-          <div className="absolute bottom-3 inset-inline-start-3 card-surface px-3 py-2 text-[11px] shadow-[var(--shadow-md)]">
-            <div className="font-bold text-[var(--text)]">בתים פתוחים · כפר סבא</div>
-            <div className="text-[var(--muted)]">148 תחנות פעילות</div>
-          </div>
         </div>
+        {/* footer */}
+        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 z-20 text-[8px] text-[var(--faint)] bg-white/80 px-2 py-0.5 rounded">© 2026 Mapa GISrael · החברה לתרבות הפנאי כפר-סבא</div>
       </div>
     </BrowserFrame>
   )
