@@ -139,8 +139,8 @@ export default function StudioLanding({ d, locale = 'he', solution, content }){
               {content.heroVideo ? (
                 <div className="relative mx-auto w-[300px] max-w-full">
                   <div className="absolute -inset-5 rounded-[3rem] opacity-40 blur-2xl" style={{ background:'var(--grad)' }} />
-                  <div className="relative rounded-[2rem] overflow-hidden border border-[var(--border)] shadow-[var(--shadow-lg)] ring-1 ring-white/60 bg-black">
-                    <video src={content.heroVideo} poster={content.heroPoster} autoPlay muted loop playsInline preload="metadata" className="w-full h-auto block" />
+                  <div className="relative rounded-[1.4rem] overflow-hidden border border-[var(--border)] shadow-[var(--shadow-lg)] ring-1 ring-white/60 bg-black">
+                    <video src={content.heroVideo} poster={content.heroPoster} autoPlay muted loop playsInline preload="metadata" className="w-full h-auto block object-contain" />
                     <span className="absolute top-2 inset-inline-start-2 z-10 text-[10px] font-bold text-white px-2 py-0.5 rounded-full shadow flex items-center gap-1" style={{ background:'rgba(13,18,32,.72)' }}>
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> {d.studioLiveLabel}
                     </span>
