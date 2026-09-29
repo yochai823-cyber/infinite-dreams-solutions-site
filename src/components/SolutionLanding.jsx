@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 import FinalCTA from './FinalCTA'
 import Footer from './Footer'
 import SolutionDemo from './SolutionDemo'
+import SolutionPricing from './SolutionPricing'
 import { openContact } from './contactBus'
 
 export default function SolutionLanding({ d, locale = 'he', solution }){
@@ -96,6 +97,8 @@ export default function SolutionLanding({ d, locale = 'he', solution }){
           </div>
         </div>
       </section>
+
+      <SolutionPricing d={d} locale={locale} slug={solution.slug} />
 
       <FinalCTA d={d} locale={locale} />
       <Footer d={d} locale={locale} />

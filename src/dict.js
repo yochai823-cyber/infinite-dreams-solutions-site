@@ -123,6 +123,43 @@ export const he = {
   contactTitle:'יש לכם חזון?\nבואו נבנה אותו.',
   contactSub:'תכנית פעולה קצרה וברורה\nעם לו״ז ועלויות שקופות.',
 
+  pricingEyebrow:'תמחור',
+  pricingCustomTitle:'תמחור בהתאמה אישית',
+  pricingCustomText:'כל פרויקט נבנה לפי הצרכים, היקף החללים והאינטגרציות שלכם — בלי חבילה שלא מתאימה. ספרו לנו מה תרצו ונחזור אליכם עם הצעת מחיר שקופה.',
+  pricingCustomCta:'קבלת הצעת מחיר',
+  pricingCta:'דברו איתנו',
+  pricingPopular:'הכי פופולרי',
+  pricing:{
+    'classes':{
+      heading:'מחירון לפי גודל הארגון',
+      note:'כל המחירים לחודש · אינם כוללים מע״מ · אפשר לשדרג בכל עת',
+      plans:[
+        { name:'Standard', price:'₪800', period:'/ חודש', priceSub:'לא כולל מע״מ', sub:'סניף / תחום אחד · עד 500 משתתפים',
+          features:['סניף או תחום אחד','עד 500 משתתפים','ניהול חוגים, נוכחות ותלמידים','סליקה מקוונת + קבלות','פורטל הורים (Hub)','עוזר AI חכם מובנה'] },
+        { name:'Medium', price:'₪1,400', period:'/ חודש', priceSub:'לא כולל מע״מ', sub:'2 סניפים/תחומים · עד 1,000 משתתפים',
+          features:['2 סניפים / תחומים','עד 1,000 משתתפים','או תחום אחד מעל 500','כל מה שבמסלול Standard','עוזר AI חכם מובנה'] },
+        { name:'Large', badge:'הכי פופולרי', price:'₪1,800', period:'/ חודש', priceSub:'לא כולל מע״מ', sub:'3 סניפים/תחומים · עד 2,000 משתתפים',
+          features:['3 תחומים / סניפים','עד 2,000 משתתפים','דוחות כספיים מתקדמים','תמיכה מועדפת','עוזר AI חכם מובנה'] },
+        { name:'Premium', price:'₪2,000', period:'/ חודש', priceSub:'לא כולל מע״מ', sub:'4+ תחומים · עד 5,000 משתתפים',
+          features:['4 תחומים ומעלה','עד 5,000 משתתפים','סניפים מרובים ללא הגבלה','ליווי ותמיכה צמודה','עוזר AI חכם מובנה'] },
+      ],
+    },
+    'whatsapp-ai':{
+      heading:'מסלולים למזכירת ה-AI',
+      note:'כל המחירים לחודש · אינם כוללים מע״מ (יתווסף כחוק) · הודעות ואטסאפ יזומות משולמות ישירות ל-Meta לפי התעריף שלהם',
+      plans:[
+        { name:'עסק קטן', price:'₪349', period:'/ חודש + מע״מ', priceSub:'₪412 כולל מע״מ', sub:'',
+          features:['500 יחידות AI בחודש','לידים והעברה לנציג','עד 2 משתמשים','סניף אחד'] },
+        { name:'מקצועי', badge:'הכי פופולרי', price:'₪649', period:'/ חודש + מע״מ', priceSub:'₪766 כולל מע״מ', sub:'',
+          features:['1,500 יחידות AI בחודש','כל הפעולות: ניסיון, תורים, הזמנות ועוד','עד 5 משתמשים','סניף אחד'] },
+        { name:'עסקי', price:'₪949', period:'/ חודש + מע״מ', priceSub:'₪1,120 כולל מע״מ', sub:'',
+          features:['4,000 יחידות AI בחודש','כל הפעולות: ניסיון, תורים, הזמנות ועוד','משתמשים ללא הגבלה','ריבוי סניפים'] },
+      ],
+    },
+    'rooms':{ custom:true },
+    'open-houses':{ custom:true },
+  },
+
   email:'infinite.dreams.solutions@gmail.com',
   phone:'054‑524‑7997',
   phoneE164:'972545247997',
@@ -258,6 +295,43 @@ export const en = {
 
   contactTitle:'Got a vision?\nLet\'s build it.',
   contactSub:'A short, clear plan\nwith timeline and pricing.',
+
+  pricingEyebrow:'Pricing',
+  pricingCustomTitle:'Custom pricing',
+  pricingCustomText:'Every project is built around your needs, the number of spaces and your integrations — no ill-fitting package. Tell us what you need and we\'ll get back with transparent pricing.',
+  pricingCustomCta:'Get a quote',
+  pricingCta:'Let\'s talk',
+  pricingPopular:'Most popular',
+  pricing:{
+    'classes':{
+      heading:'Pricing by organization size',
+      note:'All prices per month · VAT not included · upgrade anytime',
+      plans:[
+        { name:'Standard', price:'₪800', period:'/ mo', priceSub:'excl. VAT', sub:'One branch / track · up to 500 members',
+          features:['One branch or track','Up to 500 members','Classes, attendance & students','Online payments + receipts','Parents portal (Hub)','Built-in smart AI assistant'] },
+        { name:'Medium', price:'₪1,400', period:'/ mo', priceSub:'excl. VAT', sub:'2 branches/tracks · up to 1,000 members',
+          features:['2 branches / tracks','Up to 1,000 members','Or one track over 500','Everything in Standard','Built-in smart AI assistant'] },
+        { name:'Large', badge:'Most popular', price:'₪1,800', period:'/ mo', priceSub:'excl. VAT', sub:'3 branches/tracks · up to 2,000 members',
+          features:['3 tracks / branches','Up to 2,000 members','Advanced financial reports','Priority support','Built-in smart AI assistant'] },
+        { name:'Premium', price:'₪2,000', period:'/ mo', priceSub:'excl. VAT', sub:'4+ tracks · up to 5,000 members',
+          features:['4+ tracks','Up to 5,000 members','Unlimited branches','Dedicated support','Built-in smart AI assistant'] },
+      ],
+    },
+    'whatsapp-ai':{
+      heading:'AI secretary plans',
+      note:'All prices per month · VAT not included (added as required) · proactive WhatsApp messages are paid directly to Meta at their rate',
+      plans:[
+        { name:'Small business', price:'₪349', period:'/ mo + VAT', priceSub:'₪412 incl. VAT', sub:'',
+          features:['500 AI units / month','Leads & hand-off to an agent','Up to 2 users','One branch'] },
+        { name:'Professional', badge:'Most popular', price:'₪649', period:'/ mo + VAT', priceSub:'₪766 incl. VAT', sub:'',
+          features:['1,500 AI units / month','All actions: trials, bookings, orders & more','Up to 5 users','One branch'] },
+        { name:'Business', price:'₪949', period:'/ mo + VAT', priceSub:'₪1,120 incl. VAT', sub:'',
+          features:['4,000 AI units / month','All actions: trials, bookings, orders & more','Unlimited users','Multiple branches'] },
+      ],
+    },
+    'rooms':{ custom:true },
+    'open-houses':{ custom:true },
+  },
 
   email:'infinite.dreams.solutions@gmail.com',
   phone:'+972‑54‑524‑7997',
