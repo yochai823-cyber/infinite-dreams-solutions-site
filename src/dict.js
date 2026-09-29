@@ -181,6 +181,8 @@ export const he = {
     },
     'classes':{
       pricingSlug:'classes',
+      heroVideo:'/solutions/video/app-attendance.mp4',
+      heroPoster:'/solutions/video/app-attendance.jpg',
       badge:'מערכת · לניהול חוגים',
       title:'מערכת לניהול\nחוגים ופעילויות',
       tagline:'כל החוגים במקום אחד — נוכחות, הורים, תשלומים ודוחות',
@@ -451,6 +453,8 @@ export const en = {
     },
     'classes':{
       pricingSlug:'classes',
+      heroVideo:'/solutions/video/app-attendance.mp4',
+      heroPoster:'/solutions/video/app-attendance.jpg',
       badge:'System · classes management',
       title:'Classes &\nActivities System',
       tagline:'Every class in one place — attendance, parents, payments & reports',
