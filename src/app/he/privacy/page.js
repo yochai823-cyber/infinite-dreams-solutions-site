@@ -20,42 +20,61 @@ export default function PrivacyPage() {
           
           <div className="prose prose-lg max-w-none">
             <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">איסוף מידע</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                אנו אוספים מידע אישי רק כאשר אתם מספקים אותו לנו מרצונכם החופשי, 
-                כגון בעת יצירת קשר, הרשמה לשירותים או הזמנת פרויקטים.
+                מדיניות זו מפרטת כיצד {he.brand} (להלן: &quot;אנחנו&quot;) אוספת, משתמשת ושומרת מידע
+                בעת השימוש באתר. המדיניות מנוסחת בלשון זכר מטעמי נוחות בלבד ומופנית לכל המגדרים.
               </p>
-              
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">שימוש במידע</h2>
+
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">איזה מידע אנו אוספים</h2>
+              <p className="text-gray-700 mb-3 leading-relaxed"><strong>מידע שאתם מוסרים ביוזמתכם:</strong> בעת מילוי טופס יצירת קשר או פנייה אלינו — שם, מספר טלפון, כתובת דוא״ל ותיאור הצורך/הפרויקט שתבחרו לשתף.</p>
+              <p className="text-gray-700 mb-6 leading-relaxed"><strong>מידע שנאסף אוטומטית:</strong> לצורכי שיפור האתר אנו אוספים נתוני שימוש בסיסיים באמצעות מערכת מדידה עצמאית (ללא Google Analytics וללא פרסום מבוסס מעקב) — כגון עמודים שנצפו, לחיצות על כפתורים וסוג המכשיר. איננו יוצרים באמצעותם פרופיל מזהה עליכם.</p>
+
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">מטרות השימוש במידע</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                המידע שאנו אוספים משמש אותנו לספק לכם שירותים איכותיים, 
-                לתקשר איתכם בנוגע לפרויקטים, ולשפר את השירותים שלנו.
+                המידע משמש כדי לחזור אליכם ולטפל בפנייה, לספק ולשפר את השירותים,
+                ולתפעל ולאבטח את האתר. איננו מוכרים או משכירים את המידע האישי שלכם.
               </p>
-              
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">הגנה על המידע</h2>
+
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">דיוור ופרסום</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                אנו משתמשים באמצעי אבטחה מתקדמים כדי להגן על המידע האישי שלכם 
-                מפני גישה לא מורשית, שימוש לרעה או חשיפה.
+                נשלח לכם דברי פרסומת או עדכונים שיווקיים רק אם סימנתם הסכמה מפורשת לכך,
+                בהתאם לסעיף 30א לחוק התקשורת (בזק ושידורים), התשמ״ב-1982. תוכלו להסיר את
+                הסכמתכם בכל עת באמצעות פנייה אלינו או קישור ההסרה בהודעה.
               </p>
-              
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">שיתוף מידע</h2>
+
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">אחסון והעברת מידע</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                אנו לא מוכרים, משכירים או חושפים את המידע האישי שלכם לצדדים שלישיים 
-                ללא הסכמתכם המפורשת, למעט במקרים הנדרשים על פי חוק.
+                המידע נשמר אצל ספקי תשתית וארחון מוכרים (כגון שירותי אירוח ובסיסי נתונים בענן),
+                וייתכן שהוא מאוחסן בשרתים הממוקמים מחוץ לישראל. אנו פועלים להתקשר עם ספקים
+                המיישמים אמצעי אבטחה והגנת פרטיות מקובלים.
               </p>
-              
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">זכויותיכם</h2>
+
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">שמירת המידע</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                יש לכם זכות לגשת למידע האישי שלכם, לעדכן אותו, למחוק אותו 
-                או לבקש העברה שלו. אתם יכולים לפנות אלינו בכל עת בנושאים אלה.
+                נשמור את המידע כל עוד הוא נדרש למטרות שלשמן נאסף או כנדרש על פי דין,
+                ולאחר מכן נמחק או ננטרל אותו.
               </p>
-              
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">יצירת קשר</h2>
+
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">אבטחת מידע</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                אם יש לכם שאלות בנוגע למדיניות הפרטיות שלנו, 
-                אתם מוזמנים לפנות אלינו בכתובת: {he.email}
+                אנו נוקטים באמצעי אבטחה סבירים כדי להגן על המידע מפני גישה, שימוש או חשיפה
+                בלתי מורשים. עם זאת, אין באפשרותנו להבטיח הגנה מוחלטת בכל מקרה.
               </p>
-              
+
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">זכויותיכם</h2>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                בהתאם לחוק הגנת הפרטיות, התשמ״א-1981, יש לכם זכות לעיין במידע שנשמר עליכם,
+                לבקש לתקן אותו, לעדכנו או למחוק אותו. לבקשה כזו ניתן לפנות אלינו בפרטים שלהלן.
+              </p>
+
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">בעל המאגר ויצירת קשר</h2>
+              <ul className="list-none text-gray-700 mb-6 leading-relaxed space-y-1">
+                <li><strong>הגורם האחראי:</strong> {he.owner} — {he.brand}</li>
+                <li><strong>דוא״ל:</strong> <a className="text-indigo-600 force-ltr" href={`mailto:${he.email}`}>{he.email}</a></li>
+                <li><strong>טלפון:</strong> <a className="text-indigo-600 force-ltr" href={`tel:+${he.phoneE164}`}>{he.phone}</a></li>
+                <li><strong>כתובת:</strong> {he.address}</li>
+              </ul>
+
               <div className="mt-8 p-6 bg-gray-50 rounded-xl">
                 <p className="text-sm text-gray-600 text-center">
                   מדיניות זו עודכנה לאחרונה ב-{new Date().toLocaleDateString('he-IL')}

@@ -28,8 +28,8 @@ export default function TermsPage() {
               
               <h2 className="text-2xl font-bold text-gray-800 mb-6">שירותים</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                אנו מספקים שירותי פיתוח אפליקציות, אוטומציות, הפקות מוזיקה ומופעים, 
-                הדרכות ויעוץ קהילתי, והרצאות. כל השירותים ניתנים ברמה מקצועית גבוהה.
+                אנו מספקים שירותי פיתוח אפליקציות ומערכות, אוטומציות ובינה מלאכותית לעסקים
+                ולארגונים, וכן הרצאות והדרכות. כל השירותים ניתנים ברמה מקצועית גבוהה.
               </p>
               
               <h2 className="text-2xl font-bold text-gray-800 mb-6">תשלומים</h2>
@@ -56,9 +56,15 @@ export default function TermsPage() {
                 שינויים ייכנסו לתוקף מיידית עם פרסומם באתר.
               </p>
               
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">דין וסמכות שיפוט</h2>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                על תנאים אלה ועל השימוש באתר יחולו דיני מדינת ישראל בלבד. סמכות השיפוט
+                הבלעדית בכל עניין הנוגע לתנאים אלה תהא נתונה לבתי המשפט המוסמכים במחוז המרכז.
+              </p>
+
               <h2 className="text-2xl font-bold text-gray-800 mb-6">יצירת קשר</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                לשאלות בנוגע לתנאי השימוש, אתם מוזמנים לפנות אלינו בכתובת: {he.email}
+                לשאלות בנוגע לתנאי השימוש, ניתן לפנות אלינו בדוא״ל {he.email} או בטלפון {he.phone}.
               </p>
               
               <div className="mt-8 p-6 bg-gray-50 rounded-xl">

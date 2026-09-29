@@ -44,12 +44,25 @@ export default function Footer({ d, locale = 'he' }){
               <li><a href={`https://wa.me/${d.phoneE164}`} target="_blank" rel="noopener noreferrer" className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors">{he ? 'וואטסאפ' : 'WhatsApp'}</a></li>
               <li><a href={d.calendar} target="_blank" rel="noopener noreferrer" className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors">{he ? 'קביעת פגישה' : 'Book a meeting'}</a></li>
             </ul>
+
+            <div className="mt-6 space-y-1.5 text-[14px] text-[var(--muted)]">
+              <p className="text-sm font-semibold text-[var(--text)]">{d.hoursTitle}</p>
+              <p>{d.hoursWeek}</p>
+              <p>{d.hoursFri}</p>
+            </div>
+
+            <div className="mt-5 text-[14px] text-[var(--muted)]">
+              <p className="text-sm font-semibold text-[var(--text)] mb-1.5">{he ? 'כתובת' : 'Address'}</p>
+              <p>{d.address}</p>
+              <p className="text-[var(--faint)]">{d.serviceArea}</p>
+            </div>
           </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[13px] text-[var(--faint)]">© {new Date().getFullYear()} {d.brand}</p>
           <div className="flex items-center gap-5">
+            <Link href={`${home}/accessibility`} className="text-[13px] text-[var(--faint)] hover:text-[var(--text)] transition-colors">{d.accessibility}</Link>
             <Link href={`${home}/privacy`} className="text-[13px] text-[var(--faint)] hover:text-[var(--text)] transition-colors">{d.privacy}</Link>
             <Link href={`${home}/terms`} className="text-[13px] text-[var(--faint)] hover:text-[var(--text)] transition-colors">{d.terms}</Link>
           </div>

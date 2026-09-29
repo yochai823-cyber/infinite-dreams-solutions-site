@@ -127,8 +127,15 @@ export const he = {
   phone:'054‑524‑7997',
   phoneE164:'972545247997',
   calendar:'https://calendar.app.google/dZRmgiLWFz9zmktSA',
+  owner:'יוחאי אפללו',
+  address:'זוהרה אלפסיה 12, ראש העין',
+  serviceArea:'פריסה ארצית',
+  hoursTitle:'שעות פעילות',
+  hoursWeek:'א׳–ה׳ · 09:00–18:00',
+  hoursFri:'ו׳ · 09:00–13:00',
   privacy:'פרטיות',
-  terms:'תנאים'
+  terms:'תנאים',
+  accessibility:'הצהרת נגישות'
 }
 
 export const en = {
@@ -256,6 +263,13 @@ export const en = {
   phone:'+972‑54‑524‑7997',
   phoneE164:'972545247997',
   calendar:'https://calendar.app.google/dZRmgiLWFz9zmktSA',
+  owner:'Yochai Apalu',
+  address:'12 Zohara Alfasia St., Rosh HaAyin, Israel',
+  serviceArea:'Nationwide (Israel)',
+  hoursTitle:'Business hours',
+  hoursWeek:'Sun–Thu · 09:00–18:00',
+  hoursFri:'Fri · 09:00–13:00',
   privacy:'Privacy',
-  terms:'Terms'
+  terms:'Terms',
+  accessibility:'Accessibility'
 }

@@ -37,15 +37,43 @@ export default function PrivacyPage() {
             </p>
           </div>
           <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Analytics</h2>
+            <p className="text-gray-700">
+              To improve the website we collect basic usage data through our own first-party
+              measurement (no Google Analytics and no tracking-based advertising) — such as pages
+              viewed, button clicks and device type. We do not use it to build an identifying
+              profile of you.
+            </p>
+          </div>
+          <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Data Storage &amp; International Transfer</h2>
+            <p className="text-gray-700">
+              Information is stored with reputable infrastructure and hosting providers (such as
+              cloud hosting and database services) and may be held on servers located outside of
+              Israel. We work with providers that apply accepted security and privacy safeguards.
+            </p>
+          </div>
+          <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Rights</h2>
+            <p className="text-gray-700">
+              Under Israel&apos;s Protection of Privacy Law (1981) you have the right to review the
+              information held about you and to request that it be corrected, updated or deleted.
+              To exercise these rights, contact us using the details below.
+            </p>
+          </div>
+          <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Changes to Privacy Policy</h2>
             <p className="text-gray-700">
               We reserve the right to update this privacy policy from time to time. Any changes will take effect immediately upon publication on the website. We recommend that you review this policy regularly.
             </p>
           </div>
           <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Contact Us</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Data Controller &amp; Contact</h2>
             <p className="text-gray-700">
-              If you have any questions about this privacy policy, please contact us at: {en.email}
+              Responsible party: {en.owner} — {en.brand}<br />
+              Email: {en.email}<br />
+              Phone: {en.phone}<br />
+              Address: {en.address}
             </p>
           </div>
         </div>
