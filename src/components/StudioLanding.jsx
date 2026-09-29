@@ -6,7 +6,6 @@ import Navbar from './Navbar'
 import FinalCTA from './FinalCTA'
 import Footer from './Footer'
 import SolutionPricing from './SolutionPricing'
-import SolutionDemo from './SolutionDemo'
 import { openContact } from './contactBus'
 
 /* ---------- phone shell ---------- */
@@ -189,19 +188,6 @@ export default function StudioLanding({ d, locale = 'he', solution, content }){
                 <p className="mt-1.5 text-[13px] text-[var(--muted)] leading-relaxed">{c.text}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* App screens */}
-      <section className="py-16 md:py-24 bg-[var(--surface)] border-t border-[var(--border)]">
-        <div className="container-page">
-          <div className="max-w-xl mx-auto text-center reveal mb-12">
-            <span className="eyebrow">{he ? 'הצצה למערכת' : 'A peek inside'}</span>
-            <h2 className="display mt-4 text-3xl md:text-4xl text-[var(--text)]">{d.studioScreensTitle}</h2>
-          </div>
-          <div className="reveal">
-            <SolutionDemo slug="classes" />
           </div>
         </div>
       </section>
