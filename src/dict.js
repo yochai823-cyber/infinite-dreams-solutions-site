@@ -51,6 +51,15 @@ export const he = {
       forWho:'מושלם לחוגים, בתי ספר לאמנויות, מתנ״סים, תנועות נוער וכל ארגון עם פעילויות.'
     },
     {
+      slug:'dance-studio', image:'/solutions/dance-studio.webp', badge:'לריקוד',
+      title:'מערכת לניהול סטודיו לריקוד',
+      tagline:'האפליקציה היחידה בישראל לסטודיו לריקוד — ב-100%',
+      pain:'מנהלים סטודיו עם וואטסאפים, אקסלים ודפי נוכחות?',
+      description:'מערכת מלאה לניהול סטודיו לריקוד: דיווח נוכחות מהנייד, אפליקציה להורים ולתלמידים, מעקב שיעורי ניסיון, גבייה בהוראת קבע ודוחות — הכל מסונכרן במקום אחד. פחות ניירת, יותר זמן לרקוד.',
+      benefits:['דיווח נוכחות מהיר מהנייד + הערות תלמיד','אפליקציה להורים ולתלמידים עם עדכוני פוש','מעקב שיעורי ניסיון ותזכורות אוטומטיות','גבייה בהוראת קבע ומעקב תשלומים'],
+      forWho:'מותאם ב-100% לסטודיו לריקוד — בלט, היפ-הופ, מודרני, ג׳אז וכל סגנון.'
+    },
+    {
       slug:'rooms', image:'/solutions/rooms.webp', badge:'מערכת',
       title:'מערכת לניהול חדרים ואולמות',
       tagline:'הזמנות, לוח שנה ותשלומים — בלי כפילויות',
@@ -122,6 +131,94 @@ export const he = {
   // legacy contact block (used by CTA component)
   contactTitle:'יש לכם חזון?\nבואו נבנה אותו.',
   contactSub:'תכנית פעולה קצרה וברורה\nעם לו״ז ועלויות שקופות.',
+
+  studioClaimLabel:'למה אנחנו',
+  studioCubesTitle:'וזה עוד לא הכל — מה שהמערכת עושה בשבילכם',
+  studioPricingTitle:'מסלולים לרכישת האפליקציה',
+  studioScreensTitle:'הצצה למסכים מתוך האפליקציה',
+  studioAppTodayTitle:'מה קורה היום',
+  studioAppAlertsTitle:'דורש את תשומת לבך',
+  studioLiveLabel:'תצוגה חיה',
+  studio:{
+    'dance-studio':{
+      pricingSlug:'classes',
+      badge:'מערכת · לסטודיו לריקוד',
+      title:'מערכת לניהול\nסטודיו לריקוד',
+      tagline:'האפליקציה היחידה בישראל שמותאמת לסטודיו לריקוד — ב-100%',
+      desc:'ניהול מלא של הסטודיו במקום אחד — נוכחות מהנייד, אפליקציה להורים ולתלמידים, מעקב שיעורי ניסיון וגבייה בהוראת קבע. פחות ניירת, פחות וואטסאפים, יותר זמן לרקוד.',
+      claim:'האפליקציה היחידה בישראל שמותאמת לסטודיו לריקוד ב-100%!',
+      app:{
+        greeting:'בוקר טוב, סטודיו במבט אחד ✨',
+        alerts:[
+          { icon:'🔥', text:'8 שיעורי ניסיון נקבעו להיום', tone:'good' },
+          { icon:'🎂', text:'2 ימי הולדת השבוע', tone:'info' },
+          { icon:'💰', text:'3 תלמידים טרם שילמו', tone:'bad' },
+        ],
+        lessons:[
+          { time:'16:00', name:'בלט קלאסי · גילאי 6–8', count:'15 תלמידים · 10 קבועים / 5 ניסיון' },
+          { time:'17:00', name:'היפ-הופ · נוער', count:'18 תלמידים · 14 קבועים / 4 ניסיון' },
+          { time:'18:00', name:'מחול מודרני · מתקדמים', count:'12 תלמידים · 11 קבועים / 1 ניסיון' },
+          { time:'19:00', name:'ג׳אז · גילאי 10–12', count:'16 תלמידים · 13 קבועים / 3 ניסיון' },
+          { time:'20:00', name:'סטרים־בל · בוגרים', count:'20 תלמידים · 17 קבועים / 3 ניסיון' },
+        ],
+      },
+      features:[
+        { icon:'📲', title:'דיווח נוכחות מהיר מהנייד', desc:'המורה מסמן/ת נוכחות בשנייה ישירות מהמכשיר, עם אפשרות להוסיף הערות אישיות לכל תלמיד/ה.', quote:'אין צורך יותר בדפים' },
+        { icon:'👨‍👩‍👧', title:'אפליקציה להורים ולתלמידים', desc:'עדכוני פוש לנייד, צפייה במערכת השעות, הרשמה לחוגים וסדנאות ומעקב אחרי תשלומים — הכל במקום אחד.', quote:'אין צורך יותר בקבוצות וואטסאפ' },
+        { icon:'🎯', title:'מעקב אחרי שיעורי ניסיון', desc:'רישום לשיעורי ניסיון דרך וואטסאפ, תזכורות אוטומטיות לפני השיעור והמרה חכמה למנוי קבוע.', quote:'אף ליד לא נופל בדרך' },
+        { icon:'💳', title:'פתרונות תשלום', desc:'גבייה בהוראת קבע, מעקב על חובות ותשלומים ושינוי מסלול בכמה קליקים — בלי אקסלים.', quote:'הכסף נכנס לבד' },
+      ],
+      cubes:[
+        { icon:'🧑‍🏫', title:'נוכחות מורים ועובדים', text:'דיווח שעות ונוכחות של צוות ההוראה — בסיס מסודר לשכר ולדוחות.' },
+        { icon:'🏛️', title:'התממשקות למתנ״ס', text:'חיבור למערכות הרישום והגבייה של הרשות והמתנ״ס — בלי הזנה כפולה.' },
+        { icon:'📊', title:'דוחות והכנסות בזמן אמת', text:'תמונת מצב פיננסית מלאה — הכנסות, חובות ורווחיות לכל חוג ולכל סניף.' },
+        { icon:'🗓️', title:'מערכת שעות וחדרים', text:'שיבוץ שיעורים, מורים וחדרים — בלי כפילויות ובלי התנגשויות.' },
+        { icon:'🎟️', title:'הרשמה לסדנאות ואירועים', text:'פתיחת סדנאות, מופעים ואירועים חד-פעמיים עם רישום ותשלום אונליין.' },
+        { icon:'⏳', title:'ניהול רשימות המתנה', text:'שיעור מלא? המערכת מנהלת רשימת המתנה ומעדכנת אוטומטית כשמתפנה מקום.' },
+        { icon:'📣', title:'הודעות ופושים מקובצים', text:'שליחת הודעות ממוקדות לקבוצה, לשיעור או לכל הסטודיו — בלחיצה.' },
+        { icon:'🧾', title:'חשבוניות וקבלות', text:'הפקה אוטומטית של חשבונית מס-קבלה ושליחה במייל אחרי כל חיוב.' },
+      ],
+    },
+    'classes':{
+      pricingSlug:'classes',
+      badge:'מערכת · לניהול חוגים',
+      title:'מערכת לניהול\nחוגים ופעילויות',
+      tagline:'כל החוגים במקום אחד — נוכחות, הורים, תשלומים ודוחות',
+      desc:'מערכת מלאה לניהול חוגים ופעילויות: דיווח נוכחות מהנייד, אפליקציה להורים ולתלמידים, ניהול מורים ותלמידים, גבייה ודוחות — הכל מסונכרן במקום אחד. חוסכת שעות עבודה בשבוע.',
+      claim:'המערכת שמנהלת את כל החוגים שלכם מקצה לקצה — בלי אקסלים ובלי פתקים',
+      app:{
+        greeting:'בוקר טוב, כל החוגים במבט אחד ✨',
+        alerts:[
+          { icon:'🔥', text:'8 שיעורי ניסיון נקבעו להיום', tone:'good' },
+          { icon:'🎂', text:'2 ימי הולדת השבוע', tone:'info' },
+          { icon:'💰', text:'3 תלמידים טרם שילמו', tone:'bad' },
+        ],
+        lessons:[
+          { time:'16:00', name:'קרמיקה · גילאי 8–10', count:'15 תלמידים · 10 קבועים / 5 ניסיון' },
+          { time:'17:00', name:'רובוטיקה · נוער', count:'18 תלמידים · 14 קבועים / 4 ניסיון' },
+          { time:'18:00', name:'אנגלית מדוברת · מתקדמים', count:'12 תלמידים · 11 קבועים / 1 ניסיון' },
+          { time:'19:00', name:'ג׳ודו · גילאי 10–12', count:'16 תלמידים · 13 קבועים / 3 ניסיון' },
+          { time:'20:00', name:'מדעים ומעבדה · בוגרים', count:'20 תלמידים · 17 קבועים / 3 ניסיון' },
+        ],
+      },
+      features:[
+        { icon:'📲', title:'דיווח נוכחות מהיר מהנייד', desc:'המורה מסמן/ת נוכחות בשנייה ישירות מהמכשיר, עם אפשרות להוסיף הערות אישיות לכל תלמיד/ה.', quote:'אין צורך יותר בדפים' },
+        { icon:'👨‍👩‍👧', title:'אפליקציה להורים ולתלמידים', desc:'עדכוני פוש לנייד, צפייה במערכת השעות, הרשמה לחוגים וסדנאות ומעקב אחרי תשלומים — הכל במקום אחד.', quote:'אין צורך יותר בקבוצות וואטסאפ' },
+        { icon:'🎯', title:'מעקב אחרי שיעורי ניסיון', desc:'רישום לשיעורי ניסיון דרך וואטסאפ, תזכורות אוטומטיות לפני השיעור והמרה חכמה למנוי קבוע.', quote:'אף ליד לא נופל בדרך' },
+        { icon:'💳', title:'פתרונות תשלום', desc:'גבייה בהוראת קבע, מעקב על חובות ותשלומים ושינוי מסלול בכמה קליקים — בלי אקסלים.', quote:'הכסף נכנס לבד' },
+      ],
+      cubes:[
+        { icon:'🧑‍🏫', title:'נוכחות מורים ועובדים', text:'דיווח שעות ונוכחות של צוות ההוראה — בסיס מסודר לשכר ולדוחות.' },
+        { icon:'🏛️', title:'התממשקות למתנ״ס', text:'חיבור למערכות הרישום והגבייה של הרשות והמתנ״ס — בלי הזנה כפולה.' },
+        { icon:'📊', title:'דוחות והכנסות בזמן אמת', text:'תמונת מצב פיננסית מלאה — הכנסות, חובות ורווחיות לכל חוג ולכל סניף.' },
+        { icon:'🗓️', title:'מערכת שעות וחדרים', text:'שיבוץ חוגים, מורים וחדרים — בלי כפילויות ובלי התנגשויות.' },
+        { icon:'🎟️', title:'הרשמה לסדנאות ואירועים', text:'פתיחת סדנאות ואירועים חד-פעמיים עם רישום ותשלום אונליין.' },
+        { icon:'⏳', title:'ניהול רשימות המתנה', text:'חוג מלא? המערכת מנהלת רשימת המתנה ומעדכנת אוטומטית כשמתפנה מקום.' },
+        { icon:'📣', title:'הודעות ופושים מקובצים', text:'שליחת הודעות ממוקדות לקבוצה, לחוג או לכל הארגון — בלחיצה.' },
+        { icon:'🧾', title:'חשבוניות וקבלות', text:'הפקה אוטומטית של חשבונית מס-קבלה ושליחה במייל אחרי כל חיוב.' },
+      ],
+    },
+  },
 
   pricingEyebrow:'תמחור',
   pricingCustomTitle:'תמחור בהתאמה אישית',
@@ -226,6 +323,15 @@ export const en = {
       forWho:'Perfect for activity programs, arts schools, community centers and youth organizations.'
     },
     {
+      slug:'dance-studio', image:'/solutions/dance-studio.webp', badge:'For dance',
+      title:'Dance Studio Management System',
+      tagline:'The only app in Israel built 100% for dance studios',
+      pain:'Running a studio on WhatsApp, spreadsheets and attendance sheets?',
+      description:'A complete system for managing a dance studio: mobile attendance, a parents & students app, trial-class tracking, standing-order billing and reports — all synced in one place. Less paperwork, more time to dance.',
+      benefits:['Fast mobile attendance with student notes','Parents & students app with push updates','Trial-class tracking with automatic reminders','Standing-order billing and payment tracking'],
+      forWho:'Built 100% for dance studios — ballet, hip-hop, modern, jazz and every style.'
+    },
+    {
       slug:'rooms', image:'/solutions/rooms.webp', badge:'System',
       title:'Rooms & Halls Management',
       tagline:'Bookings, calendar & payments — no double-bookings',
@@ -295,6 +401,94 @@ export const en = {
 
   contactTitle:'Got a vision?\nLet\'s build it.',
   contactSub:'A short, clear plan\nwith timeline and pricing.',
+
+  studioClaimLabel:'Why us',
+  studioCubesTitle:'And that\'s not all — what the system does for you',
+  studioPricingTitle:'Plans to get the app',
+  studioScreensTitle:'A peek at screens from the app',
+  studioAppTodayTitle:'What\'s on today',
+  studioAppAlertsTitle:'Needs your attention',
+  studioLiveLabel:'Live preview',
+  studio:{
+    'dance-studio':{
+      pricingSlug:'classes',
+      badge:'System · for dance studios',
+      title:'Dance Studio\nManagement System',
+      tagline:'The only app in Israel built 100% for dance studios',
+      desc:'Run the whole studio in one place — mobile attendance, a parents & students app, trial-class tracking and standing-order billing. Less paperwork, fewer WhatsApp groups, more time to dance.',
+      claim:'The only app in Israel built 100% for dance studios!',
+      app:{
+        greeting:'Good morning — your studio at a glance ✨',
+        alerts:[
+          { icon:'🔥', text:'8 trial classes booked for today', tone:'good' },
+          { icon:'🎂', text:'2 birthdays this week', tone:'info' },
+          { icon:'💰', text:'3 students haven\'t paid yet', tone:'bad' },
+        ],
+        lessons:[
+          { time:'16:00', name:'Classical Ballet · ages 6–8', count:'15 students · 10 regular / 5 trial' },
+          { time:'17:00', name:'Hip-Hop · teens', count:'18 students · 14 regular / 4 trial' },
+          { time:'18:00', name:'Modern · advanced', count:'12 students · 11 regular / 1 trial' },
+          { time:'19:00', name:'Jazz · ages 10–12', count:'16 students · 13 regular / 3 trial' },
+          { time:'20:00', name:'Street-ballet · adults', count:'20 students · 17 regular / 3 trial' },
+        ],
+      },
+      features:[
+        { icon:'📲', title:'Fast mobile attendance', desc:'Teachers mark attendance in a second from their phone, and can add a personal note for each student.', quote:'No more paper sheets' },
+        { icon:'👨‍👩‍👧', title:'Parents & students app', desc:'Push updates, the timetable, sign-up for classes and workshops, and payment tracking — all in one place.', quote:'No more WhatsApp groups' },
+        { icon:'🎯', title:'Trial-class tracking', desc:'Sign-ups for trial classes via WhatsApp, automatic reminders before the class and smart conversion to a subscription.', quote:'No lead slips through' },
+        { icon:'💳', title:'Payment solutions', desc:'Standing-order billing, debt and payment tracking, and plan changes in a few clicks — no spreadsheets.', quote:'The money comes in on its own' },
+      ],
+      cubes:[
+        { icon:'🧑‍🏫', title:'Staff attendance', text:'Track teaching-staff hours and attendance — a clean basis for payroll and reports.' },
+        { icon:'🏛️', title:'Community-center integration', text:'Connects to the municipality and community-center registration & billing — no double entry.' },
+        { icon:'📊', title:'Real-time reports', text:'A full financial picture — revenue, debt and profitability per class and per branch.' },
+        { icon:'🗓️', title:'Timetable & rooms', text:'Schedule classes, teachers and rooms — no double-bookings or clashes.' },
+        { icon:'🎟️', title:'Workshops & events', text:'Open workshops, shows and one-off events with online sign-up and payment.' },
+        { icon:'⏳', title:'Waiting lists', text:'Class full? The system runs a waiting list and updates automatically when a spot opens.' },
+        { icon:'📣', title:'Bulk messages & push', text:'Send targeted messages to a group, a class or the whole studio — in one click.' },
+        { icon:'🧾', title:'Invoices & receipts', text:'Automatic tax invoice-receipt generation, emailed after every charge.' },
+      ],
+    },
+    'classes':{
+      pricingSlug:'classes',
+      badge:'System · classes management',
+      title:'Classes &\nActivities System',
+      tagline:'Every class in one place — attendance, parents, payments & reports',
+      desc:'A complete system for classes and activities: mobile attendance, a parents & students app, teacher and student management, billing and reports — all synced in one place. Saves hours every week.',
+      claim:'The system that runs all your classes end to end — no spreadsheets, no sticky notes',
+      app:{
+        greeting:'Good morning — all classes at a glance ✨',
+        alerts:[
+          { icon:'🔥', text:'8 trial classes booked for today', tone:'good' },
+          { icon:'🎂', text:'2 birthdays this week', tone:'info' },
+          { icon:'💰', text:'3 students haven\'t paid yet', tone:'bad' },
+        ],
+        lessons:[
+          { time:'16:00', name:'Ceramics · ages 8–10', count:'15 students · 10 regular / 5 trial' },
+          { time:'17:00', name:'Robotics · teens', count:'18 students · 14 regular / 4 trial' },
+          { time:'18:00', name:'Spoken English · advanced', count:'12 students · 11 regular / 1 trial' },
+          { time:'19:00', name:'Judo · ages 10–12', count:'16 students · 13 regular / 3 trial' },
+          { time:'20:00', name:'Science lab · seniors', count:'20 students · 17 regular / 3 trial' },
+        ],
+      },
+      features:[
+        { icon:'📲', title:'Fast mobile attendance', desc:'Teachers mark attendance in a second from their phone, and can add a personal note for each student.', quote:'No more paper sheets' },
+        { icon:'👨‍👩‍👧', title:'Parents & students app', desc:'Push updates, the timetable, sign-up for classes and workshops, and payment tracking — all in one place.', quote:'No more WhatsApp groups' },
+        { icon:'🎯', title:'Trial-class tracking', desc:'Sign-ups for trial classes via WhatsApp, automatic reminders before the class and smart conversion to a subscription.', quote:'No lead slips through' },
+        { icon:'💳', title:'Payment solutions', desc:'Standing-order billing, debt and payment tracking, and plan changes in a few clicks — no spreadsheets.', quote:'The money comes in on its own' },
+      ],
+      cubes:[
+        { icon:'🧑‍🏫', title:'Staff attendance', text:'Track teaching-staff hours and attendance — a clean basis for payroll and reports.' },
+        { icon:'🏛️', title:'Community-center integration', text:'Connects to the municipality and community-center registration & billing — no double entry.' },
+        { icon:'📊', title:'Real-time reports', text:'A full financial picture — revenue, debt and profitability per class and per branch.' },
+        { icon:'🗓️', title:'Timetable & rooms', text:'Schedule classes, teachers and rooms — no double-bookings or clashes.' },
+        { icon:'🎟️', title:'Workshops & events', text:'Open workshops and one-off events with online sign-up and payment.' },
+        { icon:'⏳', title:'Waiting lists', text:'Class full? The system runs a waiting list and updates automatically when a spot opens.' },
+        { icon:'📣', title:'Bulk messages & push', text:'Send targeted messages to a group, a class or the whole organization — in one click.' },
+        { icon:'🧾', title:'Invoices & receipts', text:'Automatic tax invoice-receipt generation, emailed after every charge.' },
+      ],
+    },
+  },
 
   pricingEyebrow:'Pricing',
   pricingCustomTitle:'Custom pricing',

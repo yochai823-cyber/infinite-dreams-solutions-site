@@ -41,7 +41,7 @@ function PlanCard({ plan, cta }){
     : inner
 }
 
-export default function SolutionPricing({ d, locale = 'he', slug }){
+export default function SolutionPricing({ d, locale = 'he', slug, heading }){
   const he = locale === 'he'
   const data = d.pricing?.[slug]
   if (!data) return null
@@ -52,7 +52,7 @@ export default function SolutionPricing({ d, locale = 'he', slug }){
         <div className="max-w-2xl mx-auto text-center mb-12 reveal">
           <span className="eyebrow">{d.pricingEyebrow}</span>
           <h2 className="display mt-4 text-3xl md:text-4xl text-[var(--text)]">
-            {data.custom ? d.pricingCustomTitle : data.heading}
+            {data.custom ? d.pricingCustomTitle : (heading || data.heading)}
           </h2>
         </div>
 

@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { he } from '../../../../dict'
 import SolutionLanding from '../../../../components/SolutionLanding'
+import StudioLanding from '../../../../components/StudioLanding'
 
 const SITE = 'https://www.infinite-dreams-solutions.co.il'
 
@@ -33,5 +34,7 @@ export default async function Page({ params }){
   const { slug } = await params
   const s = he.solutions.find((x) => x.slug === slug)
   if (!s) notFound()
+  const studio = he.studio?.[slug]
+  if (studio) return <StudioLanding d={he} locale="he" solution={s} content={studio} />
   return <SolutionLanding d={he} locale="he" solution={s} />
 }
