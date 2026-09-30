@@ -245,7 +245,7 @@ export const he = {
     },
     'whatsapp-ai':{
       heading:'מסלולים למזכירת ה-AI',
-      note:'כל המחירים לחודש · אינם כוללים מע״מ (יתווסף כחוק) · הודעות ואטסאפ יזומות משולמות ישירות ל-Meta לפי התעריף שלהם',
+      note:'7 ימי ניסיון חינם: מזינים כרטיס בהרשמה, והחיוב הראשון רק ביום ה-8 (אפשר לבטל לפני בלי לשלם) · כל המחירים לחודש · אינם כוללים מע״מ (יתווסף כחוק) · הודעות ואטסאפ יזומות משולמות ישירות ל-Meta לפי התעריף שלהם',
       plans:[
         { name:'עסק קטן', price:'₪349', period:'/ חודש + מע״מ', priceSub:'₪412 כולל מע״מ', sub:'',
           features:['500 יחידות AI בחודש','לידים והעברה לנציג','עד 2 משתמשים','סניף אחד'] },
@@ -517,7 +517,7 @@ export const en = {
     },
     'whatsapp-ai':{
       heading:'AI secretary plans',
-      note:'All prices per month · VAT not included (added as required) · proactive WhatsApp messages are paid directly to Meta at their rate',
+      note:'7-day free trial: a card is required at signup and the first charge is on day 8 (cancel before, pay nothing) · All prices per month · VAT not included (added as required) · proactive WhatsApp messages are paid directly to Meta at their rate',
       plans:[
         { name:'Small business', price:'₪349', period:'/ mo + VAT', priceSub:'₪412 incl. VAT', sub:'',
           features:['500 AI units / month','Leads & hand-off to an agent','Up to 2 users','One branch'] },
