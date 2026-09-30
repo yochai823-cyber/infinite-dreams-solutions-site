@@ -147,6 +147,7 @@ export const he = {
       tagline:'האפליקציה היחידה בישראל שמותאמת לסטודיו לריקוד — ב-100%',
       desc:'ניהול מלא של הסטודיו במקום אחד — נוכחות מהנייד, אפליקציה להורים ולתלמידים, מעקב שיעורי ניסיון וגבייה בהוראת קבע. פחות ניירת, פחות וואטסאפים, יותר זמן לרקוד.',
       claim:'האפליקציה היחידה בישראל שמותאמת לסטודיו לריקוד ב-100%!',
+      claimImage:'/solutions/dance-hero.webp',
       app:{
         greeting:'בוקר טוב, סטודיו במבט אחד ✨',
         alerts:[
@@ -419,6 +420,7 @@ export const en = {
       tagline:'The only app in Israel built 100% for dance studios',
       desc:'Run the whole studio in one place — mobile attendance, a parents & students app, trial-class tracking and standing-order billing. Less paperwork, fewer WhatsApp groups, more time to dance.',
       claim:'The only app in Israel built 100% for dance studios!',
+      claimImage:'/solutions/dance-hero.webp',
       app:{
         greeting:'Good morning — your studio at a glance ✨',
         alerts:[

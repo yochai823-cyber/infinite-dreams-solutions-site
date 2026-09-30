@@ -155,14 +155,27 @@ export default function StudioLanding({ d, locale = 'he', solution, content }){
       </section>
 
       {/* Claim band */}
-      <section className="py-12 md:py-16 relative overflow-hidden text-center">
-        <div className="absolute inset-0 -z-10 aurora-dark" />
-        <div className="container-page">
-          <p className="display text-2xl md:text-4xl text-white max-w-4xl mx-auto leading-tight reveal">
-            {content.claim}
-          </p>
-        </div>
-      </section>
+      {content.claimImage ? (
+        <section className="relative overflow-hidden min-h-[380px] md:min-h-[460px] flex items-center">
+          <img src={content.claimImage} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover object-[right_center]" />
+          <div className="absolute inset-0" style={{ background:'linear-gradient(90deg, rgba(15,9,26,.92) 0%, rgba(15,9,26,.78) 40%, rgba(15,9,26,.45) 68%, rgba(15,9,26,.12) 88%, transparent 100%)' }} />
+          <div className="absolute inset-0 md:hidden" style={{ background:'rgba(15,9,26,.32)' }} />
+          <div className="relative container-page w-full">
+            <div className="max-w-lg ms-auto reveal">
+              <p className="display text-3xl md:text-5xl text-white leading-tight" style={{ textShadow:'0 2px 16px rgba(0,0,0,.55)' }}>{content.claim}</p>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className="py-12 md:py-16 relative overflow-hidden text-center">
+          <div className="absolute inset-0 -z-10 aurora-dark" />
+          <div className="container-page">
+            <p className="display text-2xl md:text-4xl text-white max-w-4xl mx-auto leading-tight reveal">
+              {content.claim}
+            </p>
+          </div>
+        </section>
+      )}
 
       {/* Feature blocks */}
       <section className="py-16 md:py-24 bg-[var(--surface)] border-b border-[var(--border)]">
