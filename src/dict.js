@@ -240,21 +240,19 @@ export const he = {
   pricingSave:'חסכו ~13% בתשלום שנתי',
   pricingBilledAnnual:'בתשלום שנתי',
   pricingBilledMonthly:'בתשלום חודשי',
+  pricingAllInclude:'כל המסלולים כוללים את אותן היכולות — ההבדל הוא רק בכמות',
   pricing:{
     'classes':{
       heading:'מחירון לפי גודל הארגון',
       billing:true,
       trialUrl:'', // TODO: classes/studio 7-day free-trial signup link (pending from user) — fill to enable the free-trial button
       note:'מחיר שנתי מחויב מראש לשנה · כל המחירים אינם כוללים מע״מ · אפשר לשדרג בכל עת',
+      sharedFeatures:['ניהול חוגים, נוכחות ותלמידים','ניהול מורים ומערכת שעות','פורטל ואפליקציה להורים','סליקה מקוונת + קבלות','דוחות כספיים מתקדמים','אירועים, סדנאות והודעות','עוזר AI חכם מובנה'],
       plans:[
-        { name:'סטודיו', sub:'עד 400 משתתפים · תחום / סניף אחד', priceMonthly:'₪459', priceAnnual:'₪399',
-          features:['ניהול חוגים, נוכחות ותלמידים','סליקה מקוונת + קבלות','פורטל הורים (Hub)','עוזר AI חכם מובנה'] },
-        { name:'מרכז', sub:'עד 1,000 משתתפים · עד 4 תחומים/סניפים', priceMonthly:'₪990', priceAnnual:'₪860',
-          features:['כל מה שבמסלול סטודיו','עד 4 תחומים / סניפים','דוחות כספיים מתקדמים','עוזר AI חכם מובנה'] },
-        { name:'מתנ״ס', sub:'עד 4,000 משתתפים · עד 5 תחומים/סניפים', priceMonthly:'₪1,790', priceAnnual:'₪1,550',
-          features:['כל מה שבמסלול מרכז','עד 5 תחומים / סניפים','תמיכה וליווי מועדף'] },
-        { name:'רשתות וארגונים', sub:'משתתפים וסניפים ללא הגבלה', quote:true, price:'הצעת מחיר',
-          features:['ללא הגבלת משתתפים','ללא הגבלת סניפים','התאמה אישית וליווי צמוד'] },
+        { name:'סטודיו', members:'עד 400 משתתפים', scope:'תחום / סניף אחד', priceMonthly:'₪459', priceAnnual:'₪399' },
+        { name:'מרכז', members:'עד 1,000 משתתפים', scope:'עד 4 תחומים / סניפים', priceMonthly:'₪990', priceAnnual:'₪860' },
+        { name:'מתנ״ס', members:'עד 4,000 משתתפים', scope:'עד 5 תחומים / סניפים', priceMonthly:'₪1,790', priceAnnual:'₪1,550' },
+        { name:'רשתות וארגונים', members:'משתתפים ללא הגבלה', scope:'סניפים ללא הגבלה', quote:true, price:'הצעת מחיר' },
       ],
     },
     'whatsapp-ai':{
@@ -528,21 +526,19 @@ export const en = {
   pricingSave:'Save ~13% paying annually',
   pricingBilledAnnual:'billed annually',
   pricingBilledMonthly:'billed monthly',
+  pricingAllInclude:'Every plan includes the same capabilities — only the volume differs',
   pricing:{
     'classes':{
       heading:'Pricing by organization size',
       billing:true,
       trialUrl:'', // TODO: classes/studio 7-day free-trial signup link (pending from user) — fill to enable the free-trial button
       note:'Annual plans are billed upfront for the year · all prices exclude VAT · upgrade anytime',
+      sharedFeatures:['Classes, attendance & students','Teacher management & timetable','Parents portal & app','Online payments + receipts','Advanced financial reports','Events, workshops & messages','Built-in smart AI assistant'],
       plans:[
-        { name:'Studio', sub:'Up to 400 members · one track / branch', priceMonthly:'₪459', priceAnnual:'₪399',
-          features:['Classes, attendance & students','Online payments + receipts','Parents portal (Hub)','Built-in smart AI assistant'] },
-        { name:'Center', sub:'Up to 1,000 members · up to 4 tracks/branches', priceMonthly:'₪990', priceAnnual:'₪860',
-          features:['Everything in Studio','Up to 4 tracks / branches','Advanced financial reports','Built-in smart AI assistant'] },
-        { name:'Community center', sub:'Up to 4,000 members · up to 5 tracks/branches', priceMonthly:'₪1,790', priceAnnual:'₪1,550',
-          features:['Everything in Center','Up to 5 tracks / branches','Priority support & onboarding'] },
-        { name:'Networks & orgs', sub:'Unlimited members & branches', quote:true, price:'Custom quote',
-          features:['Unlimited members','Unlimited branches','Tailored setup & dedicated support'] },
+        { name:'Studio', members:'Up to 400 members', scope:'One track / branch', priceMonthly:'₪459', priceAnnual:'₪399' },
+        { name:'Center', members:'Up to 1,000 members', scope:'Up to 4 tracks / branches', priceMonthly:'₪990', priceAnnual:'₪860' },
+        { name:'Community center', members:'Up to 4,000 members', scope:'Up to 5 tracks / branches', priceMonthly:'₪1,790', priceAnnual:'₪1,550' },
+        { name:'Networks & orgs', members:'Unlimited members', scope:'Unlimited branches', quote:true, price:'Custom quote' },
       ],
     },
     'whatsapp-ai':{

@@ -34,13 +34,30 @@ function PlanCard({ plan, billing, period, billedLabel, recommend, popularLabel 
         {showPeriod && <span className="text-[13px] text-[var(--muted)]">{showPeriod}</span>}
       </div>
       {priceSub && <div className="text-[11px] text-[var(--faint)] mt-0.5">{priceSub}</div>}
-      <ul className="mt-5 space-y-2.5">
-        {plan.features.map((f,i)=>(
-          <li key={i} className="flex items-start gap-2 text-[13.5px] text-[var(--text)] leading-snug">
-            <Check />{f}
-          </li>
-        ))}
-      </ul>
+      {plan.features ? (
+        <ul className="mt-5 space-y-2.5">
+          {plan.features.map((f,i)=>(
+            <li key={i} className="flex items-start gap-2 text-[13.5px] text-[var(--text)] leading-snug">
+              <Check />{f}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="mt-5 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] p-3.5 space-y-2.5">
+          {plan.members && (
+            <div className="flex items-center gap-2 text-[14px] font-bold text-[var(--text)]">
+              <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0 text-grad" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              {plan.members}
+            </div>
+          )}
+          {plan.scope && (
+            <div className="flex items-center gap-2 text-[14px] font-bold text-[var(--text)]">
+              <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0 text-grad" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+              {plan.scope}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
   return popular
@@ -96,6 +113,19 @@ export default function SolutionPricing({ d, locale = 'he', slug, heading, recom
                 <PlanCard key={i} plan={plan} billing={billing} period={d.pricingPerMonth} billedLabel={billedLabel} recommend={recommend} popularLabel={d.pricingPopular} />
               ))}
             </div>
+
+            {data.sharedFeatures && (
+              <div className="mt-8 max-w-4xl mx-auto reveal">
+                <p className="text-center text-[14px] font-bold text-[var(--text)] mb-4">✨ {d.pricingAllInclude}</p>
+                <div className="flex flex-wrap justify-center gap-2.5">
+                  {data.sharedFeatures.map((f,i)=>(
+                    <span key={i} className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[var(--text)] bg-[var(--surface)] border border-[var(--border)] rounded-full ps-2.5 pe-3 py-1.5">
+                      <Check />{f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* single call to action below the info cards */}
             <div className="mt-10 text-center reveal">
