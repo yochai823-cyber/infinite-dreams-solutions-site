@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { openContact } from './contactBus'
 
 function Check(){
@@ -10,9 +11,14 @@ function Check(){
   )
 }
 
-/* Info-only plan card (no button — a single trial CTA lives below the grid) */
-function PlanCard({ plan }){
+/* Info-only plan card (no button — a single CTA lives below the grid) */
+function PlanCard({ plan, billing, period, billedLabel }){
   const popular = !!plan.badge
+  const isRange = !!plan.priceMonthly
+  const price = isRange ? (billing === 'annual' ? plan.priceAnnual : plan.priceMonthly) : plan.price
+  const showPeriod = !plan.quote && (isRange ? period : plan.period)
+  const priceSub = isRange ? billedLabel : plan.priceSub
+
   const inner = (
     <div className={`h-full flex flex-col rounded-[1.1rem] p-6 ${popular ? 'bg-[var(--surface)]' : 'bg-[var(--surface)] border border-[var(--border)]'}`}>
       {popular && (
@@ -23,10 +29,10 @@ function PlanCard({ plan }){
       <div className="text-lg font-extrabold text-[var(--text)]">{plan.name}</div>
       {plan.sub && <div className="text-[12px] text-[var(--muted)] mt-1 leading-snug">{plan.sub}</div>}
       <div className="mt-4 flex items-baseline gap-1.5">
-        <span className="text-4xl font-black text-grad force-ltr">{plan.price}</span>
-        <span className="text-[13px] text-[var(--muted)]">{plan.period}</span>
+        <span className={`font-black text-grad force-ltr ${plan.quote ? 'text-2xl' : 'text-4xl'}`}>{price}</span>
+        {showPeriod && <span className="text-[13px] text-[var(--muted)]">{showPeriod}</span>}
       </div>
-      {plan.priceSub && <div className="text-[11px] text-[var(--faint)] mt-0.5">{plan.priceSub}</div>}
+      {priceSub && <div className="text-[11px] text-[var(--faint)] mt-0.5">{priceSub}</div>}
       <ul className="mt-5 space-y-2.5">
         {plan.features.map((f,i)=>(
           <li key={i} className="flex items-start gap-2 text-[13.5px] text-[var(--text)] leading-snug">
@@ -44,12 +50,15 @@ function PlanCard({ plan }){
 export default function SolutionPricing({ d, locale = 'he', slug, heading }){
   const he = locale === 'he'
   const data = d.pricing?.[slug]
+  const [billing, setBilling] = useState('annual')
   if (!data) return null
+
+  const billedLabel = billing === 'annual' ? d.pricingBilledAnnual : d.pricingBilledMonthly
 
   return (
     <section className="py-16 md:py-24 bg-[var(--surface-2)] border-t border-[var(--border)]">
       <div className="container-page">
-        <div className="max-w-2xl mx-auto text-center mb-12 reveal">
+        <div className="max-w-2xl mx-auto text-center mb-10 reveal">
           <span className="eyebrow">{d.pricingEyebrow}</span>
           <h2 className="display mt-4 text-3xl md:text-4xl text-[var(--text)]">
             {data.custom ? d.pricingCustomTitle : (heading || data.heading)}
@@ -58,6 +67,16 @@ export default function SolutionPricing({ d, locale = 'he', slug, heading }){
             <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
               🎁 {data.trial}
             </span>
+          )}
+
+          {data.billing && !data.custom && (
+            <div className="mt-6 flex flex-col items-center gap-2">
+              <div className="inline-flex items-center p-1 rounded-full bg-[var(--surface)] border border-[var(--border)]">
+                <button onClick={()=>setBilling('annual')} className={`text-[13px] font-semibold px-4 py-1.5 rounded-full transition-colors ${billing==='annual'?'text-white':'text-[var(--muted)]'}`} style={billing==='annual'?{background:'var(--grad)'}:undefined}>{d.pricingAnnual}</button>
+                <button onClick={()=>setBilling('monthly')} className={`text-[13px] font-semibold px-4 py-1.5 rounded-full transition-colors ${billing==='monthly'?'text-white':'text-[var(--muted)]'}`} style={billing==='monthly'?{background:'var(--grad)'}:undefined}>{d.pricingMonthly}</button>
+              </div>
+              <span className="text-[12px] font-semibold text-emerald-600">{d.pricingSave}</span>
+            </div>
           )}
         </div>
 
@@ -73,7 +92,7 @@ export default function SolutionPricing({ d, locale = 'he', slug, heading }){
           <>
             <div className={`grid gap-5 sm:grid-cols-2 ${data.plans.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} items-stretch max-w-6xl mx-auto reveal`}>
               {data.plans.map((plan,i)=>(
-                <PlanCard key={i} plan={plan} />
+                <PlanCard key={i} plan={plan} billing={billing} period={d.pricingPerMonth} billedLabel={billedLabel} />
               ))}
             </div>
 

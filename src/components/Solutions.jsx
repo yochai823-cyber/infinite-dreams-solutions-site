@@ -4,6 +4,8 @@ import Link from 'next/link'
 
 export default function Solutions({ d, locale = 'he' }){
   const he = locale === 'he'
+  const main = d.solutions.filter((s) => s.slug !== 'dance-studio')
+  const dance = d.solutions.find((s) => s.slug === 'dance-studio')
   return (
     <section id="solutions" className="py-20 md:py-28 scroll-mt-24">
       <div className="container-page">
@@ -14,7 +16,7 @@ export default function Solutions({ d, locale = 'he' }){
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {d.solutions.map((s, i) => (
+          {main.map((s, i) => (
             <Link
               key={s.slug}
               href={`/${locale}/solutions/${s.slug}`}
@@ -40,6 +42,38 @@ export default function Solutions({ d, locale = 'he' }){
             </Link>
           ))}
         </div>
+
+        {/* Special feature: dance-studio (round, below the four cards) */}
+        {dance && (
+          <div className="mt-8 md:mt-10 reveal">
+            <Link
+              href={`/${locale}/solutions/${dance.slug}`}
+              className="group relative block max-w-3xl mx-auto overflow-hidden rounded-[var(--radius-xl)] border border-[var(--border)] shadow-[var(--shadow-md)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lg)]"
+            >
+              <div className="absolute inset-0 -z-10" style={{ background:'var(--grad-soft)' }} />
+              <div className="flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8">
+                <div className="relative shrink-0">
+                  <div className="absolute -inset-2 rounded-full opacity-60 blur-xl" style={{ background:'var(--grad)' }} />
+                  <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full p-[3px]" style={{ background:'var(--grad)' }}>
+                    <img src={dance.image} alt={dance.title} loading="lazy" className="w-full h-full rounded-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                </div>
+                <div className="text-center sm:text-start">
+                  <span className="eyebrow !mt-0">
+                    <span className="w-2 h-2 rounded-full" style={{ background:'var(--grad)' }} />
+                    {he ? 'מיוחד · לסטודיו לריקוד' : 'Special · for dance studios'}
+                  </span>
+                  <h3 className="mt-3 display text-2xl md:text-3xl text-[var(--text)] whitespace-pre-line">{dance.title}</h3>
+                  <p className="mt-2 text-[var(--muted)] leading-relaxed">{dance.tagline}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold text-grad">
+                    {d.solutionsCta}
+                    <svg viewBox="0 0 24 24" className="w-4 h-4 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d={he ? 'M11 5l-7 7 7 7' : 'M13 5l7 7-7 7'}/><path d={he ? 'M4 12h16' : 'M20 12H4'}/></svg>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   )
