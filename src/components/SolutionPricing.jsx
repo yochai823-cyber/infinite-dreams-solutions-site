@@ -10,8 +10,9 @@ function Check(){
   )
 }
 
-function PlanCard({ plan, cta }){
+function PlanCard({ plan, cta, buyUrl, buyLabel }){
   const popular = !!plan.badge
+  const btnClass = `mt-6 w-full ${popular ? 'btn btn-primary' : 'btn btn-ghost'}`
   const inner = (
     <div className={`h-full flex flex-col rounded-[1.1rem] p-6 ${popular ? 'bg-[var(--surface)]' : 'bg-[var(--surface)] border border-[var(--border)]'}`}>
       {popular && (
@@ -33,7 +34,9 @@ function PlanCard({ plan, cta }){
           </li>
         ))}
       </ul>
-      <button onClick={openContact} className={`mt-6 w-full ${popular ? 'btn btn-primary' : 'btn btn-ghost'}`}>{cta}</button>
+      {buyUrl
+        ? <a href={buyUrl} target="_blank" rel="noopener noreferrer" className={btnClass}>{buyLabel}</a>
+        : <button onClick={openContact} className={btnClass}>{cta}</button>}
     </div>
   )
   return popular
@@ -54,6 +57,11 @@ export default function SolutionPricing({ d, locale = 'he', slug, heading }){
           <h2 className="display mt-4 text-3xl md:text-4xl text-[var(--text)]">
             {data.custom ? d.pricingCustomTitle : (heading || data.heading)}
           </h2>
+          {data.trial && (
+            <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+              🎁 {data.trial}
+            </span>
+          )}
         </div>
 
         {data.custom ? (
@@ -68,7 +76,7 @@ export default function SolutionPricing({ d, locale = 'he', slug, heading }){
           <>
             <div className={`grid gap-5 sm:grid-cols-2 ${data.plans.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} items-stretch max-w-6xl mx-auto reveal`}>
               {data.plans.map((plan,i)=>(
-                <PlanCard key={i} plan={plan} cta={d.pricingCta} />
+                <PlanCard key={i} plan={plan} cta={d.pricingCta} buyUrl={data.buyUrl} buyLabel={d.pricingBuy} />
               ))}
             </div>
             {data.note && (
