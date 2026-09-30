@@ -218,7 +218,7 @@ export default function StudioLanding({ d, locale = 'he', solution, content }){
       </section>
 
       {/* Pricing */}
-      <SolutionPricing d={d} locale={locale} slug={content.pricingSlug} heading={d.studioPricingTitle} />
+      <SolutionPricing d={d} locale={locale} slug={content.pricingSlug} heading={d.studioPricingTitle} recommend={content.recommend} />
 
       <FinalCTA d={d} locale={locale} />
       <Footer d={d} locale={locale} />

@@ -142,6 +142,7 @@ export const he = {
   studio:{
     'dance-studio':{
       pricingSlug:'classes',
+      recommend:'סטודיו',
       badge:'מערכת · לסטודיו לריקוד',
       title:'מערכת לניהול\nסטודיו לריקוד',
       tagline:'האפליקציה היחידה בישראל שמותאמת לסטודיו לריקוד — ב-100%',
@@ -184,6 +185,7 @@ export const he = {
       pricingSlug:'classes',
       heroVideo:'/solutions/video/classes-promo.mp4',
       heroPoster:'/solutions/video/classes-promo.jpg',
+      recommend:'מתנ״ס',
       badge:'מערכת · לניהול חוגים',
       title:'מערכת לניהול\nחוגים ופעילויות',
       tagline:'כל החוגים במקום אחד — נוכחות, הורים, תשלומים ודוחות',
@@ -247,7 +249,7 @@ export const he = {
       plans:[
         { name:'סטודיו', sub:'עד 400 משתתפים · תחום / סניף אחד', priceMonthly:'₪459', priceAnnual:'₪399',
           features:['ניהול חוגים, נוכחות ותלמידים','סליקה מקוונת + קבלות','פורטל הורים (Hub)','עוזר AI חכם מובנה'] },
-        { name:'מרכז', badge:'הכי פופולרי', sub:'עד 1,000 משתתפים · עד 4 תחומים/סניפים', priceMonthly:'₪990', priceAnnual:'₪860',
+        { name:'מרכז', sub:'עד 1,000 משתתפים · עד 4 תחומים/סניפים', priceMonthly:'₪990', priceAnnual:'₪860',
           features:['כל מה שבמסלול סטודיו','עד 4 תחומים / סניפים','דוחות כספיים מתקדמים','עוזר AI חכם מובנה'] },
         { name:'מתנ״ס', sub:'עד 4,000 משתתפים · עד 5 תחומים/סניפים', priceMonthly:'₪1,790', priceAnnual:'₪1,550',
           features:['כל מה שבמסלול מרכז','עד 5 תחומים / סניפים','תמיכה וליווי מועדף'] },
@@ -428,6 +430,7 @@ export const en = {
   studio:{
     'dance-studio':{
       pricingSlug:'classes',
+      recommend:'Studio',
       badge:'System · for dance studios',
       title:'Dance Studio\nManagement System',
       tagline:'The only app in Israel built 100% for dance studios',
@@ -470,6 +473,7 @@ export const en = {
       pricingSlug:'classes',
       heroVideo:'/solutions/video/classes-promo.mp4',
       heroPoster:'/solutions/video/classes-promo.jpg',
+      recommend:'Community center',
       badge:'System · classes management',
       title:'Classes &\nActivities System',
       tagline:'Every class in one place — attendance, parents, payments & reports',
@@ -533,7 +537,7 @@ export const en = {
       plans:[
         { name:'Studio', sub:'Up to 400 members · one track / branch', priceMonthly:'₪459', priceAnnual:'₪399',
           features:['Classes, attendance & students','Online payments + receipts','Parents portal (Hub)','Built-in smart AI assistant'] },
-        { name:'Center', badge:'Most popular', sub:'Up to 1,000 members · up to 4 tracks/branches', priceMonthly:'₪990', priceAnnual:'₪860',
+        { name:'Center', sub:'Up to 1,000 members · up to 4 tracks/branches', priceMonthly:'₪990', priceAnnual:'₪860',
           features:['Everything in Studio','Up to 4 tracks / branches','Advanced financial reports','Built-in smart AI assistant'] },
         { name:'Community center', sub:'Up to 4,000 members · up to 5 tracks/branches', priceMonthly:'₪1,790', priceAnnual:'₪1,550',
           features:['Everything in Center','Up to 5 tracks / branches','Priority support & onboarding'] },

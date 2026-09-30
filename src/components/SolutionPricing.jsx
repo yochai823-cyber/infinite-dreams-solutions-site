@@ -12,8 +12,9 @@ function Check(){
 }
 
 /* Info-only plan card (no button — a single CTA lives below the grid) */
-function PlanCard({ plan, billing, period, billedLabel }){
-  const popular = !!plan.badge
+function PlanCard({ plan, billing, period, billedLabel, recommend, popularLabel }){
+  const popular = recommend ? (plan.name === recommend) : !!plan.badge
+  const badgeText = plan.badge || popularLabel
   const isRange = !!plan.priceMonthly
   const price = isRange ? (billing === 'annual' ? plan.priceAnnual : plan.priceMonthly) : plan.price
   const showPeriod = !plan.quote && (isRange ? period : plan.period)
@@ -23,7 +24,7 @@ function PlanCard({ plan, billing, period, billedLabel }){
     <div className={`h-full flex flex-col rounded-[1.1rem] p-6 ${popular ? 'bg-[var(--surface)]' : 'bg-[var(--surface)] border border-[var(--border)]'}`}>
       {popular && (
         <span className="self-center -mt-9 mb-3 text-[11px] font-bold text-white px-3 py-1 rounded-full shadow" style={{ background:'var(--grad)' }}>
-          {plan.badge}
+          {badgeText}
         </span>
       )}
       <div className="text-lg font-extrabold text-[var(--text)]">{plan.name}</div>
@@ -47,7 +48,7 @@ function PlanCard({ plan, billing, period, billedLabel }){
     : inner
 }
 
-export default function SolutionPricing({ d, locale = 'he', slug, heading }){
+export default function SolutionPricing({ d, locale = 'he', slug, heading, recommend }){
   const he = locale === 'he'
   const data = d.pricing?.[slug]
   const [billing, setBilling] = useState('annual')
@@ -92,7 +93,7 @@ export default function SolutionPricing({ d, locale = 'he', slug, heading }){
           <>
             <div className={`grid gap-5 sm:grid-cols-2 ${data.plans.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} items-stretch max-w-6xl mx-auto reveal`}>
               {data.plans.map((plan,i)=>(
-                <PlanCard key={i} plan={plan} billing={billing} period={d.pricingPerMonth} billedLabel={billedLabel} />
+                <PlanCard key={i} plan={plan} billing={billing} period={d.pricingPerMonth} billedLabel={billedLabel} recommend={recommend} popularLabel={d.pricingPopular} />
               ))}
             </div>
 
