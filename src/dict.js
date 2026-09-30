@@ -168,7 +168,7 @@ export const he = {
         { icon:'📲', title:'דיווח נוכחות מהיר מהנייד', desc:'המורה מסמן/ת נוכחות בשנייה ישירות מהמכשיר, עם אפשרות להוסיף הערות אישיות לכל תלמיד/ה.', quote:'אין צורך יותר בדפים' },
         { icon:'👨‍👩‍👧', title:'אפליקציה להורים ולתלמידים', desc:'עדכוני פוש לנייד, צפייה במערכת השעות, הרשמה לחוגים וסדנאות ומעקב אחרי תשלומים — הכל במקום אחד.', quote:'אין צורך יותר בקבוצות וואטסאפ' },
         { icon:'🎯', title:'מעקב אחרי שיעורי ניסיון', desc:'רישום לשיעורי ניסיון דרך וואטסאפ, תזכורות אוטומטיות לפני השיעור והמרה חכמה למנוי קבוע.', quote:'אף ליד לא נופל בדרך' },
-        { icon:'💳', title:'פתרונות תשלום', desc:'גבייה בהוראת קבע, מעקב על חובות ותשלומים ושינוי מסלול בכמה קליקים — בלי אקסלים.', quote:'הכסף נכנס לבד' },
+        { icon:'💳', title:'ניהול תשלומים וגבייה', desc:'מתחברים לסליקה הקיימת שלכם, גובים בהוראת קבע ועוקבים אחרי חובות ותשלומים — בלי אקסלים.', quote:'הכסף נכנס לבד' },
       ],
       cubes:[
         { icon:'🧑‍🏫', title:'נוכחות מורים ועובדים', text:'דיווח שעות ונוכחות של צוות ההוראה — בסיס מסודר לשכר ולדוחות.' },
@@ -210,7 +210,7 @@ export const he = {
         { icon:'📲', title:'דיווח נוכחות מהיר מהנייד', desc:'המורה מסמן/ת נוכחות בשנייה ישירות מהמכשיר, עם אפשרות להוסיף הערות אישיות לכל תלמיד/ה.', quote:'אין צורך יותר בדפים' },
         { icon:'👨‍👩‍👧', title:'אפליקציה להורים ולתלמידים', desc:'עדכוני פוש לנייד, צפייה במערכת השעות, הרשמה לחוגים וסדנאות ומעקב אחרי תשלומים — הכל במקום אחד.', quote:'אין צורך יותר בקבוצות וואטסאפ' },
         { icon:'🎯', title:'מעקב אחרי שיעורי ניסיון', desc:'רישום לשיעורי ניסיון דרך וואטסאפ, תזכורות אוטומטיות לפני השיעור והמרה חכמה למנוי קבוע.', quote:'אף ליד לא נופל בדרך' },
-        { icon:'💳', title:'פתרונות תשלום', desc:'גבייה בהוראת קבע, מעקב על חובות ותשלומים ושינוי מסלול בכמה קליקים — בלי אקסלים.', quote:'הכסף נכנס לבד' },
+        { icon:'💳', title:'ניהול תשלומים וגבייה', desc:'מתחברים לסליקה הקיימת שלכם, גובים בהוראת קבע ועוקבים אחרי חובות ותשלומים — בלי אקסלים.', quote:'הכסף נכנס לבד' },
       ],
       cubes:[
         { icon:'🧑‍🏫', title:'נוכחות מורים ועובדים', text:'דיווח שעות ונוכחות של צוות ההוראה — בסיס מסודר לשכר ולדוחות.' },
@@ -247,7 +247,7 @@ export const he = {
       billing:true,
       trialUrl:'', // TODO: classes/studio 7-day free-trial signup link (pending from user) — fill to enable the free-trial button
       note:'מחיר שנתי מחויב מראש לשנה · כל המחירים אינם כוללים מע״מ · אפשר לשדרג בכל עת',
-      sharedFeatures:['ניהול חוגים, נוכחות ותלמידים','ניהול מורים ומערכת שעות','פורטל ואפליקציה להורים','סליקה מקוונת + קבלות','דוחות כספיים מתקדמים','אירועים, סדנאות והודעות','עוזר AI חכם מובנה'],
+      sharedFeatures:['ניהול חוגים, נוכחות ותלמידים','ניהול מורים ומערכת שעות','פורטל ואפליקציה להורים','דוחות כספיים מתקדמים','אירועים, סדנאות והודעות','עוזר AI חכם מובנה'],
       plans:[
         { name:'סטודיו', members:'עד 400 משתתפים', scope:'תחום / סניף אחד', priceMonthly:'₪459', priceAnnual:'₪399' },
         { name:'מרכז', members:'עד 1,000 משתתפים', scope:'עד 4 תחומים / סניפים', priceMonthly:'₪990', priceAnnual:'₪860' },
@@ -454,7 +454,7 @@ export const en = {
         { icon:'📲', title:'Fast mobile attendance', desc:'Teachers mark attendance in a second from their phone, and can add a personal note for each student.', quote:'No more paper sheets' },
         { icon:'👨‍👩‍👧', title:'Parents & students app', desc:'Push updates, the timetable, sign-up for classes and workshops, and payment tracking — all in one place.', quote:'No more WhatsApp groups' },
         { icon:'🎯', title:'Trial-class tracking', desc:'Sign-ups for trial classes via WhatsApp, automatic reminders before the class and smart conversion to a subscription.', quote:'No lead slips through' },
-        { icon:'💳', title:'Payment solutions', desc:'Standing-order billing, debt and payment tracking, and plan changes in a few clicks — no spreadsheets.', quote:'The money comes in on its own' },
+        { icon:'💳', title:'Payments & billing', desc:'Connects to your existing payment provider, runs standing-order billing and tracks debts and payments — no spreadsheets.', quote:'The money comes in on its own' },
       ],
       cubes:[
         { icon:'🧑‍🏫', title:'Staff attendance', text:'Track teaching-staff hours and attendance — a clean basis for payroll and reports.' },
@@ -496,7 +496,7 @@ export const en = {
         { icon:'📲', title:'Fast mobile attendance', desc:'Teachers mark attendance in a second from their phone, and can add a personal note for each student.', quote:'No more paper sheets' },
         { icon:'👨‍👩‍👧', title:'Parents & students app', desc:'Push updates, the timetable, sign-up for classes and workshops, and payment tracking — all in one place.', quote:'No more WhatsApp groups' },
         { icon:'🎯', title:'Trial-class tracking', desc:'Sign-ups for trial classes via WhatsApp, automatic reminders before the class and smart conversion to a subscription.', quote:'No lead slips through' },
-        { icon:'💳', title:'Payment solutions', desc:'Standing-order billing, debt and payment tracking, and plan changes in a few clicks — no spreadsheets.', quote:'The money comes in on its own' },
+        { icon:'💳', title:'Payments & billing', desc:'Connects to your existing payment provider, runs standing-order billing and tracks debts and payments — no spreadsheets.', quote:'The money comes in on its own' },
       ],
       cubes:[
         { icon:'🧑‍🏫', title:'Staff attendance', text:'Track teaching-staff hours and attendance — a clean basis for payroll and reports.' },
@@ -533,7 +533,7 @@ export const en = {
       billing:true,
       trialUrl:'', // TODO: classes/studio 7-day free-trial signup link (pending from user) — fill to enable the free-trial button
       note:'Annual plans are billed upfront for the year · all prices exclude VAT · upgrade anytime',
-      sharedFeatures:['Classes, attendance & students','Teacher management & timetable','Parents portal & app','Online payments + receipts','Advanced financial reports','Events, workshops & messages','Built-in smart AI assistant'],
+      sharedFeatures:['Classes, attendance & students','Teacher management & timetable','Parents portal & app','Advanced financial reports','Events, workshops & messages','Built-in smart AI assistant'],
       plans:[
         { name:'Studio', members:'Up to 400 members', scope:'One track / branch', priceMonthly:'₪459', priceAnnual:'₪399' },
         { name:'Center', members:'Up to 1,000 members', scope:'Up to 4 tracks / branches', priceMonthly:'₪990', priceAnnual:'₪860' },
