@@ -229,11 +229,13 @@ export const he = {
   pricingCustomCta:'קבלת הצעת מחיר',
   pricingCta:'דברו איתנו',
   pricingBuy:'בחירת מסלול',
+  pricingTrialCta:'התחל/י 7 ימים חינם',
+  pricingTrialNote:'7 ימים חינם · נדרש כרטיס · חיוב ראשון ביום ה-8 · אפשר לבטל לפני בלי לשלם',
   pricingPopular:'הכי פופולרי',
   pricing:{
     'classes':{
       heading:'מחירון לפי גודל הארגון',
-      buyUrl:'https://infinite---community-classes.web.app/pricing',
+      trialUrl:'', // TODO: classes/studio 7-day free-trial signup link (pending from user) — fill to enable the free-trial button
       note:'כל המחירים לחודש · אינם כוללים מע״מ · אפשר לשדרג בכל עת',
       plans:[
         { name:'Standard', price:'₪800', period:'/ חודש', priceSub:'לא כולל מע״מ', sub:'סניף / תחום אחד · עד 500 משתתפים',
@@ -249,7 +251,7 @@ export const he = {
     'whatsapp-ai':{
       heading:'מסלולים למזכירת ה-AI',
       trial:'7 ימי ניסיון חינם',
-      buyUrl:'https://nynizi.com/start/plan',
+      trialUrl:'https://nynizi.com/start/plan',
       note:'7 ימי ניסיון חינם: מזינים כרטיס בהרשמה, והחיוב הראשון רק ביום ה-8 (אפשר לבטל לפני בלי לשלם) · כל המחירים לחודש · אינם כוללים מע״מ (יתווסף כחוק) · הודעות ואטסאפ יזומות משולמות ישירות ל-Meta לפי התעריף שלהם',
       plans:[
         { name:'עסק קטן', price:'₪349', period:'/ חודש + מע״מ', priceSub:'₪412 כולל מע״מ', sub:'',
@@ -506,11 +508,13 @@ export const en = {
   pricingCustomCta:'Get a quote',
   pricingCta:'Let\'s talk',
   pricingBuy:'Choose plan',
+  pricingTrialCta:'Start your 7-day free trial',
+  pricingTrialNote:'7 days free · card required · first charge on day 8 · cancel before and pay nothing',
   pricingPopular:'Most popular',
   pricing:{
     'classes':{
       heading:'Pricing by organization size',
-      buyUrl:'https://infinite---community-classes.web.app/pricing',
+      trialUrl:'', // TODO: classes/studio 7-day free-trial signup link (pending from user) — fill to enable the free-trial button
       note:'All prices per month · VAT not included · upgrade anytime',
       plans:[
         { name:'Standard', price:'₪800', period:'/ mo', priceSub:'excl. VAT', sub:'One branch / track · up to 500 members',
@@ -526,7 +530,7 @@ export const en = {
     'whatsapp-ai':{
       heading:'AI secretary plans',
       trial:'7-day free trial',
-      buyUrl:'https://nynizi.com/start/plan',
+      trialUrl:'https://nynizi.com/start/plan',
       note:'7-day free trial: a card is required at signup and the first charge is on day 8 (cancel before, pay nothing) · All prices per month · VAT not included (added as required) · proactive WhatsApp messages are paid directly to Meta at their rate',
       plans:[
         { name:'Small business', price:'₪349', period:'/ mo + VAT', priceSub:'₪412 incl. VAT', sub:'',
