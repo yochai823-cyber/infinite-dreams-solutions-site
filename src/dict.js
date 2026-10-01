@@ -167,7 +167,7 @@ export const he = {
       features:[
         { icon:'📲', title:'דיווח נוכחות מהיר מהנייד', desc:'המורה מסמן/ת נוכחות בשנייה ישירות מהמכשיר, עם אפשרות להוסיף הערות אישיות לכל תלמיד/ה.', quote:'אין צורך יותר בדפים' },
         { icon:'👨‍👩‍👧', title:'אפליקציה להורים ולתלמידים', desc:'עדכוני פוש לנייד, צפייה במערכת השעות, הרשמה לחוגים וסדנאות ומעקב אחרי תשלומים — הכל במקום אחד.', quote:'אין צורך יותר בקבוצות וואטסאפ' },
-        { icon:'🎯', title:'מעקב אחרי שיעורי ניסיון', desc:'רישום לשיעורי ניסיון דרך וואטסאפ, תזכורות אוטומטיות לפני השיעור והמרה חכמה למנוי קבוע.', quote:'אף ליד לא נופל בדרך' },
+        { icon:'🎯', title:'מעקב אחרי שיעורי ניסיון', tag:'תוסף בתשלום · דרך העוזר הדיגיטלי', desc:'רישום לשיעורי ניסיון דרך וואטסאפ, תזכורות אוטומטיות לפני השיעור והמרה חכמה למנוי קבוע.', quote:'אף ליד לא נופל בדרך' },
         { icon:'💳', title:'ניהול תשלומים וגבייה', desc:'מתחברים לסליקה הקיימת שלכם, גובים בהוראת קבע ועוקבים אחרי חובות ותשלומים — בלי אקסלים.', quote:'הכסף נכנס לבד' },
       ],
       cubes:[
@@ -209,7 +209,7 @@ export const he = {
       features:[
         { icon:'📲', title:'דיווח נוכחות מהיר מהנייד', desc:'המורה מסמן/ת נוכחות בשנייה ישירות מהמכשיר, עם אפשרות להוסיף הערות אישיות לכל תלמיד/ה.', quote:'אין צורך יותר בדפים' },
         { icon:'👨‍👩‍👧', title:'אפליקציה להורים ולתלמידים', desc:'עדכוני פוש לנייד, צפייה במערכת השעות, הרשמה לחוגים וסדנאות ומעקב אחרי תשלומים — הכל במקום אחד.', quote:'אין צורך יותר בקבוצות וואטסאפ' },
-        { icon:'🎯', title:'מעקב אחרי שיעורי ניסיון', desc:'רישום לשיעורי ניסיון דרך וואטסאפ, תזכורות אוטומטיות לפני השיעור והמרה חכמה למנוי קבוע.', quote:'אף ליד לא נופל בדרך' },
+        { icon:'🎯', title:'מעקב אחרי שיעורי ניסיון', tag:'תוסף בתשלום · דרך העוזר הדיגיטלי', desc:'רישום לשיעורי ניסיון דרך וואטסאפ, תזכורות אוטומטיות לפני השיעור והמרה חכמה למנוי קבוע.', quote:'אף ליד לא נופל בדרך' },
         { icon:'💳', title:'ניהול תשלומים וגבייה', desc:'מתחברים לסליקה הקיימת שלכם, גובים בהוראת קבע ועוקבים אחרי חובות ותשלומים — בלי אקסלים.', quote:'הכסף נכנס לבד' },
       ],
       cubes:[
@@ -453,7 +453,7 @@ export const en = {
       features:[
         { icon:'📲', title:'Fast mobile attendance', desc:'Teachers mark attendance in a second from their phone, and can add a personal note for each student.', quote:'No more paper sheets' },
         { icon:'👨‍👩‍👧', title:'Parents & students app', desc:'Push updates, the timetable, sign-up for classes and workshops, and payment tracking — all in one place.', quote:'No more WhatsApp groups' },
-        { icon:'🎯', title:'Trial-class tracking', desc:'Sign-ups for trial classes via WhatsApp, automatic reminders before the class and smart conversion to a subscription.', quote:'No lead slips through' },
+        { icon:'🎯', title:'Trial-class tracking', tag:'Paid add-on · via the Digital Assistant', desc:'Sign-ups for trial classes via WhatsApp, automatic reminders before the class and smart conversion to a subscription.', quote:'No lead slips through' },
         { icon:'💳', title:'Payments & billing', desc:'Connects to your existing payment provider, runs standing-order billing and tracks debts and payments — no spreadsheets.', quote:'The money comes in on its own' },
       ],
       cubes:[
@@ -495,7 +495,7 @@ export const en = {
       features:[
         { icon:'📲', title:'Fast mobile attendance', desc:'Teachers mark attendance in a second from their phone, and can add a personal note for each student.', quote:'No more paper sheets' },
         { icon:'👨‍👩‍👧', title:'Parents & students app', desc:'Push updates, the timetable, sign-up for classes and workshops, and payment tracking — all in one place.', quote:'No more WhatsApp groups' },
-        { icon:'🎯', title:'Trial-class tracking', desc:'Sign-ups for trial classes via WhatsApp, automatic reminders before the class and smart conversion to a subscription.', quote:'No lead slips through' },
+        { icon:'🎯', title:'Trial-class tracking', tag:'Paid add-on · via the Digital Assistant', desc:'Sign-ups for trial classes via WhatsApp, automatic reminders before the class and smart conversion to a subscription.', quote:'No lead slips through' },
         { icon:'💳', title:'Payments & billing', desc:'Connects to your existing payment provider, runs standing-order billing and tracks debts and payments — no spreadsheets.', quote:'The money comes in on its own' },
       ],
       cubes:[

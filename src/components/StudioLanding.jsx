@@ -185,6 +185,12 @@ export default function StudioLanding({ d, locale = 'he', solution, content }){
               <div key={i} className="reveal card-surface p-6 md:p-7 flex flex-col" style={{ transitionDelay:`${i*60}ms` }}>
                 <span className="w-12 h-12 rounded-2xl grid place-items-center text-2xl text-white shrink-0" style={{ background:'var(--grad)' }}>{f.icon}</span>
                 <h3 className="mt-4 text-xl font-extrabold text-[var(--text)]">{f.title}</h3>
+                {f.tag && (
+                  <span className="mt-2 self-start inline-flex items-center gap-1 text-[11px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full">
+                    <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5 10.1 10.9 5.5 9l4.6-1.4z"/></svg>
+                    {f.tag}
+                  </span>
+                )}
                 <p className="mt-2 text-[15px] text-[var(--muted)] leading-relaxed flex-1">{f.desc}</p>
                 {f.quote && (
                   <p className="mt-4 inline-flex items-center gap-2 text-[14px] font-bold text-grad">
