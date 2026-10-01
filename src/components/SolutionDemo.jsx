@@ -51,12 +51,12 @@ function BrowserFrame({ children, url, label }){
 /* ---------- WhatsApp AI (kept — user liked it) ---------- */
 function WhatsAppDemo(){
   return (
-    <PhoneFrame label="העוזר הדיגיטלי עונה, מתאם וסוגר — לבד">
+    <PhoneFrame label="העוזר/ת הדיגיטלי/ת עונה, מתאם/ת וסוגר/ת — לבד">
       <div className="pt-7">
         <div className="flex items-center gap-2.5 px-3 py-2.5 text-white" style={{ background:'#075E54' }}>
           <span className="w-9 h-9 rounded-full grid place-items-center font-bold" style={{ background:'var(--grad)' }}>UP</span>
           <div className="leading-tight">
-            <div className="font-semibold text-[15px]">Urban Place · עוזר דיגיטלי</div>
+            <div className="font-semibold text-[15px]">Urban Place · עוזר/ת דיגיטלי/ת</div>
             <div className="text-[11px] text-white/70">מקליד…</div>
           </div>
         </div>
@@ -65,7 +65,7 @@ function WhatsAppDemo(){
           <div className="max-w-[85%] ms-auto rounded-2xl rounded-tl-sm px-3 py-2 shadow-sm text-[#0b141a]" style={{ background:'#DCF8C6' }}>
             <div className="flex items-center gap-1 mb-1 text-[10px] font-bold" style={{ color:'#4f46e5' }}>
               <svg viewBox="0 0 24 24" className="w-3 h-3" fill="currentColor"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5 10.1 10.9 5.5 9l4.6-1.4z"/></svg>
-              עוזר דיגיטלי
+              עוזר/ת דיגיטלי/ת
             </div>
             בטח! 🩰 יש מקום בחוג היפ-הופ ביום ראשון בשעה 17:00. לשריין לך מקום?
           </div>
