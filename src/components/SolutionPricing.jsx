@@ -131,6 +131,15 @@ export default function SolutionPricing({ d, locale = 'he', slug, heading, recom
             <div className="mt-10 text-center reveal">
               {data.trialUrl ? (
                 <>
+                  {data.startNote && (
+                    <div className="mx-auto max-w-xl mb-6 rounded-2xl bg-emerald-50 border border-emerald-200 p-4 sm:p-5 text-center">
+                      <p className="text-[15px] font-bold text-emerald-800 flex items-center justify-center gap-2">
+                        <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" fill="currentColor"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.24-8.23 4.54 0 8.23 3.69 8.23 8.23s-3.69 8.23-8.23 8.23z"/></svg>
+                        {data.startNote.title}
+                      </p>
+                      <p className="mt-1.5 text-[13px] text-emerald-700 leading-snug">{data.startNote.text}</p>
+                    </div>
+                  )}
                   <a href={data.trialUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary text-[17px]">
                     {d.pricingTrialCta}
                     <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d={he ? 'M11 5l-7 7 7 7' : 'M13 5l7 7-7 7'}/><path d={he ? 'M4 12h16' : 'M20 12H4'}/></svg>

@@ -259,6 +259,7 @@ export const he = {
       heading:'מסלולים לעוזר הדיגיטלי',
       trial:'7 ימי ניסיון חינם',
       trialUrl:'https://nynizi.com/start/plan',
+      startNote:{ title:'לפני שמתחילים — יש לכם וואטסאפ עסקי?', text:'העוזר הדיגיטלי מתחבר ל-WhatsApp Business בלבד — לא לוואטסאפ האישי הרגיל. עדיין אין לכם? זה קל וחינם להקים, ונשמח להדריך אתכם.' },
       note:'7 ימי ניסיון חינם: מזינים כרטיס בהרשמה, והחיוב הראשון רק ביום ה-8 (אפשר לבטל לפני בלי לשלם) · כל המחירים לחודש · אינם כוללים מע״מ (יתווסף כחוק) · הודעות ואטסאפ יזומות משולמות ישירות ל-Meta לפי התעריף שלהם',
       plans:[
         { name:'עסק קטן', price:'₪349', period:'/ חודש + מע״מ', priceSub:'₪412 כולל מע״מ', sub:'',
@@ -545,6 +546,7 @@ export const en = {
       heading:'Digital assistant plans',
       trial:'7-day free trial',
       trialUrl:'https://nynizi.com/start/plan',
+      startNote:{ title:'Before you start — do you have a WhatsApp Business account?', text:'The Digital Assistant connects to WhatsApp Business only — not your regular personal WhatsApp. Don\'t have one yet? It\'s quick and free to set up, and we\'re happy to guide you.' },
       note:'7-day free trial: a card is required at signup and the first charge is on day 8 (cancel before, pay nothing) · All prices per month · VAT not included (added as required) · proactive WhatsApp messages are paid directly to Meta at their rate',
       plans:[
         { name:'Small business', price:'₪349', period:'/ mo + VAT', priceSub:'₪412 incl. VAT', sub:'',
